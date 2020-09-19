@@ -33,12 +33,15 @@ const BrowseFile = ({onDataChange}) => {
 
             reader.onloadend = e => {
 
+                // 解析文件，分段
                 const data = e?.target?.result?.split?.('\n\n');
 
-                if (!data) {
+                // 处理解析失败
+                if (!data || data.length < 1) {
                     return setErrMsg('Read file failure, please retry.');
                 }
 
+                // 回调数据
                 onDataChange?.({
                     title: data[0].split('\n'),
                     tableData: data[1].split('\n'),
