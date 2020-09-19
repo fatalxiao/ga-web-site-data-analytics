@@ -6,7 +6,7 @@
 import React, {useState, useCallback} from 'react';
 
 // Components
-import ChooseFileButton from 'containers/chooseFile/ChooseFileButton';
+import BrowseFile from 'containers/browseFile/BrowseFile';
 import AnalyticsTable from 'containers/table/AnalyticsTable';
 
 // Styles
@@ -14,12 +14,23 @@ import 'scss/containers/Root.scss';
 
 const Root = () => {
 
+    /**
+     * GA 数据
+     *  {
+     *      title: {Array},
+     *      tableData: {Array},
+     *      browseData: {Array}
+     *  }
+     */
     const [data, setData] = useState(null),
 
         /**
          * 处理数据变更
          */
-        handleDataChange = useCallback(data => setData(data));
+        handleDataChange = useCallback(data => {
+            console.log(data);
+            setData(data);
+        });
 
     return (
         <div className="root">
@@ -27,7 +38,7 @@ const Root = () => {
                 data ?
                     <AnalyticsTable data={data}/>
                     :
-                    <ChooseFileButton onDataChange={handleDataChange}/>
+                    <BrowseFile onDataChange={handleDataChange}/>
             }
         </div>
     );
