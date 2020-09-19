@@ -16,6 +16,7 @@ import {render} from 'react-dom';
 
 // Styles
 import 'scss/index.scss';
+import 'scss/global.scss';
 
 /**
  * 渲染应用到dom

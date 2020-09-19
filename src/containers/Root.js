@@ -4,7 +4,9 @@
  */
 
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+
+// Components
+import ChooseFileButton from 'containers/chooseFile/ChooseFileButton';
 
 // Styles
 import 'scss/containers/Root.scss';
@@ -12,19 +14,32 @@ import 'scss/containers/Root.scss';
 class Root extends Component {
 
     constructor(props) {
+
         super(props);
+
+        this.state = {
+            file: null
+        };
+
     }
 
     render() {
+
+        const {file} = this.state;
+
         return (
             <div className="root">
-
+                {
+                    file ?
+                        <table></table>
+                        :
+                        <ChooseFileButton/>
+                }
             </div>
         );
+
     }
 
 }
-
-Root.propTypes = {};
 
 export default Root;

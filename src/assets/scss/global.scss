@@ -1,0 +1,35 @@
+/**
+ * @file global.scss
+ * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ */
+@import "./common.scss";
+
+body {
+    font-family: "helvetica neue", "hiragino sans gb", "stheiti", "microsoft yahei", \5FAE\8F6F\96C5\9ED1, tahoma, sans-serif !important;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    min-width: 1440px;
+    overflow: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    outline: none;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.float-fix {
+    @include float-fix;
+}
+
+.invisible {
+    @include invisible;
+}
+
+.text-nowrap {
+    @include text-nowrap;
+}
