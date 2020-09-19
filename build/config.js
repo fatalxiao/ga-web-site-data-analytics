@@ -10,7 +10,8 @@ module.exports = {
         port: 4010,
         srcRoot: path.resolve(__dirname, '../src'),
         index: path.resolve(__dirname, '../src/index.html'),
-        assetsVirtualRoot: path.posix && path.posix.join('/', 'static')
+        assetsVirtualRoot: path.posix && path.posix.join('/', 'static'),
+        isHotReload: true
     },
 
     'production': {
