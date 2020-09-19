@@ -27,10 +27,7 @@ const Root = () => {
         /**
          * 处理数据变更
          */
-        handleDataChange = useCallback(data => {
-            console.log(data);
-            setData(data);
-        });
+        handleDataChange = useCallback(data => setData(data));
 
     return (
         <div className="root">
