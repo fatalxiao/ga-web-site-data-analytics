@@ -3,43 +3,35 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {Component} from 'react';
+import React, {useState, useCallback} from 'react';
 
 // Components
 import ChooseFileButton from 'containers/chooseFile/ChooseFileButton';
+import AnalyticsTable from 'containers/table/AnalyticsTable';
 
 // Styles
 import 'scss/containers/Root.scss';
 
-class Root extends Component {
+const Root = () => {
 
-    constructor(props) {
+    const [data, setData] = useState(null),
 
-        super(props);
+        /**
+         * 处理数据变更
+         */
+        handleDataChange = useCallback(data => setData(data));
 
-        this.state = {
-            file: null
-        };
+    return (
+        <div className="root">
+            {
+                data ?
+                    <AnalyticsTable data={data}/>
+                    :
+                    <ChooseFileButton onDataChange={handleDataChange}/>
+            }
+        </div>
+    );
 
-    }
-
-    render() {
-
-        const {file} = this.state;
-
-        return (
-            <div className="root">
-                {
-                    file ?
-                        <table></table>
-                        :
-                        <ChooseFileButton/>
-                }
-            </div>
-        );
-
-    }
-
-}
+};
 
 export default Root;
