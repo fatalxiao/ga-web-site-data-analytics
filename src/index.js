@@ -15,6 +15,7 @@ import Root from 'containers/Root';
 import {render} from 'react-dom';
 
 // Styles
+import 'assets/font-awesome/css/fontawesome-all.min.css';
 import 'scss/index.scss';
 import 'scss/global.scss';
 

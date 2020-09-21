@@ -26,7 +26,10 @@ const AnalyticsTable = ({data}) => {
             width: index === 0 ? '50%' : 'auto',
             resizable: true,
             headRenderer: item,
-            bodyRenderer: rowData => rowData[index]
+            bodyRenderer: rowData => index === 0 ?
+                `/${rowData[index]}`
+                :
+                rowData[index]
         })), [data]),
 
         rawData = useMemo(() => tableData?.slice(1)?.map(item => {
@@ -57,23 +60,25 @@ const AnalyticsTable = ({data}) => {
                 }
 
                 const url = URI(row[0]),
-                    path = url.path();
+                    path = url.path(),
+                    pathArray = path.split('/');
 
-                addPath(result, path.split('/'), row);
+                addPath(result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row);
 
             });
 
-            console.log('collapsedData::', result);
+            return [result];
 
         }, [data]);
 
     return (
         <div className="analytics-table">
             <Table columns={columns}
-                   data={rawData}
+                   data={collapsedData}
                    isHeadFixed={true}
                    isPaginated={false}
                    useDynamicRender={true}
+                   canBeExpanded={true}
                    scrollHeight={500}
                    rowHeight={50}/>
         </div>

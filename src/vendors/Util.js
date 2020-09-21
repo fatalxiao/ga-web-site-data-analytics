@@ -20,8 +20,12 @@ export function getMatchedChildNode(node, path) {
 
 export function addPath(node, pathArray, rowData) {
 
-    if (!node || !pathArray || pathArray.length < 1 || node[0] !== pathArray[0]) {
+    if (!node || !pathArray || pathArray.length < 1) {
         return;
+    }
+
+    if (!node[0]) {
+        node[0] = pathArray[0];
     }
 
     // 找到了最后的节点
