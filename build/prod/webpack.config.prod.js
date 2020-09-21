@@ -21,6 +21,7 @@ const prodConfig = {
     devtool: false,
 
     output: {
+        publicPath: './',
         path: config[env].assetsRoot,
         filename: utils.assetsSubPath('js/[name].[chunkhash].js', env),
         chunkFilename: utils.assetsSubPath('js/[id].[chunkhash].js', env)
