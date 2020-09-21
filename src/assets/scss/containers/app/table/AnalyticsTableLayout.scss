@@ -2,8 +2,11 @@
  * @file AnalyticsTableLayout.scss
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
+@import '../../../common.scss';
 
 .analytics-table-layout {
     flex: 1;
+    background: #fff;
+    border-radius: $theme-border-radius;
     overflow: hidden;
 }
