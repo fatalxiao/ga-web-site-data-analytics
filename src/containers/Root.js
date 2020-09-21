@@ -7,7 +7,7 @@ import React, {useState, useCallback} from 'react';
 
 // Components
 import BrowseFile from 'containers/browseFile/BrowseFile';
-import AnalyticsTable from 'containers/table/AnalyticsTable';
+import Frame from 'containers/app/Frame';
 
 // Styles
 import 'scss/containers/Root.scss';
@@ -33,7 +33,7 @@ const Root = () => {
         <div className="root">
             {
                 data ?
-                    <AnalyticsTable data={data}/>
+                    <Frame data={data}/>
                     :
                     <BrowseFile onDataChange={handleDataChange}/>
             }

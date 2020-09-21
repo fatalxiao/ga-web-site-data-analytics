@@ -14,12 +14,18 @@ import URI from 'urijs';
 import {addPath} from 'vendors/Util';
 
 // Styles
-import 'scss/containers/table/AnalyticsTable.scss';
+import 'scss/containers/app/table/AnalyticsTable.scss';
 
 const AnalyticsTable = ({data}) => {
 
+    /**
+     * 表格的完整数据，包含表头和表体
+     */
     const tableData = useMemo(() => data?.tableData, [data]),
 
+        /**
+         * columns 配置
+         */
         columns = useMemo(() => tableData?.[0]?.split(',')?.map((item, index) => ({
             key: item,
             noWrap: true,
@@ -32,6 +38,9 @@ const AnalyticsTable = ({data}) => {
                 rowData[index]
         })), [data]),
 
+        /**
+         * 原始的表格数据
+         */
         rawData = useMemo(() => tableData?.slice(1)?.map(item => {
 
             if (!item) {
@@ -49,6 +58,10 @@ const AnalyticsTable = ({data}) => {
 
         }), [data]),
 
+        /**
+         * 按第一列 route 折叠后的数据
+         * @type {*[]}
+         */
         collapsedData = useMemo(() => {
 
             const result = {};
@@ -72,16 +85,15 @@ const AnalyticsTable = ({data}) => {
         }, [data]);
 
     return (
-        <div className="analytics-table">
-            <Table columns={columns}
-                   data={collapsedData}
-                   isHeadFixed={true}
-                   isPaginated={false}
-                   useDynamicRender={true}
-                   canBeExpanded={true}
-                   scrollHeight={500}
-                   rowHeight={50}/>
-        </div>
+        <Table className="analytics-table"
+               columns={columns}
+               data={collapsedData}
+               isHeadFixed={true}
+               isPaginated={false}
+               useDynamicRender={true}
+               canBeExpanded={true}
+               scrollHeight={500}
+               rowHeight={50}/>
     );
 
 };
