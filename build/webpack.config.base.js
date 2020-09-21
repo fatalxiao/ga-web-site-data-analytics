@@ -45,6 +45,7 @@ module.exports = {
             'assets': resolve('src/assets'),
             'scss': resolve('src/assets/scss'),
             'containers': resolve('src/containers'),
+            'vendors': resolve('src/vendors'),
 
             'test': resolve('test')
 

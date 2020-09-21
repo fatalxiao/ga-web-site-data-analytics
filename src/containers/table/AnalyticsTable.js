@@ -11,6 +11,7 @@ import Table from 'alcedo-ui/Table';
 
 // Vendors
 import URI from 'urijs';
+import {addPath} from 'vendors/Util';
 
 // Styles
 import 'scss/containers/table/AnalyticsTable.scss';
@@ -58,14 +59,11 @@ const AnalyticsTable = ({data}) => {
                 const url = URI(row[0]),
                     path = url.path();
 
-                path.split('/').forEach(pathItem => {
-
-                });
-
-                console.log('url::', url.path());
-                console.log('query::', url.query());
+                addPath(result, path.split('/'), row);
 
             });
+
+            console.log('collapsedData::', result);
 
         }, [data]);
 
