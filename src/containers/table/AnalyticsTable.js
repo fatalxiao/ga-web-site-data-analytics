@@ -3,31 +3,81 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useMemo, useCallback} from 'react';
+import React, {useMemo} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import Table from 'alcedo-ui/Table';
+
+// Vendors
+import URI from 'urijs';
 
 // Styles
 import 'scss/containers/table/AnalyticsTable.scss';
 
 const AnalyticsTable = ({data}) => {
 
-    const columns = useMemo(() => data[0].split(',').map((item, index) => ({
+    const tableData = useMemo(() => data?.tableData, [data]),
+
+        columns = useMemo(() => tableData?.[0]?.split(',')?.map((item, index) => ({
             key: item,
+            noWrap: true,
+            width: index === 0 ? '50%' : 'auto',
+            resizable: true,
             headRenderer: item,
-            bodyRenderer: rowData => rowData[item]
+            bodyRenderer: rowData => rowData[index]
         })), [data]),
 
-        tableData = useMemo(() => {
+        rawData = useMemo(() => tableData?.slice(1)?.map(item => {
+
+            if (!item) {
+                return null;
+            }
+
+            const row = item.split(','),
+                result = {};
+
+            row.forEach((col, colIndex) => {
+                result[colIndex] = col;
+            });
+
+            return result;
+
+        }), [data]),
+
+        collapsedData = useMemo(() => {
+
+            const result = {};
+
+            rawData?.forEach(row => {
+
+                if (!row?.[0]) {
+                    return;
+                }
+
+                const url = URI(row[0]),
+                    path = url.path();
+
+                path.split('/').forEach(pathItem => {
+
+                });
+
+                console.log('url::', url.path());
+                console.log('query::', url.query());
+
+            });
 
         }, [data]);
 
     return (
         <div className="analytics-table">
             <Table columns={columns}
-                   data={[]}/>
+                   data={rawData}
+                   isHeadFixed={true}
+                   isPaginated={false}
+                   useDynamicRender={true}
+                   scrollHeight={500}
+                   rowHeight={50}/>
         </div>
     );
 
