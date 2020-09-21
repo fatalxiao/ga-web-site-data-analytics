@@ -19,18 +19,44 @@ import 'scss/containers/app/table/AnalyticsTable.scss';
 const AnalyticsTable = ({data, scrollHeight}) => {
 
     /**
-     * columns 配置
+     * columns field 配置
+     * @type {string[]}
      */
-    const columns = useMemo(() => data?.[0]?.split(',')?.map((item, index) => ({
+    const columnsField = useMemo(() => [
+            'route',
+            'pageViews',
+            'uniquePageViews',
+            'averageTimeOnPage',
+            'numberOfEntries',
+            'bounceRate',
+            'exitPercentage',
+            'pageValue'
+        ], []),
+
+        /**
+         * columns 配置
+         */
+        columns = useMemo(() => data?.[0]?.split(',')?.map((item, index) => ({
             key: item,
             noWrap: true,
-            width: index === 0 ? '50%' : 'auto',
+            width: index === 0 ? '50%' : null,
             resizable: true,
             headRenderer: item,
-            bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => index === 0 ?
-                `${path?.map(row => row?.node?.[0]).join('/')}` || '/'
-                :
-                rowData[index]
+            bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => {
+
+                // 第一列
+                if (index === 0) {
+                    return `${path?.map(row => row?.node?.[columnsField[index]]).join('/')}` || '/';
+                }
+
+                // 第二列
+                if (index === 1) {
+                    return rowData[columnsField[index]];
+                }
+
+                return rowData[columnsField[index]];
+
+            }
         })), [data]),
 
         /**
@@ -46,7 +72,7 @@ const AnalyticsTable = ({data, scrollHeight}) => {
                 result = {};
 
             row.forEach((col, colIndex) => {
-                result[colIndex] = col;
+                result[columnsField[colIndex]] = col;
             });
 
             return result;
@@ -63,21 +89,23 @@ const AnalyticsTable = ({data, scrollHeight}) => {
 
             rawData?.forEach(row => {
 
-                if (!row?.[0]) {
+                if (!row?.[columnsField[0]]) {
                     return;
                 }
 
-                const url = URI(row[0]),
+                const url = URI(row[columnsField[0]]),
                     path = url.path(),
                     pathArray = path.split('/');
 
-                addPath(result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row);
+                addPath(result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, columnsField[0]);
 
             });
 
             return [result];
 
         }, [data]);
+
+    // console.log('collapsedData::', collapsedData);
 
     return (
         <Table className="analytics-table"
