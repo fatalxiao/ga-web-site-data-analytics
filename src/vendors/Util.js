@@ -3,6 +3,9 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
+// Vendors
+import Util from 'alcedo-ui/_vendors/Util';
+
 /**
  * 获取匹配 route 的子节点
  * @param node
@@ -67,7 +70,26 @@ export function addPath(node, pathArray, rowData, collapsedField) {
 
 }
 
+/**
+ * 计算 pageViews 列的求和
+ * @param root
+ * @param field
+ * @returns {number}
+ */
+export function getPageViewsTotalCount(root, field) {
+
+    let result = 0;
+
+    Util.preOrderTraverse(root, node => {
+        result += +(node[field] || 0);
+    });
+
+    return result;
+
+}
+
 export default {
     getMatchedChildNode,
-    addPath
+    addPath,
+    getPageViewsTotalCount
 };

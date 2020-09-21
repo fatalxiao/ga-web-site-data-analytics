@@ -11,7 +11,7 @@ import Table from 'alcedo-ui/Table';
 
 // Vendors
 import URI from 'urijs';
-import {addPath} from 'vendors/Util';
+import {addPath, getPageViewsTotalCount} from 'vendors/Util';
 
 // Styles
 import 'scss/containers/app/table/AnalyticsTable.scss';
@@ -46,12 +46,12 @@ const AnalyticsTable = ({data, scrollHeight}) => {
 
                 // 第一列
                 if (index === 0) {
-                    return `${path?.map(row => row?.node?.[columnsField[index]]).join('/')}` || '/';
+                    return `${path?.map(row => row?.node?.[columnsField[0]]).join('/')}` || '/';
                 }
 
                 // 第二列
                 if (index === 1) {
-                    return rowData[columnsField[index]];
+                    return `${rowData?.[columnsField[1]] || 0} / ${getPageViewsTotalCount(rowData, columnsField[1])}`;
                 }
 
                 return rowData[columnsField[index]];
