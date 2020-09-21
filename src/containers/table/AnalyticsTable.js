@@ -26,8 +26,8 @@ const AnalyticsTable = ({data}) => {
             width: index === 0 ? '50%' : 'auto',
             resizable: true,
             headRenderer: item,
-            bodyRenderer: rowData => index === 0 ?
-                `/${rowData[index]}`
+            bodyRenderer: (rowData, rowIndex, colIndex, parentData, tableData, collapsed, depth, path) => index === 0 ?
+                `${path?.map(row => row?.node?.[0]).join('/')}` || '/'
                 :
                 rowData[index]
         })), [data]),
