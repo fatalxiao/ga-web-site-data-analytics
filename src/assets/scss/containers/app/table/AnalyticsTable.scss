@@ -5,4 +5,9 @@
 
 .analytics-table {
     flex: 1;
+
+    th {
+        box-sizing: border-box;
+        height: 47px;
+    }
 }

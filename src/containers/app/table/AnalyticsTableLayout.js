@@ -63,7 +63,7 @@ const AnalyticsTableLayout = (props) => {
         <div ref={layout}
              className="analytics-table-layout">
             <Table {...props}
-                   scrollHeight={height - 35}/>
+                   scrollHeight={height - 48}/>
         </div>
     );
 
