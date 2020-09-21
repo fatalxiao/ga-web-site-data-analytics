@@ -7,7 +7,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import AnalyticsTable from './table/AnalyticsTable';
+import Title from './title/AnalyticsTitle';
+import AnalyticsTableLayout from './table/AnalyticsTableLayout';
 
 // Styles
 import 'scss/containers/app/Frame.scss';
@@ -15,7 +16,8 @@ import 'scss/containers/app/Frame.scss';
 const Frame = ({data}) => {
     return (
         <div className="frame">
-            <AnalyticsTable data={data}/>
+            <Title data={data?.title}/>
+            <AnalyticsTableLayout data={data?.tableData}/>
         </div>
     );
 };

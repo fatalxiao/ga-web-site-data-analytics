@@ -16,23 +16,18 @@ import {addPath} from 'vendors/Util';
 // Styles
 import 'scss/containers/app/table/AnalyticsTable.scss';
 
-const AnalyticsTable = ({data}) => {
+const AnalyticsTable = ({data, scrollHeight}) => {
 
     /**
-     * 表格的完整数据，包含表头和表体
+     * columns 配置
      */
-    const tableData = useMemo(() => data?.tableData, [data]),
-
-        /**
-         * columns 配置
-         */
-        columns = useMemo(() => tableData?.[0]?.split(',')?.map((item, index) => ({
+    const columns = useMemo(() => data?.[0]?.split(',')?.map((item, index) => ({
             key: item,
             noWrap: true,
             width: index === 0 ? '50%' : 'auto',
             resizable: true,
             headRenderer: item,
-            bodyRenderer: (rowData, rowIndex, colIndex, parentData, tableData, collapsed, depth, path) => index === 0 ?
+            bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => index === 0 ?
                 `${path?.map(row => row?.node?.[0]).join('/')}` || '/'
                 :
                 rowData[index]
@@ -41,7 +36,7 @@ const AnalyticsTable = ({data}) => {
         /**
          * 原始的表格数据
          */
-        rawData = useMemo(() => tableData?.slice(1)?.map(item => {
+        rawData = useMemo(() => data?.slice(1)?.map(item => {
 
             if (!item) {
                 return null;
@@ -92,18 +87,15 @@ const AnalyticsTable = ({data}) => {
                isPaginated={false}
                useDynamicRender={true}
                canBeExpanded={true}
-               scrollHeight={500}
-               rowHeight={50}/>
+               scrollHeight={scrollHeight}
+               rowHeight={48}/>
     );
 
 };
 
 AnalyticsTable.propTypes = {
-    data: PropTypes.shape({
-        title: PropTypes.array,
-        tableData: PropTypes.array,
-        browseData: PropTypes.array
-    })
+    data: PropTypes.array,
+    scrollHeight: PropTypes.number
 };
 
 export default AnalyticsTable;
