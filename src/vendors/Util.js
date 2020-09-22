@@ -88,6 +88,12 @@ export function getPageViewsTotalCount(root, field) {
 
 }
 
+/**
+ * 获取排序后的数据
+ * @param root
+ * @param sorting
+ * @returns {*}
+ */
 export function getSortingData(root, sorting) {
 
     if (!root || !sorting) {
@@ -95,8 +101,46 @@ export function getSortingData(root, sorting) {
     }
 
     Util.preOrderTraverse(root, node => {
-        result += +(node[field] || 0);
+        if (node?.children?.length > 0) {
+            node.children.sort((a, b) => {
+                if (!isNaN(a[sorting.prop]) && !isNaN(b[sorting.prop])) {
+                    return (Number(a[sorting.prop]) - Number(b[sorting.prop])) * sorting.type;
+                } else {
+                    return (a[sorting.prop] + '').localeCompare(b[sorting.prop] + '') * sorting.type;
+                }
+            });
+        }
     });
+
+    return root;
+
+}
+
+/**
+ * 获取排序后的数据（ 针对 PageViews 这一列的排序 ）
+ * @param root
+ * @param sorting
+ * @returns {*}
+ */
+export function getPageViewsSortingData(root, sorting) {
+
+    if (!root || !sorting) {
+        return root;
+    }
+
+    Util.preOrderTraverse(root, node => {
+        if (node?.children?.length > 0) {
+            node.children.sort((a, b) => {
+                if (!isNaN(a[sorting.prop]) && !isNaN(b[sorting.prop])) {
+                    return (Number(a[sorting.prop]) - Number(b[sorting.prop])) * sorting.type;
+                } else {
+                    return (a[sorting.prop] + '').localeCompare(b[sorting.prop] + '') * sorting.type;
+                }
+            });
+        }
+    });
+
+    return root;
 
 }
 
@@ -104,5 +148,6 @@ export default {
     getMatchedChildNode,
     addPath,
     getPageViewsTotalCount,
-    getSortingData
+    getSortingData,
+    getPageViewsSortingData
 };

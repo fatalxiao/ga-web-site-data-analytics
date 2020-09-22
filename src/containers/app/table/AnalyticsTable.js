@@ -14,7 +14,7 @@ import ColumnsFields from 'statics/ColumnsFields';
 
 // Vendors
 import URI from 'urijs';
-import {addPath, getPageViewsTotalCount, getSortingData} from 'vendors/Util';
+import {addPath, getPageViewsTotalCount, getSortingData, getPageViewsSortingData} from 'vendors/Util';
 
 // Styles
 import 'scss/containers/app/table/AnalyticsTable.scss';
@@ -91,7 +91,7 @@ const AnalyticsTable = ({data, scrollHeight}) => {
 
             const result = {};
 
-            sortingData?.forEach(row => {
+            rawData?.forEach(row => {
 
                 if (!row?.[ColumnsFields[0]]) {
                     return;
@@ -115,7 +115,11 @@ const AnalyticsTable = ({data, scrollHeight}) => {
                 return collapsedData;
             }
 
-            return [getSortingData(collapsedData?.[0], sorting)];
+            // 对第二列的排序做特殊处理
+            return sorting?.prop === ColumnsFields[1] ?
+                [getPageViewsSortingData(collapsedData?.[0], sorting)]
+                :
+                [getSortingData(collapsedData?.[0], sorting)];
 
         }, [collapsedData, sorting]),
 
@@ -128,7 +132,7 @@ const AnalyticsTable = ({data, scrollHeight}) => {
     return (
         <Table className="analytics-table"
                columns={columns}
-               data={collapsedData}
+               data={sortingData}
                isHeadFixed={true}
                isPaginated={false}
                useDynamicRender={true}
