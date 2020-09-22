@@ -39,7 +39,8 @@ const AnalyticsTable = ({data, scrollHeight}) => {
             return ({
                 key: field,
                 noWrap: true,
-                width: index === 0 ? '50%' : null,
+                width: index === 0 ? '40%' : null,
+                align: index === 0 ? Table.Align.LEFT : Table.Align.RIGHT,
                 resizable: true,
                 headRenderer: item,
                 bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => {
