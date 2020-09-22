@@ -88,8 +88,21 @@ export function getPageViewsTotalCount(root, field) {
 
 }
 
+export function getSortingData(root, sorting) {
+
+    if (!root || !sorting) {
+        return root;
+    }
+
+    Util.preOrderTraverse(root, node => {
+        result += +(node[field] || 0);
+    });
+
+}
+
 export default {
     getMatchedChildNode,
     addPath,
-    getPageViewsTotalCount
+    getPageViewsTotalCount,
+    getSortingData
 };

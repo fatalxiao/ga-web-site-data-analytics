@@ -3,61 +3,65 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useMemo} from 'react';
+import React, {useMemo, useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import Table from 'alcedo-ui/Table';
 
+// Statics
+import ColumnsFields from 'statics/ColumnsFields';
+
 // Vendors
 import URI from 'urijs';
-import {addPath, getPageViewsTotalCount} from 'vendors/Util';
+import {addPath, getPageViewsTotalCount, getSortingData} from 'vendors/Util';
 
 // Styles
 import 'scss/containers/app/table/AnalyticsTable.scss';
 
 const AnalyticsTable = ({data, scrollHeight}) => {
 
-    /**
-     * columns field 配置
-     * @type {string[]}
-     */
-    const columnsField = useMemo(() => [
-            'route',
-            'pageViews',
-            'uniquePageViews',
-            'averageTimeOnPage',
-            'numberOfEntries',
-            'bounceRate',
-            'exitPercentage',
-            'pageValue'
-        ], []),
+    const
+
+        /**
+         * 表格的排序
+         * @type {string[]}
+         */
+        [sorting, setSorting] = useState(null),
 
         /**
          * columns 配置
          */
-        columns = useMemo(() => data?.[0]?.split(',')?.map((item, index) => ({
-            key: item,
-            noWrap: true,
-            width: index === 0 ? '50%' : null,
-            resizable: true,
-            headRenderer: item,
-            bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => {
+        columns = useMemo(() => data?.[0]?.split(',')?.map((item, index) => {
 
-                // 第一列
-                if (index === 0) {
-                    return `${path?.map(row => row?.node?.[columnsField[0]]).join('/')}` || '/';
-                }
+            const field = ColumnsFields[index];
 
-                // 第二列
-                if (index === 1) {
-                    return `${rowData?.[columnsField[1]] || 0} / ${getPageViewsTotalCount(rowData, columnsField[1])}`;
-                }
+            return ({
+                key: field,
+                noWrap: true,
+                width: index === 0 ? '50%' : null,
+                resizable: true,
+                headRenderer: item,
+                bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => {
 
-                return rowData[columnsField[index]];
+                    // 第一列
+                    if (index === 0) {
+                        return `${path?.map(row => row?.node?.[ColumnsFields[0]]).join('/')}` || '/';
+                    }
 
-            }
-        })), [data]),
+                    // 第二列
+                    if (index === 1) {
+                        return `${rowData?.[ColumnsFields[1]] || 0} / ${getPageViewsTotalCount(rowData, ColumnsFields[1])}`;
+                    }
+
+                    return rowData[field];
+
+                },
+                sortable: true,
+                sortingProp: field
+            });
+
+        }), [data]),
 
         /**
          * 原始的表格数据
@@ -72,7 +76,7 @@ const AnalyticsTable = ({data, scrollHeight}) => {
                 result = {};
 
             row.forEach((col, colIndex) => {
-                result[columnsField[colIndex]] = col;
+                result[ColumnsFields[colIndex]] = col;
             });
 
             return result;
@@ -87,25 +91,39 @@ const AnalyticsTable = ({data, scrollHeight}) => {
 
             const result = {};
 
-            rawData?.forEach(row => {
+            sortingData?.forEach(row => {
 
-                if (!row?.[columnsField[0]]) {
+                if (!row?.[ColumnsFields[0]]) {
                     return;
                 }
 
-                const url = URI(row[columnsField[0]]),
+                const url = URI(row[ColumnsFields[0]]),
                     path = url.path(),
                     pathArray = path.split('/');
 
-                addPath(result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, columnsField[0]);
+                addPath(result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, ColumnsFields[0]);
 
             });
 
             return [result];
 
-        }, [data]);
+        }, [rawData]),
 
-    // console.log('collapsedData::', collapsedData);
+        sortingData = useMemo(() => {
+
+            if (!sorting) {
+                return collapsedData;
+            }
+
+            return [getSortingData(collapsedData?.[0], sorting)];
+
+        }, [collapsedData, sorting]),
+
+        /**
+         * 处理排序变更
+         * @type {function(*=): void}
+         */
+        handleSortChange = useCallback(sorting => setSorting(sorting));
 
     return (
         <Table className="analytics-table"
@@ -116,7 +134,9 @@ const AnalyticsTable = ({data, scrollHeight}) => {
                useDynamicRender={true}
                canBeExpanded={true}
                scrollHeight={scrollHeight}
-               rowHeight={48}/>
+               rowHeight={48}
+               autoSorting={false}
+               onSortChange={handleSortChange}/>
     );
 
 };
