@@ -3,6 +3,9 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
+// Statics
+import ColumnsFields from 'statics/ColumnsFields';
+
 // Vendors
 import Util from 'alcedo-ui/_vendors/Util';
 
@@ -76,7 +79,7 @@ export function addPath(node, pathArray, rowData, collapsedField) {
  * @param field
  * @returns {number}
  */
-export function getPageViewsTotalCount(root, field) {
+export function getPageViewsTotalCount(root, field = ColumnsFields[1]) {
 
     let result = 0;
 
@@ -104,7 +107,7 @@ export function getSortingData(root, sorting) {
         if (node?.children?.length > 0) {
             node.children.sort((a, b) => {
                 if (!isNaN(a[sorting.prop]) && !isNaN(b[sorting.prop])) {
-                    return (Number(a[sorting.prop]) - Number(b[sorting.prop])) * sorting.type;
+                    return (+a[sorting.prop] - +b[sorting.prop]) * sorting.type;
                 } else {
                     return (a[sorting.prop] + '').localeCompare(b[sorting.prop] + '') * sorting.type;
                 }
@@ -131,11 +134,9 @@ export function getPageViewsSortingData(root, sorting) {
     Util.preOrderTraverse(root, node => {
         if (node?.children?.length > 0) {
             node.children.sort((a, b) => {
-                if (!isNaN(a[sorting.prop]) && !isNaN(b[sorting.prop])) {
-                    return (Number(a[sorting.prop]) - Number(b[sorting.prop])) * sorting.type;
-                } else {
-                    return (a[sorting.prop] + '').localeCompare(b[sorting.prop] + '') * sorting.type;
-                }
+                const aCount = getPageViewsTotalCount(a),
+                    bCount = getPageViewsTotalCount(b);
+                return (+aCount - +bCount) * sorting.type;
             });
         }
     });

@@ -51,7 +51,7 @@ const AnalyticsTable = ({data, scrollHeight}) => {
 
                     // 第二列
                     if (index === 1) {
-                        return `${rowData?.[ColumnsFields[1]] || 0} / ${getPageViewsTotalCount(rowData, ColumnsFields[1])}`;
+                        return `${rowData?.[ColumnsFields[1]] || 0} / ${getPageViewsTotalCount(rowData)}`;
                     }
 
                     return rowData[field];
@@ -109,6 +109,10 @@ const AnalyticsTable = ({data, scrollHeight}) => {
 
         }, [rawData]),
 
+        /**
+         * 排序后的数据
+         * @type {any}
+         */
         sortingData = useMemo(() => {
 
             if (!sorting) {
