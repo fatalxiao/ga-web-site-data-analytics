@@ -141,10 +141,10 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                     return rowData[field];
 
                 },
-                footRenderer: (rowData, colIndex) => colIndex === 0 ?
-                    'Total'
-                    :
-                    footData[ColumnsFields[colIndex]]
+                // footRenderer: (rowData, colIndex) => colIndex === 0 ?
+                //     'Total'
+                //     :
+                //     footData[ColumnsFields[colIndex]]
             });
 
         }), [data, footData, isDataCollapsed]),
@@ -160,7 +160,7 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                columns={columns}
                data={sortingData}
                isHeadFixed={true}
-               isFootFixed={true}
+               // isFootFixed={true}
                isPaginated={false}
                useDynamicRender={true}
                canBeExpanded={true}
