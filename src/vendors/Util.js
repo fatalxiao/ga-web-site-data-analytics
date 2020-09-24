@@ -10,6 +10,39 @@ import ColumnsFields from 'statics/ColumnsFields';
 import Util from 'alcedo-ui/_vendors/Util';
 
 /**
+ * 根据逗号，split 行
+ * @param rowString
+ */
+export function splitCSVRow(rowString) {
+
+    const reg = /(?:(?:\,\"([^\"]+)\")|(?:\,([^\"\,]*)))/g,
+        str = `,${rowString}`,
+        result = {};
+
+    ColumnsFields.forEach((field, index) => {
+
+        const matched = reg.exec(str);
+
+        if (!matched) {
+            return;
+        }
+
+        const data = matched?.[1] || matched?.[2];
+
+        // 第一列
+        if (index === 0) {
+            return result[field] = data || null;
+        }
+
+        result[field] = data?.replace(',', '') || null;
+
+    });
+
+    return result;
+
+}
+
+/**
  * 获取匹配 route 的子节点
  * @param node
  * @param path

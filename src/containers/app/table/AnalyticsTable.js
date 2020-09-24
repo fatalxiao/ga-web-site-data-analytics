@@ -15,7 +15,7 @@ import ColumnsFields from 'statics/ColumnsFields';
 // Vendors
 import URI from 'urijs';
 import {
-    addPath, getPageViewsTotalCount,
+    splitCSVRow, addPath, getPageViewsTotalCount,
     getSortingCollapsedData, getPageViewsSortingCollapsedData, getSortingData
 } from 'vendors/Util';
 
@@ -77,20 +77,13 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
         /**
          * 原始的表格数据
          */
-        rawData = useMemo(() => data?.slice(1)?.map(item => {
+        rawData = useMemo(() => data?.slice(1, data.length - 1)?.map(item => {
 
             if (!item) {
                 return null;
             }
 
-            const row = item.split(','),
-                result = {};
-
-            row.forEach((col, colIndex) => {
-                result[ColumnsFields[colIndex]] = col;
-            });
-
-            return result;
+            return splitCSVRow(item);
 
         }), [data]),
 
