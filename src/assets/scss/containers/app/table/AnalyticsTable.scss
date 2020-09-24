@@ -7,6 +7,10 @@
 .analytics-table {
     flex: 1;
 
+    .scroll-table-body {
+        background: #fff;
+    }
+
     th {
         box-sizing: border-box;
         height: 47px;
