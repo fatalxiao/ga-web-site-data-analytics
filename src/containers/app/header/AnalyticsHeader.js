@@ -13,15 +13,13 @@ import Tools from './AnalyticsTools';
 // Styles
 import 'scss/containers/app/header/AnalyticsHeader.scss';
 
-const AnalyticsHeader = ({data, isDataCollapsed, onDataCollapsedChange}) => {
-    return (
-        <div className="analytics-header">
-            <Title data={data}/>
-            <Tools isDataCollapsed={isDataCollapsed}
-                   onDataCollapsedChange={onDataCollapsedChange}/>
-        </div>
-    );
-};
+const AnalyticsHeader = ({data, isDataCollapsed, onDataCollapsedChange}) => (
+    <div className="analytics-header">
+        <Title data={data}/>
+        <Tools isDataCollapsed={isDataCollapsed}
+               onDataCollapsedChange={onDataCollapsedChange}/>
+    </div>
+);
 
 AnalyticsHeader.propTypes = {
 
