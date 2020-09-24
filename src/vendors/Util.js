@@ -97,7 +97,7 @@ export function getPageViewsTotalCount(root, field = ColumnsFields[1]) {
  * @param sorting
  * @returns {*}
  */
-export function getSortingData(root, sorting) {
+export function getSortingCollapsedData(root, sorting) {
 
     if (!root || !sorting) {
         return root;
@@ -125,7 +125,7 @@ export function getSortingData(root, sorting) {
  * @param sorting
  * @returns {*}
  */
-export function getPageViewsSortingData(root, sorting) {
+export function getPageViewsSortingCollapsedData(root, sorting) {
 
     if (!root || !sorting) {
         return root;
@@ -149,6 +149,6 @@ export default {
     getMatchedChildNode,
     addPath,
     getPageViewsTotalCount,
-    getSortingData,
-    getPageViewsSortingData
+    getSortingCollapsedData,
+    getPageViewsSortingCollapsedData
 };

@@ -90,7 +90,8 @@ const AnalyticsTableLayout = (props) => {
 };
 
 AnalyticsTableLayout.propTypes = {
-    data: PropTypes.array
+    data: PropTypes.array,
+    isDataCollapsed: PropTypes.bool
 };
 
 export default AnalyticsTableLayout;

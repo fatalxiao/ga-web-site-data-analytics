@@ -14,12 +14,12 @@ import ColumnsFields from 'statics/ColumnsFields';
 
 // Vendors
 import URI from 'urijs';
-import {addPath, getPageViewsTotalCount, getSortingData, getPageViewsSortingData} from 'vendors/Util';
+import {addPath, getPageViewsTotalCount, getSortingCollapsedData, getPageViewsSortingCollapsedData} from 'vendors/Util';
 
 // Styles
 import 'scss/containers/app/table/AnalyticsTable.scss';
 
-const AnalyticsTable = ({data, scrollHeight}) => {
+const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
 
     const
 
@@ -116,17 +116,29 @@ const AnalyticsTable = ({data, scrollHeight}) => {
          */
         sortingData = useMemo(() => {
 
-            if (!sorting) {
-                return collapsedData;
+            // 数据折叠
+            if (isDataCollapsed) {
+
+                if (!sorting) {
+                    return collapsedData;
+                }
+
+                // 对第二列的排序做特殊处理
+                return sorting?.prop === ColumnsFields[1] ?
+                    [getPageViewsSortingCollapsedData(collapsedData?.[0], sorting)]
+                    :
+                    [getSortingCollapsedData(collapsedData?.[0], sorting)];
+
             }
 
-            // 对第二列的排序做特殊处理
-            return sorting?.prop === ColumnsFields[1] ?
-                [getPageViewsSortingData(collapsedData?.[0], sorting)]
-                :
-                [getSortingData(collapsedData?.[0], sorting)];
+            // 数据平铺
+            if (!sorting) {
+                return rawData;
+            }
 
-        }, [collapsedData, sorting]),
+            return rawData;
+
+        }, [isDataCollapsed, rawData, collapsedData, sorting]),
 
         /**
          * 处理排序变更
@@ -152,7 +164,8 @@ const AnalyticsTable = ({data, scrollHeight}) => {
 
 AnalyticsTable.propTypes = {
     data: PropTypes.array,
-    scrollHeight: PropTypes.number
+    scrollHeight: PropTypes.number,
+    isDataCollapsed: PropTypes.bool
 };
 
 export default AnalyticsTable;
