@@ -36,45 +36,6 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
         }),
 
         /**
-         * columns 配置
-         */
-        columns = useMemo(() => data?.[0]?.split(',')?.map((item, index) => {
-
-            const field = ColumnsFields[index];
-
-            return ({
-                key: field,
-                noWrap: true,
-                width: index === 0 ? '40%' : null,
-                align: index === 0 ? Table.Align.LEFT : Table.Align.RIGHT,
-                resizable: true,
-                headRenderer: item,
-                bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => {
-
-                    // 第一列
-                    if (index === 0) {
-                        return `${path?.map(row => row?.node?.[ColumnsFields[0]]).join('/')}` || '/';
-                    }
-
-                    // 第二列
-                    if (index === 1) {
-                        const value = rowData?.[ColumnsFields[1]] || 0;
-                        return isDataCollapsed ?
-                            `${value} / ${getPageViewsTotalCount(rowData)}`
-                            :
-                            value;
-                    }
-
-                    return rowData[field];
-
-                },
-                sortable: true,
-                sortingProp: field
-            });
-
-        }), [data, isDataCollapsed]),
-
-        /**
          * 原始的表格数据
          */
         rawData = useMemo(() => data?.slice(1, data.length - 1)?.map(item => {
@@ -86,6 +47,8 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
             return splitCSVRow(item);
 
         }), [data]),
+
+        footData = useMemo(() => splitCSVRow(data?.[data.length - 1]), [data]),
 
         /**
          * 按第一列 route 折叠后的数据
@@ -144,6 +107,49 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
         }, [isDataCollapsed, rawData, collapsedData, sorting]),
 
         /**
+         * columns 配置
+         */
+        columns = useMemo(() => data?.[0]?.split(',')?.map((item, index) => {
+
+            const field = ColumnsFields[index];
+
+            return ({
+                key: field,
+                noWrap: true,
+                width: index === 0 ? '40%' : null,
+                align: index === 0 ? Table.Align.LEFT : Table.Align.RIGHT,
+                resizable: true,
+                sortable: true,
+                sortingProp: field,
+                headRenderer: item,
+                bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => {
+
+                    // 第一列
+                    if (index === 0) {
+                        return `${path?.map(row => row?.node?.[ColumnsFields[0]]).join('/')}` || '/';
+                    }
+
+                    // 第二列
+                    if (index === 1) {
+                        const value = rowData?.[ColumnsFields[1]] || 0;
+                        return isDataCollapsed ?
+                            `${value} / ${getPageViewsTotalCount(rowData)}`
+                            :
+                            value;
+                    }
+
+                    return rowData[field];
+
+                },
+                footRenderer: (rowData, colIndex) => colIndex === 0 ?
+                    'Total'
+                    :
+                    footData[ColumnsFields[colIndex]]
+            });
+
+        }), [data, footData, isDataCollapsed]),
+
+        /**
          * 处理排序变更
          * @type {function(*=): void}
          */
@@ -154,6 +160,7 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                columns={columns}
                data={sortingData}
                isHeadFixed={true}
+               isFootFixed={true}
                isPaginated={false}
                useDynamicRender={true}
                canBeExpanded={true}

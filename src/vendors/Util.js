@@ -15,19 +15,18 @@ import Util from 'alcedo-ui/_vendors/Util';
  */
 export function splitCSVRow(rowString) {
 
-    const reg = /(?:(?:\,\"([^\"]+)\")|(?:\,([^\"\,]*)))/g,
-        str = `,${rowString}`,
+    const reg = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g,
         result = {};
 
     ColumnsFields.forEach((field, index) => {
 
-        const matched = reg.exec(str);
+        const matched = reg.exec(rowString);
 
         if (!matched) {
             return;
         }
 
-        const data = matched?.[1] || matched?.[2];
+        const data = matched?.[1] || matched?.[2] || matched?.[3];
 
         // 第一列
         if (index === 0) {

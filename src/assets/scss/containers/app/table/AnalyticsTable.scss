@@ -2,6 +2,7 @@
  * @file AnalyticsTable.scss
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
+@import '../../../common.scss';
 
 .analytics-table {
     flex: 1;
@@ -9,5 +10,13 @@
     th {
         box-sizing: border-box;
         height: 47px;
+    }
+
+    tfoot td {
+        box-sizing: border-box;
+        height: 48px;
+        border-bottom: none !important;
+        color: $theme-primary;
+        font-weight: 700;
     }
 }
