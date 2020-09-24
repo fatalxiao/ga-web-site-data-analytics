@@ -7,18 +7,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
-import 'scss/containers/app/title/AnalyticsTitle.scss';
+import 'scss/containers/app/header/AnalyticsTools.scss';
 
-const AnalyticsTitle = ({data}) => {
+const AnalyticsTitle = ({isDataCollapsed, onDataCollapsedChange}) => {
     return (
-        <div className="analytics-title">
-            {data.join('\n')}
+        <div className="analytics-tools">
+
         </div>
     );
 };
 
 AnalyticsTitle.propTypes = {
-    data: PropTypes.array
+    isDataCollapsed: PropTypes.bool,
+    onDataCollapsedChange: PropTypes.func
 };
 
 export default AnalyticsTitle;

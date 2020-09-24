@@ -7,8 +7,8 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import Title from './title/AnalyticsTitle';
-import AnalyticsTableLayout from './table/AnalyticsTableLayout';
+import Header from './header/AnalyticsHeader';
+import TableLayout from './table/AnalyticsTableLayout';
 
 // Styles
 import 'scss/containers/app/App.scss';
@@ -22,11 +22,11 @@ const App = ({data}) => {
 
     return (
         <div className="app">
-            <Title data={data?.title}
-                   isDataCollapsed={isDataCollapsed}
-                   onDataCollapsedChange={setIsDataCollapsed}/>
-            <AnalyticsTableLayout data={data?.tableData}
-                                  isDataCollapsed={isDataCollapsed}/>
+            <Header data={data?.title}
+                    isDataCollapsed={isDataCollapsed}
+                    onDataCollapsedChange={setIsDataCollapsed}/>
+            <TableLayout data={data?.tableData}
+                         isDataCollapsed={isDataCollapsed}/>
         </div>
     );
 
