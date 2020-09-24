@@ -145,10 +145,33 @@ export function getPageViewsSortingCollapsedData(root, sorting) {
 
 }
 
+/**
+ * 获取排序后的数据
+ * @param data
+ * @param sorting
+ * @returns {*}
+ */
+export function getSortingData(data, sorting) {
+
+    if (!data || !sorting) {
+        return data;
+    }
+
+    return data.sort((a, b) => {
+        if (!isNaN(a[sorting.prop]) && !isNaN(b[sorting.prop])) {
+            return (+a[sorting.prop] - +b[sorting.prop]) * sorting.type;
+        } else {
+            return (a[sorting.prop] + '').localeCompare(b[sorting.prop] + '') * sorting.type;
+        }
+    });
+
+}
+
 export default {
     getMatchedChildNode,
     addPath,
     getPageViewsTotalCount,
     getSortingCollapsedData,
-    getPageViewsSortingCollapsedData
+    getPageViewsSortingCollapsedData,
+    getSortingData
 };

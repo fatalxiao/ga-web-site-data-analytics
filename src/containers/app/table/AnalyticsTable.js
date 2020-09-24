@@ -14,7 +14,10 @@ import ColumnsFields from 'statics/ColumnsFields';
 
 // Vendors
 import URI from 'urijs';
-import {addPath, getPageViewsTotalCount, getSortingCollapsedData, getPageViewsSortingCollapsedData} from 'vendors/Util';
+import {
+    addPath, getPageViewsTotalCount,
+    getSortingCollapsedData, getPageViewsSortingCollapsedData, getSortingData
+} from 'vendors/Util';
 
 // Styles
 import 'scss/containers/app/table/AnalyticsTable.scss';
@@ -27,7 +30,10 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
          * 表格的排序
          * @type {string[]}
          */
-        [sorting, setSorting] = useState(null),
+        [sorting, setSorting] = useState({
+            prop: ColumnsFields[0],
+            type: 1
+        }),
 
         /**
          * columns 配置
@@ -52,7 +58,11 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
 
                     // 第二列
                     if (index === 1) {
-                        return `${rowData?.[ColumnsFields[1]] || 0} / ${getPageViewsTotalCount(rowData)}`;
+                        const value = rowData?.[ColumnsFields[1]] || 0;
+                        return isDataCollapsed ?
+                            `${value} / ${getPageViewsTotalCount(rowData)}`
+                            :
+                            value;
                     }
 
                     return rowData[field];
@@ -62,7 +72,7 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                 sortingProp: field
             });
 
-        }), [data]),
+        }), [data, isDataCollapsed]),
 
         /**
          * 原始的表格数据
@@ -136,7 +146,7 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                 return rawData;
             }
 
-            return rawData;
+            return getSortingData(rawData, sorting);
 
         }, [isDataCollapsed, rawData, collapsedData, sorting]),
 
@@ -157,6 +167,8 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                scrollHeight={scrollHeight}
                rowHeight={48}
                autoSorting={false}
+               sorting={sorting}
+               defaultSortingType={Table.SortingType.DESC}
                onSortChange={handleSortChange}/>
     );
 
