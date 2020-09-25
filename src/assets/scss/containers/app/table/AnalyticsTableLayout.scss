@@ -6,7 +6,9 @@
 
 .analytics-table-layout {
     flex: 1;
+    padding: 16px;
     background: #fff;
-    border-radius: $theme-border-radius;
+    border-radius: 24px !important;
+    box-shadow: 0 0 16px transparentize(#000, .94) !important;
     overflow: hidden;
 }

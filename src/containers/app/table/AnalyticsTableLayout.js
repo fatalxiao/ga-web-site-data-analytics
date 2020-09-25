@@ -7,9 +7,11 @@ import React, {useRef, useMemo, useState, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
+import Paper from 'alcedo-ui/Paper';
 import Table from './AnalyticsTable';
 
 // Vendors
+import {findDOMNode} from 'react-dom';
 import ResizeObserver from 'resize-observer-polyfill';
 
 // Styles
@@ -47,7 +49,7 @@ const AnalyticsTableLayout = (props) => {
 
             const target = entries[0].target,
                 {height} = target.getBoundingClientRect(),
-                fixedHeight = Math.floor(height) - tableHeadHeight - tableFootHeight;
+                fixedHeight = Math.floor(height) - tableHeadHeight - tableFootHeight - 32;
 
             if (height !== fixedHeight) {
                 setHeight(fixedHeight);
@@ -62,7 +64,7 @@ const AnalyticsTableLayout = (props) => {
         addObserver = useCallback(() => {
             if (layout?.current && !observer) {
                 observer = new ResizeObserver(handleMeasure);
-                observer.observe(layout?.current);
+                observer.observe(findDOMNode(layout?.current));
             }
         }),
 
@@ -86,11 +88,11 @@ const AnalyticsTableLayout = (props) => {
     }, []);
 
     return (
-        <div ref={layout}
-             className="analytics-table-layout">
+        <Paper ref={layout}
+               className="analytics-table-layout">
             <Table {...props}
                    scrollHeight={height}/>
-        </div>
+        </Paper>
     );
 
 };

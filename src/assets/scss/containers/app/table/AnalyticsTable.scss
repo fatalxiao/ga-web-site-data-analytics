@@ -4,23 +4,91 @@
  */
 @import '../../../common.scss';
 
-.analytics-table {
+.table.analytics-table {
     flex: 1;
 
-    .scroll-table-body {
-        background: #fff;
+    .scroll-table-head,
+    .scroll-table-foot {
+        background: transparent;
     }
 
-    th {
-        box-sizing: border-box;
-        height: 47px;
+    table {
+
+        thead tr th,
+        tbody tr td,
+        tfoot tr td {
+
+            &:first-child {
+                padding-left: 16px;
+            }
+
+            &:last-child {
+                padding-right: 16px;
+            }
+        }
+
+        thead tr {
+
+            th {
+                box-sizing: border-box;
+                height: 47px;
+                background: lighten($theme-primary, 56%) !important;
+                border: none;
+
+                &:first-child {
+                    border-top-left-radius: 8px;
+                    border-bottom-left-radius: 8px;
+                }
+
+                &:last-child {
+                    border-top-right-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                }
+
+                &.sorting {
+                    background: initial;
+                }
+            }
+        }
+
+        tbody tr {
+
+            td {
+                background: transparent;
+                border: none;
+
+                &:first-child {
+                    border-top-left-radius: 8px;
+                    border-bottom-left-radius: 8px;
+                }
+
+                &:last-child {
+                    border-top-right-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                }
+
+                &.sorting {
+                    background: initial;
+                }
+            }
+
+            &:nth-child(odd) {
+                background: lighten($theme-primary, 59%);
+            }
+
+            &:hover {
+                background: lighten($theme-primary, 54%);
+            }
+        }
+
+        tfoot tr td {
+            box-sizing: border-box;
+            height: 48px;
+            background: #fff;
+            border-bottom: none;
+            color: $theme-primary;
+            font-weight: 700;
+        }
     }
 
-    tfoot td {
-        box-sizing: border-box;
-        height: 48px;
-        border-bottom: none !important;
-        color: $theme-primary;
-        font-weight: 700;
-    }
 }
