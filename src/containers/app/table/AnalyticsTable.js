@@ -48,6 +48,10 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
 
         }), [data]),
 
+        /**
+         * 表尾 Total 数据
+         * @type {{}}
+         */
         footData = useMemo(() => splitCSVRow(data?.[data.length - 1]), [data]),
 
         /**
@@ -66,7 +70,17 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
 
                 const url = URI(row[ColumnsFields[0]]),
                     path = url.path(),
-                    pathArray = path.split('/');
+                    query = url.query(),
+                    pathArray = path?.split('/');
+
+                if (!path || !pathArray || pathArray.length < 1) {
+                    return;
+                }
+
+                // 将 query 部分添加到最后一层的路由上
+                if (query && query.length > 0) {
+                    pathArray[pathArray.length - 1] += `?${query}`;
+                }
 
                 addPath(result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, ColumnsFields[0]);
 
@@ -141,10 +155,10 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                     return rowData[field];
 
                 },
-                // footRenderer: (rowData, colIndex) => colIndex === 0 ?
-                //     'Total'
-                //     :
-                //     footData[ColumnsFields[colIndex]]
+                footRenderer: (rowData, colIndex) => colIndex === 0 ?
+                    'Total'
+                    :
+                    footData[ColumnsFields[colIndex]]
             });
 
         }), [data, footData, isDataCollapsed]),
@@ -160,7 +174,7 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                columns={columns}
                data={sortingData}
                isHeadFixed={true}
-               // isFootFixed={true}
+               isFootFixed={true}
                isPaginated={false}
                useDynamicRender={true}
                canBeExpanded={true}

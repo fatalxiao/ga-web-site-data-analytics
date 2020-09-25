@@ -31,7 +31,7 @@ const AnalyticsTableLayout = (props) => {
          * 表尾高度
          * @type {number}
          */
-        // tableFootHeight = useMemo(() => 48, []),
+        tableFootHeight = useMemo(() => 48, []),
 
         /**
          * 测量出的高度
@@ -47,7 +47,7 @@ const AnalyticsTableLayout = (props) => {
 
             const target = entries[0].target,
                 {height} = target.getBoundingClientRect(),
-                fixedHeight = Math.floor(height) - tableHeadHeight; //- tableFootHeight;
+                fixedHeight = Math.floor(height) - tableHeadHeight - tableFootHeight;
 
             if (height !== fixedHeight) {
                 setHeight(fixedHeight);
