@@ -25,14 +25,14 @@
             line-height: 38px;
             padding-top: 0;
             padding-bottom: 0;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .text-field-placeholder {
             color: #ccc;
         }
 
-        &.focused .text-field-input {
+        .text-field-input {
             color: $theme-highlight;
         }
     }

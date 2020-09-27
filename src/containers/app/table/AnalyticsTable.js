@@ -22,7 +22,9 @@ import {
 // Styles
 import 'scss/containers/app/table/AnalyticsTable.scss';
 
-const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
+const AnalyticsTable = ({
+    data, scrollHeight, searchText, isDataCollapsed
+}) => {
 
     const
 
@@ -54,6 +56,16 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
          */
         footData = useMemo(() => splitCSVRow(data?.[data.length - 1]), [data]),
 
+        filteredData = useMemo(() => {
+
+            if (!searchText || searchText?.length < 1) {
+                return rawData;
+            }
+
+            return rawData.filter(row => row?.[ColumnsFields[0]].includes(searchText));
+
+        }, [rawData, searchText]),
+
         /**
          * 按第一列 route 折叠后的数据
          * @type {*[]}
@@ -62,7 +74,7 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
 
             const result = {};
 
-            rawData?.forEach(row => {
+            filteredData?.forEach(row => {
 
                 if (!row?.[ColumnsFields[0]]) {
                     return;
@@ -88,7 +100,7 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
 
             return [result];
 
-        }, [rawData]),
+        }, [filteredData]),
 
         /**
          * 排序后的数据
@@ -113,12 +125,12 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
 
             // 数据平铺
             if (!sorting) {
-                return rawData;
+                return filteredData;
             }
 
-            return getSortingData(rawData, sorting);
+            return getSortingData(filteredData, sorting);
 
-        }, [isDataCollapsed, rawData, collapsedData, sorting]),
+        }, [isDataCollapsed, filteredData, collapsedData, sorting]),
 
         /**
          * columns 配置
@@ -189,9 +201,13 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
 };
 
 AnalyticsTable.propTypes = {
+
     data: PropTypes.array,
     scrollHeight: PropTypes.number,
+
+    searchText: PropTypes.string,
     isDataCollapsed: PropTypes.bool
+
 };
 
 export default AnalyticsTable;

@@ -14,7 +14,10 @@ import IconButton from 'alcedo-ui/IconButton';
 // Styles
 import 'scss/containers/app/table/filter/AnalyticsTableFilters.scss';
 
-const AnalyticsTableFilters = forwardRef(({isDataCollapsed, onDataCollapsedChange}, ref) => {
+const AnalyticsTableFilters = forwardRef(({
+    searchText, isDataCollapsed,
+    onSearchChang, onDataCollapsedChange
+}, ref) => {
 
     const renderTypeTipInstance = useRef(),
 
@@ -29,7 +32,9 @@ const AnalyticsTableFilters = forwardRef(({isDataCollapsed, onDataCollapsedChang
 
             <TextField className="analytics-table-search"
                        iconCls="fas fa-search"
-                       placeholder="Search routes..."/>
+                       placeholder="Search routes..."
+                       value={searchText}
+                       onChange={onSearchChang}/>
 
             <TipProvider ref={renderTypeTipInstance}
                          tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}>
@@ -44,8 +49,13 @@ const AnalyticsTableFilters = forwardRef(({isDataCollapsed, onDataCollapsedChang
 });
 
 AnalyticsTableFilters.propTypes = {
+
+    searchText: PropTypes.string,
     isDataCollapsed: PropTypes.bool,
+
+    onSearchChang: PropTypes.func,
     onDataCollapsedChange: PropTypes.func
+
 };
 
 export default AnalyticsTableFilters;

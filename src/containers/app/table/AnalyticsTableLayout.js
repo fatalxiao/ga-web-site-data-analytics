@@ -26,6 +26,12 @@ const AnalyticsTableLayout = (props) => {
         filterInstance = useRef(),
 
         /**
+         * 查询的文本
+         * @type {React.MutableRefObject<undefined>}
+         */
+        [searchText, setSearchText] = useState(''),
+
+        /**
          * 是否折叠数据
          */
         [isDataCollapsed, setIsDataCollapsed] = useState(true),
@@ -102,11 +108,14 @@ const AnalyticsTableLayout = (props) => {
                className="analytics-table-card">
 
             <Filters ref={filterInstance}
+                     searchText={searchText}
                      isDataCollapsed={isDataCollapsed}
+                     onSearchChang={setSearchText}
                      onDataCollapsedChange={setIsDataCollapsed}/>
 
             <Table {...props}
                    scrollHeight={height}
+                   searchText={searchText}
                    isDataCollapsed={isDataCollapsed}/>
 
         </Paper>
