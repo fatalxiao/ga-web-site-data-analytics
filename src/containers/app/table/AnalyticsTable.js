@@ -179,7 +179,7 @@ const AnalyticsTable = ({data, scrollHeight, isDataCollapsed}) => {
                useDynamicRender={true}
                canBeExpanded={true}
                scrollHeight={scrollHeight}
-               rowHeight={48}
+               rowHeight={40}
                autoSorting={false}
                sorting={sorting}
                defaultSortingType={Table.SortingType.DESC}

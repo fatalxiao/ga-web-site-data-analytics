@@ -33,7 +33,7 @@
                 box-sizing: border-box;
                 height: 47px;
                 background: lighten($theme-primary, 56%) !important;
-                border: none;
+                border-bottom: 4px solid transparent;
                 font-size: 12px;
                 font-weight: 600;
 
@@ -57,7 +57,7 @@
 
             td {
                 background: transparent;
-                border: none;
+                border-bottom: 4px solid transparent;
 
                 &:first-child {
                     border-top-left-radius: 8px;

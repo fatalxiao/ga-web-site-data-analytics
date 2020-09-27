@@ -4,6 +4,10 @@
  */
 
 .analytics-table-filters {
+    flex: 0 0 56px;
+    box-sizing: border-box;
+    height: 56px;
+    padding: 0 16px 16px;
 
     .switcher-wrap-label {
         display: flex;

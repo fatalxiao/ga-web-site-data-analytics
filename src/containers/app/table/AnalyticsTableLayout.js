@@ -22,7 +22,8 @@ let observer = null;
 
 const AnalyticsTableLayout = (props) => {
 
-    const layout = useRef(),
+    const cardInstance = useRef(),
+        filterInstance = useRef(),
 
         /**
          * 是否折叠数据
@@ -55,7 +56,10 @@ const AnalyticsTableLayout = (props) => {
 
             const target = entries[0].target,
                 {height} = target.getBoundingClientRect(),
-                fixedHeight = Math.floor(height) - tableHeadHeight - tableFootHeight - 32;
+                filterEl = findDOMNode(filterInstance?.current),
+                {paddingTop, paddingBottom} = window.getComputedStyle(target),
+                fixedHeight = Math.floor(height) - (parseInt(paddingTop) || 0) - (parseInt(paddingBottom) || 0)
+                    - (filterEl?.offsetHeight || 0) - tableHeadHeight - tableFootHeight;
 
             if (height !== fixedHeight) {
                 setHeight(fixedHeight);
@@ -68,9 +72,9 @@ const AnalyticsTableLayout = (props) => {
          * @type {Function}
          */
         addObserver = useCallback(() => {
-            if (layout?.current && !observer) {
+            if (cardInstance?.current && !observer) {
                 observer = new ResizeObserver(handleMeasure);
-                observer.observe(findDOMNode(layout?.current));
+                observer.observe(findDOMNode(cardInstance?.current));
             }
         }),
 
@@ -94,10 +98,11 @@ const AnalyticsTableLayout = (props) => {
     }, []);
 
     return (
-        <Paper ref={layout}
-               className="analytics-table-layout">
+        <Paper ref={cardInstance}
+               className="analytics-table-card">
 
-            <Filters isDataCollapsed={isDataCollapsed}
+            <Filters ref={filterInstance}
+                     isDataCollapsed={isDataCollapsed}
                      onDataCollapsedChange={setIsDataCollapsed}/>
 
             <Table {...props}
