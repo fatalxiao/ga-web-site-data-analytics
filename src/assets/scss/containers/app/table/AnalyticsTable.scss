@@ -34,6 +34,8 @@
                 height: 47px;
                 background: lighten($theme-primary, 56%) !important;
                 border: none;
+                font-size: 12px;
+                font-weight: 600;
 
                 &:first-child {
                     border-top-left-radius: 8px;

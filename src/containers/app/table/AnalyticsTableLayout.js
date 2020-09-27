@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import Paper from 'alcedo-ui/Paper';
+import Filters from './AnalyticsTableFilters';
 import Table from './AnalyticsTable';
 
 // Vendors
@@ -22,6 +23,11 @@ let observer = null;
 const AnalyticsTableLayout = (props) => {
 
     const layout = useRef(),
+
+        /**
+         * 是否折叠数据
+         */
+        [isDataCollapsed, setIsDataCollapsed] = useState(true),
 
         /**
          * 表头高度
@@ -90,16 +96,21 @@ const AnalyticsTableLayout = (props) => {
     return (
         <Paper ref={layout}
                className="analytics-table-layout">
+
+            <Filters isDataCollapsed={isDataCollapsed}
+                     onDataCollapsedChange={setIsDataCollapsed}/>
+
             <Table {...props}
-                   scrollHeight={height}/>
+                   scrollHeight={height}
+                   isDataCollapsed={isDataCollapsed}/>
+
         </Paper>
     );
 
 };
 
 AnalyticsTableLayout.propTypes = {
-    data: PropTypes.array,
-    isDataCollapsed: PropTypes.bool
+    data: PropTypes.array
 };
 
 export default AnalyticsTableLayout;

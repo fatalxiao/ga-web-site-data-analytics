@@ -8,26 +8,18 @@ import PropTypes from 'prop-types';
 
 // Components
 import Title from './AnalyticsTitle';
-import Tools from './AnalyticsTools';
 
 // Styles
 import 'scss/containers/app/header/AnalyticsHeader.scss';
 
-const AnalyticsHeader = ({data, isDataCollapsed, onDataCollapsedChange}) => (
+const AnalyticsHeader = ({data}) => (
     <div className="analytics-header">
         <Title data={data}/>
-        <Tools isDataCollapsed={isDataCollapsed}
-               onDataCollapsedChange={onDataCollapsedChange}/>
     </div>
 );
 
 AnalyticsHeader.propTypes = {
-
-    data: PropTypes.array,
-    isDataCollapsed: PropTypes.bool,
-
-    onDataCollapsedChange: PropTypes.func
-
+    data: PropTypes.array
 };
 
 export default AnalyticsHeader;
