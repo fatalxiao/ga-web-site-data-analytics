@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import Paper from 'alcedo-ui/Paper';
-import Filters from './AnalyticsTableFilters';
+import Filters from './filter/AnalyticsTableFilters';
 import Table from './AnalyticsTable';
 
 // Vendors

@@ -27,29 +27,26 @@
             }
         }
 
-        thead tr {
+        thead tr th {
+            box-sizing: border-box;
+            height: 47px;
+            background: lighten($theme-primary, 56%) !important;
+            border-bottom: 4px solid transparent;
+            font-size: 12px;
+            font-weight: 600;
 
-            th {
-                box-sizing: border-box;
-                height: 47px;
-                background: lighten($theme-primary, 56%) !important;
-                border-bottom: 4px solid transparent;
-                font-size: 12px;
-                font-weight: 600;
+            &:first-child {
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+            }
 
-                &:first-child {
-                    border-top-left-radius: 8px;
-                    border-bottom-left-radius: 8px;
-                }
+            &:last-child {
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+            }
 
-                &:last-child {
-                    border-top-right-radius: 8px;
-                    border-bottom-right-radius: 8px;
-                }
-
-                &.sorting {
-                    background: initial;
-                }
+            &.sorting {
+                background: initial;
             }
         }
 
