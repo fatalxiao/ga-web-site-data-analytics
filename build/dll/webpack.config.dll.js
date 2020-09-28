@@ -1,6 +1,5 @@
 const webpack = require('webpack'),
     AssetsPlugin = require('assets-webpack-plugin'),
-    CompressionPlugin = require('compression-webpack-plugin'),
 
     config = require('../config.js'),
     utils = require('../utils.js'),
@@ -37,11 +36,6 @@ module.exports = {
         new AssetsPlugin({
             path: config[env].assetsRoot,
             filename: utils.assetsSubPath('vendors/vendors-assets.json', env)
-        }),
-
-        new CompressionPlugin({
-            test: new RegExp('\\.(' + config.productionGzipExtensions.join('|') + ')$'),
-            filename: '[path][base].gz[query]'
         })
 
     ]

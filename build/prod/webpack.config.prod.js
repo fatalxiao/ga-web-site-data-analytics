@@ -4,7 +4,6 @@ const path = require('path'),
     CopyPlugin = require('copy-webpack-plugin'),
     HtmlPlugin = require('html-webpack-plugin'),
     HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin'),
-    CompressionPlugin = require('compression-webpack-plugin'),
     BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
 
     config = require('../config.js'),
@@ -76,11 +75,6 @@ const prodConfig = {
                 vendorsAssets['polyfill'].js
             ],
             append: false
-        }),
-
-        new CompressionPlugin({
-            test: new RegExp('\\.(' + config.productionGzipExtensions.join('|') + ')$'),
-            filename: '[path][base].gz[query]'
         })
 
     ]

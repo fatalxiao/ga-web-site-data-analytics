@@ -1,7 +1,6 @@
 const express = require('express'),
     history = require('connect-history-api-fallback'),
     open = require('open'),
-    compression = require('compression'),
 
     config = require('../config.js'),
 
@@ -10,8 +9,7 @@ const express = require('express'),
     port = config[env].port,
     uri = 'http://localhost:' + port;
 
-app.use(compression())
-   .use(history())
+app.use(history())
    .use(express.static(config[env].assetsRoot, {
        setHeaders: (res, path) => {
            res.setHeader('Cache-Control', path.endsWith('index.html') ?
