@@ -111,9 +111,13 @@ export function addPath(node, pathArray, rowData, collapsedField) {
  * @param field
  * @returns {number}
  */
-export function getPageViewsTotalCount(root, field = ColumnsFields[1]) {
+export function getPageViewsTotalCount(root, field) {
 
     let result = 0;
+
+    if (!root || !field) {
+        return result;
+    }
 
     Util.preOrderTraverse(root, node => {
         result += +(node[field] || 0);

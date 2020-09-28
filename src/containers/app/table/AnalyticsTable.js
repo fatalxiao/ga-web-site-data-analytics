@@ -155,15 +155,16 @@ const AnalyticsTable = ({
                         return `${path?.map(row => row?.node?.[ColumnsFields[0]]).join('/')}` || '/';
                     }
 
-                    // 第二列
-                    if (index === 1) {
-                        const value = rowData?.[ColumnsFields[1]] || 0;
+                    // 第二或第三列
+                    if (index === 1 || index === 2) {
+                        const value = rowData?.[ColumnsFields[index]] || 0;
                         return isDataCollapsed ?
-                            `${value} / ${getPageViewsTotalCount(rowData)}`
+                            `${value} / ${getPageViewsTotalCount(rowData, ColumnsFields[index])}`
                             :
                             value;
                     }
 
+                    // 其他列
                     return rowData[field];
 
                 },
