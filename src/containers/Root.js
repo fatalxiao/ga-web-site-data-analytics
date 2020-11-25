@@ -14,20 +14,22 @@ import 'scss/containers/Root.scss';
 
 const Root = () => {
 
-    /**
-     * GA 数据
-     *  {
-     *      title: {Array},
-     *      tableData: {Array},
-     *      browseData: {Array}
-     *  }
-     */
-    const [data, setData] = useState(null),
+    const
+
+        /**
+         * GA 数据
+         *  {
+         *      title: {Array},
+         *      tableData: {Array},
+         *      browseData: {Array}
+         *  }
+         */
+        [data, setData] = useState(null),
 
         /**
          * 处理数据变更
          */
-        handleDataChange = useCallback(data => setData(data));
+        handleDataChange = useCallback(data => setData(data), [setData]);
 
     return (
         <div className="root">
