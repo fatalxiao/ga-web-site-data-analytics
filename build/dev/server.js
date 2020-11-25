@@ -15,8 +15,7 @@ const os = require('os'),
     app = express(),
     compiler = webpack(webpackConfig),
     devMiddleware = require('webpack-dev-middleware')(compiler, {
-        publicPath: webpackConfig.output.publicPath,
-        logLevel: 'error'
+        publicPath: webpackConfig.output.publicPath
     });
 
 os.platform() !== 'win32' && chokidar.watch('.');
