@@ -177,7 +177,7 @@ const AnalyticsTable = ({
                 footRenderer: (rowData, colIndex) => colIndex === 0 ?
                     'Total'
                     :
-                    footData[ColumnsFields[colIndex]]
+                    footData[ColumnsFields[colIndex].name]
             }));
 
         }, [data, footData, isDataCollapsed]),
