@@ -74,7 +74,7 @@ const AnalyticsTable = ({
          * 按第一列 route 折叠后的数据
          * @type {*[]}
          */
-        collapsedData = useMemo(() => {
+        getCollapsedData = useCallback(() => {
 
             const result = {};
 
@@ -93,9 +93,9 @@ const AnalyticsTable = ({
                     return;
                 }
 
-                // 将 query 部分添加到最后一层的路由上
+                // 将 query 部分作为下一层的 path
                 if (query && query.length > 0) {
-                    pathArray[pathArray.length - 1] += `?${query}`;
+                    pathArray.push(`?${query}`);
                 }
 
                 addPath(
@@ -117,6 +117,8 @@ const AnalyticsTable = ({
             // 数据折叠
             if (isDataCollapsed) {
 
+                const collapsedData = getCollapsedData();
+
                 if (!sorting) {
                     return collapsedData;
                 }
@@ -136,7 +138,7 @@ const AnalyticsTable = ({
 
             return getSortingData(filteredData, sorting);
 
-        }, [isDataCollapsed, filteredData, collapsedData, sorting]),
+        }, [isDataCollapsed, filteredData, getCollapsedData, sorting]),
 
         /**
          * columns 配置
