@@ -14,14 +14,24 @@ import 'scss/containers/browseFile/BrowseFile.scss';
 
 const BrowseFile = ({onDataChange}) => {
 
-    const fileInput = useRef(),
+    const
 
+        /**
+         * file input ref
+         * @type {React.MutableRefObject<undefined>}
+         */
+        fileInput = useRef(),
+
+        /**
+         * 错误消息 state
+         * @type {React.MutableRefObject<undefined>}
+         */
         [errMsg, setErrMsg] = useState(''),
 
         /**
          * 选择文件
          */
-        chooseFile = useCallback(() => fileInput?.current?.click(), [fileInput]),
+        chooseFile = useCallback(() => fileInput?.current?.click?.(), [fileInput]),
 
         /**
          * 处理文件变更
@@ -51,7 +61,7 @@ const BrowseFile = ({onDataChange}) => {
             };
             reader.readAsText(file);
 
-        });
+        }, [onDataChange]);
 
     return (
         <div className="browse-file">
