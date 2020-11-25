@@ -56,6 +56,10 @@ const AnalyticsTable = ({
          */
         footData = useMemo(() => splitCSVRow(data?.[data.length - 1]), [data]),
 
+        /**
+         * 获取过滤后的数据
+         * @type {any}
+         */
         filteredData = useMemo(() => {
 
             if (!searchText || searchText?.length < 1) {
