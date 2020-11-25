@@ -30,10 +30,10 @@ export function splitCSVRow(rowString) {
 
         // 第一列
         if (index === 0) {
-            return result[field] = data || null;
+            return result[field.name] = data || null;
         }
 
-        result[field] = data?.replace(',', '') || null;
+        result[field.name] = data?.replace(',', '') || null;
 
     });
 

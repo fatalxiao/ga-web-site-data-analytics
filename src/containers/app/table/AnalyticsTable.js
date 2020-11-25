@@ -33,7 +33,7 @@ const AnalyticsTable = ({
          * @type {string[]}
          */
         [sorting, setSorting] = useState({
-            prop: ColumnsFields[0],
+            prop: ColumnsFields[0].name,
             type: 1
         }),
 
@@ -66,7 +66,7 @@ const AnalyticsTable = ({
                 return rawData;
             }
 
-            return rawData.filter(row => row?.[ColumnsFields[0]].includes(searchText));
+            return rawData.filter(row => row?.[ColumnsFields[0].name].includes(searchText));
 
         }, [rawData, searchText]),
 
@@ -80,11 +80,11 @@ const AnalyticsTable = ({
 
             filteredData?.forEach(row => {
 
-                if (!row?.[ColumnsFields[0]]) {
+                if (!row?.[ColumnsFields[0].name]) {
                     return;
                 }
 
-                const url = URI(row[ColumnsFields[0]]),
+                const url = URI(row[ColumnsFields[0].name]),
                     path = url.path(),
                     query = url.query(),
                     pathArray = path?.split('/');
@@ -98,7 +98,9 @@ const AnalyticsTable = ({
                     pathArray[pathArray.length - 1] += `?${query}`;
                 }
 
-                addPath(result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, ColumnsFields[0]);
+                addPath(
+                    result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, ColumnsFields[0].name
+                );
 
             });
 
@@ -120,7 +122,7 @@ const AnalyticsTable = ({
                 }
 
                 // 对第二列的排序做特殊处理
-                return sorting?.prop === ColumnsFields[1] ?
+                return sorting?.prop === ColumnsFields[1].name ?
                     [getPageViewsSortingCollapsedData(collapsedData?.[0], sorting)]
                     :
                     [getSortingCollapsedData(collapsedData?.[0], sorting)];
@@ -139,46 +141,46 @@ const AnalyticsTable = ({
         /**
          * columns 配置
          */
-        columns = useMemo(() => data?.[0]?.split(',')?.map((item, index) => {
+        columns = useMemo(() => {
 
-            const field = ColumnsFields[index];
+            const dataColumns = data?.[0]?.split(',');
 
-            return ({
-                key: field,
+            return ColumnsFields.map(({name, mappingColumnIndex}, index) => ({
+                key: name,
                 noWrap: true,
                 width: index === 0 ? '40%' : null,
                 align: index === 0 ? Table.Align.LEFT : Table.Align.RIGHT,
                 resizable: true,
                 sortable: true,
-                sortingProp: field,
-                headRenderer: item,
+                sortingProp: name,
+                headRenderer: dataColumns[mappingColumnIndex],
                 bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => {
 
                     // 第一列
                     if (index === 0) {
-                        return `${path?.map(row => row?.node?.[ColumnsFields[0]]).join('/')}` || '/';
+                        return `${path?.map(row => row?.node?.[ColumnsFields[0].name]).join('/')}` || '/';
                     }
 
                     // 第二或第三列
                     if (index === 1 || index === 2) {
-                        const value = rowData?.[ColumnsFields[index]] || 0;
+                        const value = rowData?.[ColumnsFields[index].name] || 0;
                         return isDataCollapsed ?
-                            `${value} / ${getPageViewsTotalCount(rowData, ColumnsFields[index])}`
+                            `${value} / ${getPageViewsTotalCount(rowData, ColumnsFields[index].name)}`
                             :
                             value;
                     }
 
                     // 其他列
-                    return rowData[field];
+                    return rowData[name];
 
                 },
                 footRenderer: (rowData, colIndex) => colIndex === 0 ?
                     'Total'
                     :
                     footData[ColumnsFields[colIndex]]
-            });
+            }));
 
-        }), [data, footData, isDataCollapsed]),
+        }, [data, footData, isDataCollapsed]),
 
         /**
          * 处理排序变更
