@@ -22,7 +22,18 @@ let observer = null;
 
 const AnalyticsTableLayout = (props) => {
 
-    const cardInstance = useRef(),
+    const
+
+        /**
+         * card ref
+         * @type {React.MutableRefObject<undefined>}
+         */
+        cardInstance = useRef(),
+
+        /**
+         * filter ref
+         * @type {React.MutableRefObject<undefined>}
+         */
         filterInstance = useRef(),
 
         /**
