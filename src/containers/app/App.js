@@ -15,8 +15,7 @@ import 'scss/containers/app/App.scss';
 
 const App = ({data}) => (
     <div className="app">
-        <Header data={data?.title}/>
-        <TableLayout data={data?.tableData}/>
+        <TableLayout data={data}/>
     </div>
 );
 

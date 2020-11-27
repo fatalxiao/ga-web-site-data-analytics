@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import Paper from 'alcedo-ui/Paper';
-import Filters from './filter/AnalyticsTableFilters';
+import TableHeader from './header/AnalyticsTableHeader';
 import Table from './AnalyticsTable';
 
 // Vendors
@@ -20,7 +20,9 @@ import 'scss/containers/app/table/AnalyticsTableLayout.scss';
 
 let observer = null;
 
-const AnalyticsTableLayout = (props) => {
+const AnalyticsTableLayout = ({
+    data, ...restProps
+}) => {
 
     const
 
@@ -34,7 +36,7 @@ const AnalyticsTableLayout = (props) => {
          * filter ref
          * @type {React.MutableRefObject<undefined>}
          */
-        filterInstance = useRef(),
+        headerRef = useRef(),
 
         /**
          * 查询的文本
@@ -73,10 +75,10 @@ const AnalyticsTableLayout = (props) => {
 
             const target = entries[0].target,
                 {height} = target.getBoundingClientRect(),
-                filterEl = findDOMNode(filterInstance?.current),
+                headerEl = findDOMNode(headerRef?.current),
                 {paddingTop, paddingBottom} = window.getComputedStyle(target),
                 fixedHeight = Math.floor(height) - (parseInt(paddingTop) || 0) - (parseInt(paddingBottom) || 0)
-                    - (filterEl?.offsetHeight || 0) - tableHeadHeight - tableFootHeight;
+                    - (headerEl?.offsetHeight || 0) - tableHeadHeight - tableFootHeight;
 
             if (height !== fixedHeight) {
                 setHeight(fixedHeight);
@@ -118,13 +120,15 @@ const AnalyticsTableLayout = (props) => {
         <Paper ref={cardInstance}
                className="analytics-table-card">
 
-            <Filters ref={filterInstance}
-                     searchText={searchText}
-                     isDataCollapsed={isDataCollapsed}
-                     onSearchChang={setSearchText}
-                     onDataCollapsedChange={setIsDataCollapsed}/>
+            <TableHeader ref={headerRef}
+                         title={data?.title}
+                         searchText={searchText}
+                         isDataCollapsed={isDataCollapsed}
+                         onSearchChang={setSearchText}
+                         onDataCollapsedChange={setIsDataCollapsed}/>
 
-            <Table {...props}
+            <Table {...restProps}
+                   data={data?.tableData}
                    scrollHeight={height}
                    searchText={searchText}
                    isDataCollapsed={isDataCollapsed}/>
@@ -135,7 +139,11 @@ const AnalyticsTableLayout = (props) => {
 };
 
 AnalyticsTableLayout.propTypes = {
-    data: PropTypes.array
+    data: PropTypes.shape({
+        title: PropTypes.array,
+        tableData: PropTypes.array,
+        browseData: PropTypes.array
+    })
 };
 
 export default AnalyticsTableLayout;

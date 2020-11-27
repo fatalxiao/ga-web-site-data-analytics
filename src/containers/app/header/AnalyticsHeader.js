@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import Title from './AnalyticsTitle';
+import Title from '../table/header/title/AnalyticsTableTitle';
 
 // Styles
 import 'scss/containers/app/header/AnalyticsHeader.scss';

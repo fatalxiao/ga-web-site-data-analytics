@@ -12,7 +12,7 @@ import TipProvider from 'alcedo-ui/TipProvider';
 import IconButton from 'alcedo-ui/IconButton';
 
 // Styles
-import 'scss/containers/app/table/filter/AnalyticsTableFilters.scss';
+import 'scss/containers/app/table/header/filter/AnalyticsTableFilters.scss';
 
 const AnalyticsTableFilters = forwardRef(({
     searchText, isDataCollapsed,
