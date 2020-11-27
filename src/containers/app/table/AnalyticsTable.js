@@ -13,9 +13,8 @@ import Table from 'alcedo-ui/Table';
 import ColumnsFields from 'statics/ColumnsFields';
 
 // Vendors
-import URI from 'urijs';
 import {
-    splitCSVRow, addPath, getPageViewsTotalCount,
+    splitCSVRow, addPath, collapseData, getPageViewsTotalCount,
     getSortingCollapsedData, getPageViewsSortingCollapsedData, getSortingData
 } from 'vendors/Util';
 
@@ -71,44 +70,6 @@ const AnalyticsTable = ({
         }, [rawData, searchText]),
 
         /**
-         * 按第一列 route 折叠后的数据
-         * @type {*[]}
-         */
-        getCollapsedData = useCallback(() => {
-
-            const result = {};
-
-            filteredData?.forEach(row => {
-
-                if (!row?.[ColumnsFields[0].name]) {
-                    return;
-                }
-
-                const url = URI(row[ColumnsFields[0].name]),
-                    path = url.path(),
-                    query = url.query(),
-                    pathArray = path?.split('/');
-
-                if (!path || !pathArray || pathArray.length < 1) {
-                    return;
-                }
-
-                // 将 query 部分作为下一层的 path
-                if (query && query.length > 0) {
-                    pathArray.push(`?${query}`);
-                }
-
-                addPath(
-                    result, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, ColumnsFields[0].name
-                );
-
-            });
-
-            return [result];
-
-        }, [filteredData]),
-
-        /**
          * 排序后的数据
          * @type {any}
          */
@@ -117,7 +78,7 @@ const AnalyticsTable = ({
             // 数据折叠
             if (isDataCollapsed) {
 
-                const collapsedData = getCollapsedData();
+                const collapsedData = collapseData(filteredData);
 
                 if (!sorting) {
                     return collapsedData;
@@ -138,7 +99,7 @@ const AnalyticsTable = ({
 
             return getSortingData(filteredData, sorting);
 
-        }, [isDataCollapsed, filteredData, getCollapsedData, sorting]),
+        }, [isDataCollapsed, filteredData, sorting]),
 
         /**
          * columns 配置
@@ -147,7 +108,7 @@ const AnalyticsTable = ({
 
             const dataColumns = data?.[0]?.split(',');
 
-            return ColumnsFields.map(({name, mappingColumnIndex}, index) => ({
+            return ColumnsFields.map(({name, mappingIndex, bodyRenderer}, index) => ({
                 key: name,
                 noWrap: true,
                 width: index === 0 ? '40%' : null,
@@ -155,27 +116,8 @@ const AnalyticsTable = ({
                 resizable: true,
                 sortable: true,
                 sortingProp: name,
-                headRenderer: dataColumns[mappingColumnIndex],
-                bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) => {
-
-                    // 第一列
-                    if (index === 0) {
-                        return `${path?.map(row => row?.node?.[ColumnsFields[0].name]).join('/')}` || '/';
-                    }
-
-                    // 第二或第三列
-                    if (index === 1 || index === 2) {
-                        const value = rowData?.[ColumnsFields[index].name] || 0;
-                        return isDataCollapsed ?
-                            `${value} / ${getPageViewsTotalCount(rowData, ColumnsFields[index].name)}`
-                            :
-                            value;
-                    }
-
-                    // 其他列
-                    return rowData[name];
-
-                },
+                headRenderer: dataColumns[mappingIndex],
+                bodyRenderer: (...args) => bodyRenderer?.(...args, isDataCollapsed),
                 footRenderer: (rowData, colIndex) => colIndex === 0 ?
                     'Total'
                     :

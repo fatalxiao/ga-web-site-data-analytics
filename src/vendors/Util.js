@@ -8,6 +8,7 @@ import ColumnsFields from 'statics/ColumnsFields';
 
 // Vendors
 import Util from 'alcedo-ui/_vendors/Util';
+import URI from 'urijs';
 
 /**
  * 根据逗号，split 行
@@ -102,6 +103,60 @@ export function addPath(node, pathArray, rowData, collapsedField) {
     if (pathArray.length > 1) {
         addPath(getMatchedChildNode(node, pathArray?.[1], collapsedField), pathArray.slice(1), rowData, collapsedField);
     }
+
+}
+
+export function summaryCollapsedData(root) {
+
+    Util.postOrderTraverse(root, node =>
+        ColumnsFields.forEach(field => field?.summary?.(node))
+    );
+
+    return root;
+
+}
+
+/**
+ *
+ * @param data
+ * @returns {Array|*[]}
+ */
+export function collapseData(data) {
+
+    if (!data || data.length < 1) {
+        return [];
+    }
+
+    const root = {};
+
+    data?.forEach(row => {
+
+        if (!row?.[ColumnsFields[0].name]) {
+            return;
+        }
+
+        const url = URI(row[ColumnsFields[0].name]),
+            path = url.path(),
+            query = url.query(),
+            pathArray = path?.split('/');
+
+        if (!path || !pathArray || pathArray.length < 1) {
+            return;
+        }
+
+        // 将 query 部分作为下一层的 path
+        if (query && query.length > 0) {
+            pathArray.push(`?${query}`);
+        }
+
+        // 添加子节点
+        addPath(
+            root, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, ColumnsFields[0].name
+        );
+
+    });
+
+    return [summaryCollapsedData(root)];
 
 }
 
@@ -206,6 +261,8 @@ export function getSortingData(data, sorting) {
 export default {
     getMatchedChildNode,
     addPath,
+    summaryCollapsedData,
+    collapseData,
     getPageViewsTotalCount,
     getSortingCollapsedData,
     getPageViewsSortingCollapsedData,
