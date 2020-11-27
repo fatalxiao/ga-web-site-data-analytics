@@ -10,6 +10,7 @@
     border-radius: 8px;
     border: 2px solid $theme-highlight !important;
     transition: width $theme-transition-duration ease-in-out,
+    background $theme-transition-duration ease-in-out,
     border-color $theme-transition-duration ease-in-out $theme-transition-duration;
 
     .icon-button {
@@ -28,15 +29,16 @@
         width: 40px;
         border-color: transparent !important;
         transition: width $theme-transition-duration ease-in-out,
+        background $theme-transition-duration ease-in-out,
         border-color 0s ease-in-out;
 
         .icon-button {
             border-radius: 8px;
             cursor: pointer;
+        }
 
-            &:hover {
-                background: $theme-secondary;
-            }
+        &:hover {
+            background: $theme-secondary;
         }
     }
 }
