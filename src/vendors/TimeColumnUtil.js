@@ -16,7 +16,7 @@ export function isValidTime(value) {
 }
 
 /**
- * 计算时间（ 如 0:02:30 ）含有多少秒
+ * 计算时间（ 如 00:02:30 ）含有多少秒
  * @param value
  * @returns {number}
  */
