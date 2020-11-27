@@ -6,13 +6,19 @@
 // Vendors
 import mean from 'lodash/mean';
 
+const REG = /^(\d+)\:(\d{2})\:(\d{2})$/;
+
 /**
  * 是否是合法的时间
  * @param value
  * @returns {boolean}
  */
 export function isValidTime(value) {
-    return /^\d+\:\d{2}\:\d{2}$/.test(value);
+
+    const matched = REG.exec(value);
+
+    return !(!matched || !matched[1] || !matched[2] || !matched[3] || +matched[2] > 60 || +matched[3] > 60);
+
 }
 
 /**
@@ -26,7 +32,7 @@ export function countTime(value) {
         return 0;
     }
 
-    const matched = /^(\d+)\:(\d{2})\:(\d{2})$/.exec(value);
+    const matched = REG.exec(value);
 
     if (!matched) {
         return 0;
