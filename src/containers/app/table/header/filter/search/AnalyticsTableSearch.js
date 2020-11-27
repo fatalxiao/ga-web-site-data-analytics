@@ -22,27 +22,47 @@ const AnalyticsTableSearch = ({
 
     const
 
+        /**
+         * field ref
+         * @type {React.MutableRefObject<undefined>}
+         */
         fieldRef = useRef(),
 
+        /**
+         * field 是否折叠的 state
+         * @type {React.MutableRefObject<undefined>}
+         */
         [collapsed, setCollapsed] = useState(true),
 
+        /**
+         * 处理 search icon 点击事件
+         * @type {Function}
+         */
         handleIconClick = useCallback(() => {
 
             if (!collapsed) {
                 return;
             }
 
+            // 展开 text field
             setCollapsed(false);
+
+            // 动画结束后 focus
             setTimeout(() => fieldRef?.current?.focus(), 250);
 
         }, [collapsed, setCollapsed]),
 
+        /**
+         * 处理 text field blur 事件
+         * @type {Function}
+         */
         handleBlur = useCallback(() => {
 
             if (collapsed || (searchText && searchText.length > 0)) {
                 return;
             }
 
+            // 折叠 text field
             setCollapsed(true);
 
         }, [searchText, collapsed, setCollapsed]);
