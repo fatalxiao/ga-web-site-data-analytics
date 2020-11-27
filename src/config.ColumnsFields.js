@@ -5,7 +5,8 @@
 
 // Vendors
 import sum from 'lodash/sum';
-import {getAverageTime} from 'vendors/Util';
+import {getAverageTime} from 'vendors/TimeColumnUtil';
+import {getAveragePercent} from 'vendors/PercentColumnUtil';
 
 /**
  *  {
@@ -80,16 +81,51 @@ export default [{
 }, {
     name: 'numberOfEntries',
     mappingIndex: 4,
+    summary: node => {
+
+        if (!node) {
+            return;
+        }
+
+        if (!node.children || node.children.length < 1) {
+            return node.allNumberOfEntries = +node.numberOfEntries || 0;
+        }
+
+        return node.allNumberOfEntries = (+node.numberOfEntries || 0)
+            + sum(node.children.map(item => +item?.allNumberOfEntries || 0));
+
+    },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        rowData.numberOfEntries
+        isDataCollapsed ?
+            `${+rowData?.numberOfEntries || 0} / ${+rowData?.allNumberOfEntries || 0}`
+            :
+            +rowData?.numberOfEntries || 0
 }, {
     name: 'bounceRate',
     mappingIndex: 5,
+    summary: node => {
+
+        if (!node || node.bounceRate || !node.children || node.children.length < 1) {
+            return;
+        }
+
+        return node.bounceRate = getAveragePercent(node.children.map(child => child?.bounceRate));
+
+    },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
         rowData.bounceRate
 }, {
     name: 'exitPercentage',
     mappingIndex: 6,
+    summary: node => {
+
+        if (!node || node.exitPercentage || !node.children || node.children.length < 1) {
+            return;
+        }
+
+        return node.exitPercentage = getAveragePercent(node.children.map(child => child?.exitPercentage));
+
+    },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
         rowData.exitPercentage
 }];

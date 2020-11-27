@@ -16,7 +16,7 @@ import ColumnsFields from 'src/config.ColumnsFields';
 import {
     splitCSVRow, collapseData,
     getSortingCollapsedData, getPageViewsSortingCollapsedData, getSortingData
-} from 'vendors/Util';
+} from 'vendors/TableDataUtil';
 
 // Styles
 import 'scss/containers/app/table/AnalyticsTable.scss';
