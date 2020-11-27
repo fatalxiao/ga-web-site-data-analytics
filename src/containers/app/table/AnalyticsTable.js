@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 import Table from 'alcedo-ui/Table';
 
 // Statics
-import ColumnsFields from 'statics/ColumnsFields';
+import ColumnsFields from 'src/config.ColumnsFields';
 
 // Vendors
 import {
-    splitCSVRow, addPath, collapseData, getPageViewsTotalCount,
+    splitCSVRow, collapseData,
     getSortingCollapsedData, getPageViewsSortingCollapsedData, getSortingData
 } from 'vendors/Util';
 

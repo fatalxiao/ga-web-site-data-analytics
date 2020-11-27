@@ -4,7 +4,7 @@
  */
 
 // Statics
-import ColumnsFields from 'statics/ColumnsFields';
+import ColumnsFields from 'src/config.ColumnsFields';
 
 // Vendors
 import Util from 'alcedo-ui/_vendors/Util';
