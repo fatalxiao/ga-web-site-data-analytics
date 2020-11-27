@@ -1,3 +1,8 @@
+/**
+ * @file TimeColumnUtil.test.js
+ * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ */
+
 'use strict';
 
 // Vendors
@@ -59,6 +64,14 @@ describe('countTime test', () => {
 
     test('countTime "00:20:20"', () => {
         expect(countTime('00:20:20')).toBe(1220);
+    });
+
+    test('countTime "20:20"', () => {
+        expect(countTime('20:20')).toBe(0);
+    });
+
+    test('countTime "20"', () => {
+        expect(countTime('20')).toBe(0);
     });
 
 });
