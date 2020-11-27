@@ -3,13 +3,16 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
+// Vendors
 import sum from 'lodash/sum';
+import {getAverageTime} from 'vendors/Util';
 
 /**
  *  {
  *      name {string} 列名
  *      mappingIndex {number} 映射 excel 中的列索引
  *      summary {function} 汇总回调
+ *      bodyRenderer {function} table body 渲染回调
  *  }
  */
 export default [{
@@ -63,6 +66,15 @@ export default [{
 }, {
     name: 'averageTimeOnPage',
     mappingIndex: 3,
+    summary: node => {
+
+        if (!node || node.averageTimeOnPage || !node.children || node.children.length < 1) {
+            return;
+        }
+
+        return node.averageTimeOnPage = getAverageTime(node.children.map(child => child?.averageTimeOnPage));
+
+    },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
         rowData.averageTimeOnPage
 }, {
