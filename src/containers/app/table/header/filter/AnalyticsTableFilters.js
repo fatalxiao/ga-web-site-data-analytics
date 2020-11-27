@@ -3,7 +3,7 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useRef, useCallback, forwardRef} from 'react';
+import React, {useRef, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -14,10 +14,10 @@ import IconButton from 'alcedo-ui/IconButton';
 // Styles
 import 'scss/containers/app/table/header/filter/AnalyticsTableFilters.scss';
 
-const AnalyticsTableFilters = forwardRef(({
+const AnalyticsTableFilters = ({
     searchText, isDataCollapsed,
     onSearchChang, onDataCollapsedChange
-}, ref) => {
+}) => {
 
     const renderTypeTipInstance = useRef(),
 
@@ -27,14 +27,7 @@ const AnalyticsTableFilters = forwardRef(({
         }, [isDataCollapsed, onDataCollapsedChange]);
 
     return (
-        <div ref={ref}
-             className="analytics-table-filters">
-
-            <TextField className="analytics-table-search"
-                       iconCls="fas fa-search"
-                       placeholder="Search routes..."
-                       value={searchText}
-                       onChange={onSearchChang}/>
+        <div className="analytics-table-filters">
 
             <TipProvider ref={renderTypeTipInstance}
                          tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}>
@@ -43,10 +36,16 @@ const AnalyticsTableFilters = forwardRef(({
                             onClick={handleDataCollapsedClick}/>
             </TipProvider>
 
+            <TextField className="analytics-table-search"
+                       iconCls="fas fa-search"
+                       placeholder="Search routes..."
+                       value={searchText}
+                       onChange={onSearchChang}/>
+
         </div>
     );
 
-});
+};
 
 AnalyticsTableFilters.propTypes = {
 

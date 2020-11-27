@@ -2,7 +2,10 @@
  * @file AnalyticsTableTitle.scss
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
+@import '../../../../../common.scss';
 
 .analytics-table-title {
-
+    font-size: 17px;
+    font-weight: 600;
+    color: $theme-primary;
 }
