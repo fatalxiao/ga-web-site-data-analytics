@@ -10,37 +10,4 @@
     justify-content: flex-end;
     align-items: center;
     height: 56px;
-
-    .analytics-table-search {
-        border: none !important;
-
-        .icon-button {
-            color: #ccc;
-        }
-
-        .text-field-placeholder,
-        .text-field-input {
-            line-height: 38px;
-            padding-top: 0;
-            padding-bottom: 0;
-            font-size: 16px;
-        }
-
-        .text-field-placeholder {
-            color: #ccc;
-        }
-
-        .text-field-input {
-            color: $theme-highlight;
-        }
-    }
-
-    .analytics-table-render-type {
-        font-size: 16px;
-        transform: rotate(180deg);
-
-        &:hover {
-            color: $theme-highlight !important;
-        }
-    }
 }

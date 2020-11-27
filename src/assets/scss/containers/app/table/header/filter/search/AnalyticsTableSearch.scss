@@ -1,0 +1,61 @@
+/**
+ * @file AnalyticsTableSearch.scss
+ * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ */
+@import '../../../../../../common.scss';
+
+.text-field.analytics-table-search {
+    width: 300px;
+    border-radius: 8px;
+    border: 2px solid $theme-highlight !important;
+    transition: width $theme-transition-duration ease-in-out,
+    border-color $theme-transition-duration ease-in-out $theme-transition-duration;
+
+    .icon-button {
+        font-size: 16px;
+        z-index: 2;
+    }
+
+    .text-field-placeholder,
+    .text-field-input {
+        font-size: 15px;
+    }
+
+    //.text-field-placeholder,
+    //.text-field-input {
+    //    line-height: 38px;
+    //    padding-top: 0;
+    //    padding-bottom: 0;
+    //    font-size: 16px;
+    //}
+    //
+    //.text-field-placeholder {
+    //    color: #ccc;
+    //}
+    //
+    //.text-field-input {
+    //    color: $theme-highlight;
+    //}
+
+    &.collapsed {
+        width: 40px;
+        border-color: transparent !important;
+        transition: width $theme-transition-duration ease-in-out,
+        border-color 0s ease-in-out;
+
+        .icon-button {
+            border-radius: 8px;
+            cursor: pointer;
+
+            &:hover {
+                background: $theme-secondary;
+            }
+        }
+
+        .text-field-placeholder,
+        .text-field-input {
+            //width: 0;
+            //padding: 0 !important;
+        }
+    }
+}

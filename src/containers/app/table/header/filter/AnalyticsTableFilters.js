@@ -3,13 +3,12 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useRef, useCallback} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import TextField from 'alcedo-ui/TextField';
-import TipProvider from 'alcedo-ui/TipProvider';
-import IconButton from 'alcedo-ui/IconButton';
+import ToggleCollapseData from './toggleCollapseData/AnalyticsTableToggleCollapseData';
+import TableSearch from './search/AnalyticsTableSearch';
 
 // Styles
 import 'scss/containers/app/table/header/filter/AnalyticsTableFilters.scss';
@@ -17,35 +16,17 @@ import 'scss/containers/app/table/header/filter/AnalyticsTableFilters.scss';
 const AnalyticsTableFilters = ({
     searchText, isDataCollapsed,
     onSearchChang, onDataCollapsedChange
-}) => {
+}) => (
+    <div className="analytics-table-filters">
 
-    const renderTypeTipInstance = useRef(),
+        <ToggleCollapseData isDataCollapsed={isDataCollapsed}
+                            onDataCollapsedChange={onDataCollapsedChange}/>
 
-        handleDataCollapsedClick = useCallback(() => {
-            setTimeout(() => renderTypeTipInstance?.current?.resetPosition?.(), 0);
-            onDataCollapsedChange?.(!isDataCollapsed);
-        }, [isDataCollapsed, onDataCollapsedChange]);
+        <TableSearch searchText={searchText}
+                     onSearchChang={onSearchChang}/>
 
-    return (
-        <div className="analytics-table-filters">
-
-            <TipProvider ref={renderTypeTipInstance}
-                         tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}>
-                <IconButton className="analytics-table-render-type"
-                            iconCls={`fas fa-align-${isDataCollapsed ? 'justify' : 'right'}`}
-                            onClick={handleDataCollapsedClick}/>
-            </TipProvider>
-
-            <TextField className="analytics-table-search"
-                       iconCls="fas fa-search"
-                       placeholder="Search routes..."
-                       value={searchText}
-                       onChange={onSearchChang}/>
-
-        </div>
-    );
-
-};
+    </div>
+);
 
 AnalyticsTableFilters.propTypes = {
 
