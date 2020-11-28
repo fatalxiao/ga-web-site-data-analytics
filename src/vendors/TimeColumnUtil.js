@@ -52,7 +52,7 @@ export function countTime(value) {
  * @returns {string}
  */
 export function fillZero(value) {
-    return +value < 10 ? `0${value}` : value;
+    return (+value < 10) && (+value >= 0) ? `0${value}` : `${value}`;
 }
 
 /**
@@ -62,7 +62,7 @@ export function fillZero(value) {
  */
 export function formatTime(value) {
 
-    if (!value) {
+    if (!value || value < 0) {
         return '00:00:00';
     }
 
