@@ -6,7 +6,11 @@
 // Vendors
 import mean from 'lodash/mean';
 
-const REG = /^(\d+)\:(\d{2})\:(\d{2})$/;
+/**
+ * 时间格式的正则
+ * @type {RegExp}
+ */
+const REG = /^(\d+):(\d{2}):(\d{2})$/;
 
 /**
  * 是否是合法的时间
@@ -62,9 +66,9 @@ export function formatTime(value) {
         return '00:00:00';
     }
 
-    const hours = parseInt(value / 3600),
-        minutes = parseInt(value % 3600 / 60),
-        seconds = parseInt(value % 60);
+    const hours = parseInt(value / 3600, 10),
+        minutes = parseInt(value % 3600 / 60, 10),
+        seconds = parseInt(value % 60, 10);
 
     return `${fillZero(hours)}:${fillZero(minutes)}:${fillZero(seconds)}`;
 
@@ -73,7 +77,7 @@ export function formatTime(value) {
 /**
  * 获取一组时间的平均时间
  * @param data
- * @returns {number}
+ * @returns {string}
  */
 export function getAverageTime(data) {
 
