@@ -5,6 +5,8 @@
 
 'use strict';
 
+/* eslint-disable no-undef */
+
 // Vendors
 import {getDigitLength} from 'vendors/Util';
 
