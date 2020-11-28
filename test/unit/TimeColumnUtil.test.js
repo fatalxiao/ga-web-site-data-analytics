@@ -5,6 +5,7 @@
 
 'use strict';
 
+/* eslint-disable no-undef */
 
 // Vendors
 import {
@@ -14,8 +15,6 @@ import {
     formatTime,
     getAverageTime
 } from 'vendors/TimeColumnUtil';
-
-/* eslint-disable no-undef */
 
 /**
  * isValidTime 测试
@@ -79,6 +78,26 @@ describe('countTime test', () => {
 
     test('countTime "20"', () =>
         expect(countTime('20')).toBe(0)
+    );
+
+});
+
+describe('fillZero test', () => {
+
+    test('fillZero "0"', () =>
+        expect(fillZero('0')).toBe('00')
+    );
+
+    test('fillZero "6"', () =>
+        expect(fillZero('6')).toBe('06')
+    );
+
+    test('fillZero "10"', () =>
+        expect(fillZero('10')).toBe('10')
+    );
+
+    test('fillZero "100"', () =>
+        expect(fillZero('100')).toBe('100')
     );
 
 });
