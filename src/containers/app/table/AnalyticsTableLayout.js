@@ -21,8 +21,8 @@ import 'scss/containers/app/table/AnalyticsTableLayout.scss';
 let observer = null;
 
 const AnalyticsTableLayout = ({
-    data, ...restProps
-}) => {
+                                  data, ...restProps
+                              }) => {
 
     const
 
@@ -77,7 +77,9 @@ const AnalyticsTableLayout = ({
                 {height} = target.getBoundingClientRect(),
                 headerEl = findDOMNode(headerRef?.current),
                 {paddingTop, paddingBottom} = window.getComputedStyle(target),
-                fixedHeight = Math.floor(height) - (parseInt(paddingTop) || 0) - (parseInt(paddingBottom) || 0)
+                fixedHeight = Math.floor(height)
+                    - (parseInt(paddingTop, 10) || 0)
+                    - (parseInt(paddingBottom, 10) || 0)
                     - (headerEl?.offsetHeight || 0) - tableHeadHeight - tableFootHeight;
 
             if (height !== fixedHeight) {
