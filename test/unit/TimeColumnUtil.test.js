@@ -182,25 +182,40 @@ describe('fillZero test', () => {
  */
 describe('formatTime test', () => {
 
-    test('formatTime 0', () =>
-        expect(formatTime(0)).toBe('00:00:00')
-    );
+    {
+        const value = 0;
+        test(`formatTime ${value}`, () =>
+            expect(formatTime(value)).toBe('00:00:00')
+        );
+    }
 
-    test('formatTime 1', () =>
-        expect(formatTime(1)).toBe('00:00:01')
-    );
+    {
+        const value = 1;
+        test(`formatTime ${value}`, () =>
+            expect(formatTime(value)).toBe('00:00:01')
+        );
+    }
 
-    test('formatTime 20', () =>
-        expect(formatTime(20)).toBe('00:00:20')
-    );
+    {
+        const value = 20;
+        test(`formatTime ${value}`, () =>
+            expect(formatTime(value)).toBe('00:00:20')
+        );
+    }
 
-    test('formatTime 59', () =>
-        expect(formatTime(59)).toBe('00:00:59')
-    );
+    {
+        const value = 59;
+        test(`formatTime ${value}`, () =>
+            expect(formatTime(value)).toBe('00:00:59')
+        );
+    }
 
-    test('formatTime 60', () =>
-        expect(formatTime(60)).toBe('00:01:00')
-    );
+    {
+        const value = 60;
+        test(`formatTime ${value}`, () =>
+            expect(formatTime(value)).toBe('00:01:00')
+        );
+    }
 
     {
         const value = 20 * 60;
@@ -237,9 +252,12 @@ describe('formatTime test', () => {
         );
     }
 
-    test('formatTime -1', () =>
-        expect(formatTime(-1)).toBe('00:00:00')
-    );
+    {
+        const value = -1;
+        test(`formatTime ${value}`, () =>
+            expect(formatTime(value)).toBe('00:00:00')
+        );
+    }
 
 });
 
@@ -248,16 +266,25 @@ describe('formatTime test', () => {
  */
 describe('getAverageTime test', () => {
 
-    test('getAverageTime ["00:00:00"]', () =>
-        expect(getAverageTime(['00:00:00'])).toBe('00:00:00')
-    );
+    {
+        const value = ['00:00:00'];
+        test(`getAverageTime ${value}`, () =>
+            expect(getAverageTime(value)).toBe('00:00:00')
+        );
+    }
 
-    test('getAverageTime ["00:00:20"]', () =>
-        expect(getAverageTime(['00:00:20'])).toBe('00:00:20')
-    );
+    {
+        const value = ['00:00:20'];
+        test(`getAverageTime ${value}`, () =>
+            expect(getAverageTime(value)).toBe('00:00:20')
+        );
+    }
 
-    test('getAverageTime ["00:00:00", "00:00:20"]', () =>
-        expect(getAverageTime(['00:00:00', '00:00:20'])).toBe('00:00:10')
-    );
+    {
+        const value = ['00:00:00', '00:00:20'];
+        test(`getAverageTime ${value}`, () =>
+            expect(getAverageTime(value)).toBe('00:00:10')
+        );
+    }
 
 });
