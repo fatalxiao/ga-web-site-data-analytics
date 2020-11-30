@@ -5,7 +5,6 @@
 
 // Vendors
 import mean from 'lodash/mean';
-import round from 'lodash/round';
 import repeat from 'lodash/repeat';
 import {getDigitLength} from './Util';
 
@@ -32,10 +31,8 @@ export function formatPercent(value, precision = 2) {
     const fixedValue = value * 100,
         digitLen = getDigitLength(fixedValue);
 
-    if (digitLen === precision) {
+    if (digitLen >= precision) {
         return `${fixedValue}%`;
-    } else if (digitLen > precision) {
-        return `${round(fixedValue, precision)}%`;
     }
 
     return `${fixedValue}${digitLen === 0 ? '.' : ''}${repeat('0', precision - digitLen)}%`;
