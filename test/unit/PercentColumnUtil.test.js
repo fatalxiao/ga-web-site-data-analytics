@@ -127,7 +127,7 @@ describe('formatPercent test', () => {
     {
         const value = 0.00001;
         test(`formatPercent ${value}`, () =>
-            expect(formatPercent(value)).toBe('0.001%')
+            expect(formatPercent(value)).toBe('0.00%')
         );
     }
 
