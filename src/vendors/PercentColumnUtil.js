@@ -15,7 +15,7 @@ import {getDigitLength} from './Util';
  * @returns {boolean}
  */
 export function isValidPercent(value) {
-    return /^\-?\d+(\.\d+)?$/.test(value);
+    return /^\-?\d+(\.\d+)?\%$/.test(value);
 }
 
 /**
