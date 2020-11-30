@@ -70,6 +70,12 @@ const AnalyticsTable = ({
         }, [rawData, searchText]),
 
         /**
+         * 折叠的数据
+         * @type {Array|*[]}
+         */
+        collapsedData = useMemo(() => collapseData(filteredData), [filteredData]),
+
+        /**
          * 排序后的数据
          * @type {any}
          */
@@ -77,8 +83,6 @@ const AnalyticsTable = ({
 
             // 数据折叠
             if (isDataCollapsed) {
-
-                const collapsedData = collapseData(filteredData);
 
                 if (!sorting) {
                     return collapsedData;
@@ -130,7 +134,7 @@ const AnalyticsTable = ({
          * 处理排序变更
          * @type {function(*=): void}
          */
-        handleSortChange = useCallback(sorting => setSorting(sorting));
+        handleSortChange = useCallback(sorting => setSorting(sorting), [setSorting]);
 
     return (
         <Table className="analytics-table"
