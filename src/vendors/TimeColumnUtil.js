@@ -88,12 +88,12 @@ export function getAverageTime(data) {
     return formatTime(mean(data.map(item => {
 
         if (!item || !isValidTime(item)) {
-            return 0;
+            return null;
         }
 
         return countTime(item);
 
-    })));
+    }).filter(item => !isNaN(item))));
 
 }
 
