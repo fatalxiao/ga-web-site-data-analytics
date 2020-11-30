@@ -268,22 +268,43 @@ describe('getAverageTime test', () => {
 
     {
         const value = ['00:00:00'];
-        test(`getAverageTime ${value}`, () =>
+        test(`getAverageTime [${value}]`, () =>
             expect(getAverageTime(value)).toBe('00:00:00')
         );
     }
 
     {
         const value = ['00:00:20'];
-        test(`getAverageTime ${value}`, () =>
+        test(`getAverageTime [${value}]`, () =>
             expect(getAverageTime(value)).toBe('00:00:20')
         );
     }
 
     {
         const value = ['00:00:00', '00:00:20'];
-        test(`getAverageTime ${value}`, () =>
+        test(`getAverageTime [${value}]`, () =>
             expect(getAverageTime(value)).toBe('00:00:10')
+        );
+    }
+
+    {
+        const value = ['00:00:00', '00:00:10', '00:00:20'];
+        test(`getAverageTime [${value}]`, () =>
+            expect(getAverageTime(value)).toBe('00:00:10')
+        );
+    }
+
+    {
+        const value = ['00:00', '00:00:20'];
+        test(`getAverageTime [${value}]`, () =>
+            expect(getAverageTime(value)).toBe('00:00:20')
+        );
+    }
+
+    {
+        const value = ['00', '00:00:20'];
+        test(`getAverageTime [${value}]`, () =>
+            expect(getAverageTime(value)).toBe('00:00:20')
         );
     }
 
