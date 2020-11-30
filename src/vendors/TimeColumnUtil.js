@@ -88,7 +88,7 @@ export function getAverageTime(data) {
     return formatTime(mean(data.map(item => {
 
         if (!item || !isValidTime(item)) {
-            return null;
+            return;
         }
 
         return countTime(item);
