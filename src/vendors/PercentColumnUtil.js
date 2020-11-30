@@ -53,12 +53,12 @@ export function getAveragePercent(data, precision = 2) {
     return formatPercent(mean(data.map(value => {
 
         if (!value || !isValidPercent(value)) {
-            return 0;
+            return;
         }
 
         return +value.split('%')[0] / 100;
 
-    })), precision);
+    }).filter(item => !isNaN(item))), precision);
 
 }
 
