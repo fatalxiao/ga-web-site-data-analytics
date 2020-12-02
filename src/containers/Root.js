@@ -6,7 +6,7 @@
 import React, {useState, useCallback} from 'react';
 
 // Components
-import BrowseFile from 'containers/browseFile/BrowseFile';
+import SelectFile from 'containers/selectFile/SelectFile';
 import App from 'containers/app/App';
 
 // Styles
@@ -37,7 +37,7 @@ const Root = () => {
                 data ?
                     <App data={data}/>
                     :
-                    <BrowseFile onDataChange={handleDataChange}/>
+                    <SelectFile onDataChange={handleDataChange}/>
             }
         </div>
     );
