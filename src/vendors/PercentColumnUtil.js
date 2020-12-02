@@ -4,7 +4,6 @@
  */
 
 // Vendors
-import mean from 'lodash/mean';
 import round from 'lodash/round';
 import repeat from 'lodash/repeat';
 import {getDigitLength} from './Util';
@@ -16,6 +15,21 @@ import {getDigitLength} from './Util';
  */
 export function isValidPercent(value) {
     return /^\-?\d+(\.\d+)?\%$/.test(value);
+}
+
+/**
+ * 解析百分比
+ * @param value
+ * @returns {number}
+ */
+export function parsePercent(value) {
+
+    if (!isValidPercent(value)) {
+        return 0;
+    }
+
+    return +(value.split('%')[0]) / 100;
+
 }
 
 /**
@@ -36,31 +50,8 @@ export function formatPercent(value, precision = 2) {
 
 }
 
-/**
- * 获取一组时间的平均百分比
- * @param data
- * @returns {number}
- */
-export function getAveragePercent(data, precision = 2) {
-
-    if (!data || data.length < 1) {
-        return formatPercent(undefined, precision);
-    }
-
-    return formatPercent(mean(data.map(value => {
-
-        if (!value || !isValidPercent(value)) {
-            return;
-        }
-
-        return +value.split('%')[0] / 100;
-
-    }).filter(item => !isNaN(item))), precision);
-
-}
-
 export default {
     isValidPercent,
-    formatPercent,
-    getAveragePercent
+    parsePercent,
+    formatPercent
 };
