@@ -38,7 +38,7 @@ export default [{
             return node.allPageViews = +node.pageViews || 0;
         }
 
-        return node.allPageViews = (+node.pageViews || 0) + sum(node.children.map(item => +item?.allPageViews || 0));
+        node.allPageViews = (+node.pageViews || 0) + (sum(node.children.map(item => +item?.allPageViews || 0)) || 0);
 
     },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
@@ -60,8 +60,8 @@ export default [{
             return node.allUniquePageViews = +node.uniquePageViews || 0;
         }
 
-        return node.allUniquePageViews = (+node.uniquePageViews || 0)
-            + sum(node.children.map(item => +item?.allUniquePageViews || 0));
+        node.allUniquePageViews = (+node.uniquePageViews || 0)
+            + (sum(node.children.map(item => +item?.allUniquePageViews || 0)) || 0);
 
     },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
@@ -79,11 +79,10 @@ export default [{
             return;
         }
 
-        return node.averageTimeOnPage = mean(node.children.map(child => child?.averageTimeOnPage));
+        node.averageTimeOnPage = mean(node.children.map(child => child?.averageTimeOnPage)) || 0;
 
     },
-    bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        formatTime(rowData.averageTimeOnPage)
+    bodyRenderer: rowData => formatTime(rowData.averageTimeOnPage)
 }, {
     name: 'numberOfEntries',
     mappingIndex: 4,
@@ -98,8 +97,8 @@ export default [{
             return node.allNumberOfEntries = +node.numberOfEntries || 0;
         }
 
-        return node.allNumberOfEntries = (+node.numberOfEntries || 0)
-            + sum(node.children.map(item => +item?.allNumberOfEntries || 0));
+        node.allNumberOfEntries = (+node.numberOfEntries || 0)
+            + (sum(node.children.map(item => +item?.allNumberOfEntries || 0)) || 0);
 
     },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
@@ -117,11 +116,10 @@ export default [{
             return;
         }
 
-        return node.bounceRate = mean(node.children.map(child => child?.bounceRate));
+        node.bounceRate = mean(node.children.map(child => child?.bounceRate)) || 0;
 
     },
-    bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        formatPercent(rowData.bounceRate)
+    bodyRenderer: rowData => formatPercent(rowData.bounceRate)
 }, {
     name: 'exitPercentage',
     mappingIndex: 6,
@@ -132,9 +130,8 @@ export default [{
             return;
         }
 
-        return node.exitPercentage = mean(node.children.map(child => child?.exitPercentage));
+        node.exitPercentage = mean(node.children.map(child => child?.exitPercentage)) || 0;
 
     },
-    bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        formatPercent(rowData.exitPercentage)
+    bodyRenderer: rowData => formatPercent(rowData.exitPercentage)
 }];
