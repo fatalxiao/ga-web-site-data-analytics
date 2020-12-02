@@ -21,19 +21,14 @@ import {parsePercent, formatPercent} from 'vendors/PercentColumnUtil';
 export default [{
     name: 'route',
     mappingIndex: 0,
-    sortingProp: {
-        default: 'route'
-    },
+    sortingProp: () => 'route',
     parse: value => value || '',
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) =>
         `${path?.map(row => row?.node?.route).join('/')}` || '/'
 }, {
     name: 'pageViews',
     mappingIndex: 1,
-    sortingProp: {
-        default: 'pageViews',
-        collapsed: 'allPageViews'
-    },
+    sortingProp: isDataCollapsed => isDataCollapsed ? 'allPageViews' : 'pageViews',
     parse: value => +value || 0,
     summary: node => {
 
@@ -56,10 +51,7 @@ export default [{
 }, {
     name: 'uniquePageViews',
     mappingIndex: 2,
-    sortingProp: {
-        default: 'uniquePageViews',
-        collapsed: 'allUniquePageViews'
-    },
+    sortingProp: isDataCollapsed => isDataCollapsed ? 'allUniquePageViews' : 'uniquePageViews',
     parse: value => +value || 0,
     summary: node => {
 
@@ -83,9 +75,7 @@ export default [{
 }, {
     name: 'averageTimeOnPage',
     mappingIndex: 3,
-    sortingProp: {
-        default: 'averageTimeOnPage'
-    },
+    sortingProp: () => 'averageTimeOnPage',
     parse: value => parseTime(value) || 0,
     summary: node => {
 
@@ -100,10 +90,7 @@ export default [{
 }, {
     name: 'numberOfEntries',
     mappingIndex: 4,
-    sortingProp: {
-        default: 'numberOfEntries',
-        collapsed: 'allNumberOfEntries'
-    },
+    sortingProp: isDataCollapsed => isDataCollapsed ? 'allNumberOfEntries' : 'numberOfEntries',
     parse: value => +value || 0,
     summary: node => {
 
@@ -127,9 +114,7 @@ export default [{
 }, {
     name: 'bounceRate',
     mappingIndex: 5,
-    sortingProp: {
-        default: 'bounceRate'
-    },
+    sortingProp: () => 'bounceRate',
     parse: value => parsePercent(value) || 0,
     summary: node => {
 
@@ -144,9 +129,7 @@ export default [{
 }, {
     name: 'exitPercentage',
     mappingIndex: 6,
-    sortingProp: {
-        default: 'exitPercentage'
-    },
+    sortingProp: () => 'exitPercentage',
     parse: value => parsePercent(value) || 0,
     summary: node => {
 

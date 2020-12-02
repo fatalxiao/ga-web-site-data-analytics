@@ -32,7 +32,7 @@ const AnalyticsTable = ({
          * @type {{prop: string, type: number}}
          */
         DEFAULT_SORTING = useMemo(() => ({
-            prop: ColumnsFields[0].sortingProp,
+            prop: ColumnsFields[0].name,
             type: 1
         }), []),
 
@@ -87,6 +87,11 @@ const AnalyticsTable = ({
          */
         sortingData = useMemo(() => {
 
+            const sortingConfig = sorting ? {
+                ...sorting,
+                prop: ColumnsFields.find(item => item?.name === sorting.prop)?.sortingProp(isDataCollapsed)
+            } : null;
+
             // 数据折叠
             if (isDataCollapsed) {
 
@@ -94,10 +99,7 @@ const AnalyticsTable = ({
                     return collapsedData;
                 }
 
-                return [getSortingCollapsedData(collapsedData?.[0], {
-                    ...sorting,
-                    prop: sorting.prop[isDataCollapsed ? 'collapsed' : 'default']
-                })];
+                return [getSortingCollapsedData(collapsedData?.[0], sortingConfig)];
 
             }
 
@@ -106,10 +108,7 @@ const AnalyticsTable = ({
                 return filteredData;
             }
 
-            return getSortingData(filteredData, {
-                ...sorting,
-                prop: sorting.prop[isDataCollapsed ? 'collapsed' : 'default']
-            });
+            return getSortingData(filteredData, sortingConfig);
 
         }, [isDataCollapsed, filteredData, sorting]),
 
@@ -120,14 +119,14 @@ const AnalyticsTable = ({
 
             const dataColumns = data?.[0]?.split(',');
 
-            return ColumnsFields.map(({name, mappingIndex, sortingProp, bodyRenderer}, index) => ({
+            return ColumnsFields.map(({name, mappingIndex, bodyRenderer}, index) => ({
                 key: name,
                 noWrap: true,
                 width: index === 0 ? '40%' : null,
                 align: index === 0 ? Table.Align.LEFT : Table.Align.RIGHT,
                 resizable: true,
                 sortable: true,
-                sortingProp: sortingProp,
+                sortingProp: name,
                 headRenderer: dataColumns[mappingIndex],
                 bodyRenderer: (...args) => bodyRenderer?.(...args, isDataCollapsed),
                 footRenderer: (rowData, colIndex) => colIndex === 0 ?
