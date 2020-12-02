@@ -3,9 +3,6 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-// Vendors
-import mean from 'lodash/mean';
-
 /**
  * 时间格式的正则
  * @type {RegExp}
@@ -26,11 +23,11 @@ export function isValidTime(value) {
 }
 
 /**
- * 计算时间（ 如 00:02:30 ）含有多少秒
+ * 解析时间（ 如 00:02:30 ）含有多少秒
  * @param value
  * @returns {number}
  */
-export function countTime(value) {
+export function parseTime(value) {
 
     if (!isValidTime(value)) {
         return 0;
@@ -74,33 +71,9 @@ export function formatTime(value) {
 
 }
 
-/**
- * 获取一组时间的平均时间
- * @param data
- * @returns {string}
- */
-export function getAverageTime(data) {
-
-    if (!data || data.length < 1) {
-        return formatTime();
-    }
-
-    return formatTime(mean(data.map(item => {
-
-        if (!item || !isValidTime(item)) {
-            return;
-        }
-
-        return countTime(item);
-
-    }).filter(item => !isNaN(item))));
-
-}
-
 export default {
     isValidTime,
-    countTime,
+    parseTime,
     fillZero,
-    formatTime,
-    getAverageTime
+    formatTime
 };

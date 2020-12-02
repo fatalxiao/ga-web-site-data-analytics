@@ -10,10 +10,9 @@
 // Vendors
 import {
     isValidTime,
-    countTime,
+    parseTime,
     fillZero,
-    formatTime,
-    getAverageTime
+    formatTime
 } from 'vendors/TimeColumnUtil';
 
 /**
@@ -59,70 +58,70 @@ describe('isValidTime test', () => {
 });
 
 /**
- * countTime 测试
+ * parseTime 测试
  */
-describe('countTime test', () => {
+describe('parseTime test', () => {
 
     {
         const value = '00:00:00';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(0)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(0)
         );
     }
 
     {
         const value = '00:00:01';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(1)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(1)
         );
     }
 
     {
         const value = '00:00:20';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(20)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(20)
         );
     }
 
     {
         const value = '00:01:00';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(60)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(60)
         );
     }
 
     {
         const value = '00:20:20';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(20 * 60 + 20)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(20 * 60 + 20)
         );
     }
 
     {
         const value = '01:20:20';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(60 * 60 + 20 * 60 + 20)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(60 * 60 + 20 * 60 + 20)
         );
     }
 
     {
         const value = '20:20:20';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(20 * 60 * 60 + 20 * 60 + 20)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(20 * 60 * 60 + 20 * 60 + 20)
         );
     }
 
     {
         const value = '20:20';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(0)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(0)
         );
     }
 
     {
         const value = '20';
-        test(`countTime ${value}`, () =>
-            expect(countTime(value)).toBe(0)
+        test(`parseTime ${value}`, () =>
+            expect(parseTime(value)).toBe(0)
         );
     }
 
@@ -256,55 +255,6 @@ describe('formatTime test', () => {
         const value = -1;
         test(`formatTime ${value}`, () =>
             expect(formatTime(value)).toBe('00:00:00')
-        );
-    }
-
-});
-
-/**
- * getAverageTime 测试
- */
-describe('getAverageTime test', () => {
-
-    {
-        const value = ['00:00:00'];
-        test(`getAverageTime [${value}]`, () =>
-            expect(getAverageTime(value)).toBe('00:00:00')
-        );
-    }
-
-    {
-        const value = ['00:00:20'];
-        test(`getAverageTime [${value}]`, () =>
-            expect(getAverageTime(value)).toBe('00:00:20')
-        );
-    }
-
-    {
-        const value = ['00:00:00', '00:00:20'];
-        test(`getAverageTime [${value}]`, () =>
-            expect(getAverageTime(value)).toBe('00:00:10')
-        );
-    }
-
-    {
-        const value = ['00:00:00', '00:00:10', '00:00:20'];
-        test(`getAverageTime [${value}]`, () =>
-            expect(getAverageTime(value)).toBe('00:00:10')
-        );
-    }
-
-    {
-        const value = ['00:00', '00:00:20'];
-        test(`getAverageTime [${value}]`, () =>
-            expect(getAverageTime(value)).toBe('00:00:20')
-        );
-    }
-
-    {
-        const value = ['00', '00:00:20'];
-        test(`getAverageTime [${value}]`, () =>
-            expect(getAverageTime(value)).toBe('00:00:20')
         );
     }
 
