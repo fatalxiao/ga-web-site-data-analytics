@@ -45,7 +45,7 @@ const AnalyticsTable = ({
                 return null;
             }
 
-            return splitCSVRow(item);
+            return splitCSVRow(item, true);
 
         }), [data]),
 
