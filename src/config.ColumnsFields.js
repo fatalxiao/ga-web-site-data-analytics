@@ -1,17 +1,19 @@
 /**
- * @file ColumnsFields.js
+ * @file config.ColumnsFields.js
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
 // Vendors
 import sum from 'lodash/sum';
-import {getAverageTime} from 'vendors/TimeColumnUtil';
-import {getAveragePercent} from 'vendors/PercentColumnUtil';
+import mean from 'lodash/mean';
+import {parseTime, formatTime} from 'vendors/TimeColumnUtil';
+import {parsePercent, formatPercent} from 'vendors/PercentColumnUtil';
 
 /**
  *  {
  *      name {string} 列名
  *      mappingIndex {number} 映射 excel 中的列索引
+ *      parse {function} 解析 excel 数据
  *      summary {function} 汇总回调
  *      bodyRenderer {function} table body 渲染回调
  *  }
@@ -19,11 +21,13 @@ import {getAveragePercent} from 'vendors/PercentColumnUtil';
 export default [{
     name: 'route',
     mappingIndex: 0,
+    parse: value => value || '',
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) =>
         `${path?.map(row => row?.node?.route).join('/')}` || '/'
 }, {
     name: 'pageViews',
     mappingIndex: 1,
+    parse: value => +value || 0,
     summary: node => {
 
         if (!node) {
@@ -45,6 +49,7 @@ export default [{
 }, {
     name: 'uniquePageViews',
     mappingIndex: 2,
+    parse: value => +value || 0,
     summary: node => {
 
         if (!node) {
@@ -67,20 +72,22 @@ export default [{
 }, {
     name: 'averageTimeOnPage',
     mappingIndex: 3,
+    parse: value => parseTime(value) || 0,
     summary: node => {
 
         if (!node || node.averageTimeOnPage || !node.children || node.children.length < 1) {
             return;
         }
 
-        return node.averageTimeOnPage = getAverageTime(node.children.map(child => child?.averageTimeOnPage));
+        return node.averageTimeOnPage = mean(node.children.map(child => child?.averageTimeOnPage));
 
     },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        rowData.averageTimeOnPage
+        formatTime(rowData.averageTimeOnPage)
 }, {
     name: 'numberOfEntries',
     mappingIndex: 4,
+    parse: value => +value || 0,
     summary: node => {
 
         if (!node) {
@@ -103,29 +110,31 @@ export default [{
 }, {
     name: 'bounceRate',
     mappingIndex: 5,
+    parse: value => parsePercent(value) || 0,
     summary: node => {
 
         if (!node || node.bounceRate || !node.children || node.children.length < 1) {
             return;
         }
 
-        return node.bounceRate = getAveragePercent(node.children.map(child => child?.bounceRate));
+        return node.bounceRate = mean(node.children.map(child => child?.bounceRate));
 
     },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        rowData.bounceRate
+        formatPercent(rowData.bounceRate)
 }, {
     name: 'exitPercentage',
     mappingIndex: 6,
+    parse: value => parsePercent(value) || 0,
     summary: node => {
 
         if (!node || node.exitPercentage || !node.children || node.children.length < 1) {
             return;
         }
 
-        return node.exitPercentage = getAveragePercent(node.children.map(child => child?.exitPercentage));
+        return node.exitPercentage = mean(node.children.map(child => child?.exitPercentage));
 
     },
     bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        rowData.exitPercentage
+        formatPercent(rowData.exitPercentage)
 }];
