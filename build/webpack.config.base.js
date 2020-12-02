@@ -61,14 +61,14 @@ module.exports = {
         }, {
             test: /\.(png|jpe?g|gif|svg|cur|ico)(\?.*)?$/,
             loader: 'url-loader',
-            options: {
+            query: {
                 limit: 1000,
                 name: utils.assetsSubPath('img/[name].[hash:7].[ext]')
             }
         }, {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
             loader: 'url-loader',
-            options: {
+            query: {
                 limit: 1000,
                 name: utils.assetsSubPath('fonts/[name].[hash:7].[ext]')
             }
@@ -78,6 +78,13 @@ module.exports = {
         }, {
             test: /\.css$/,
             use: cssLoaderConfig
+        }, {
+            test: /\.md/,
+            loader: 'js-markdown-loader',
+            query: {
+                fullInfo: true,
+                dialect: 'DERBY'
+            }
         }]
     },
 
