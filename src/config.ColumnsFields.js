@@ -13,6 +13,7 @@ import {parsePercent, formatPercent} from 'vendors/PercentColumnUtil';
  *  {
  *      name {string} 列名
  *      mappingIndex {number} 映射 excel 中的列索引
+ *      sortingProp {function} 获取真正的排序字段（ 数据折叠时使用不同的排序字段 ）
  *      parse {function} 解析 excel 数据
  *      summary {function} 汇总回调
  *      bodyRenderer {function} table body 渲染回调
@@ -23,7 +24,7 @@ export default [{
     mappingIndex: 0,
     sortingProp: () => 'route',
     parse: value => value || '',
-    bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) =>
+    bodyRenderer: (isDataCollapsed, rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path) =>
         `${path?.map(row => row?.node?.route).join('/')}` || '/'
 }, {
     name: 'pageViews',
@@ -43,11 +44,10 @@ export default [{
         node.allPageViews = (+node.pageViews || 0) + (sum(node.children.map(item => +item?.allPageViews || 0)) || 0);
 
     },
-    bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        isDataCollapsed ?
-            `${+rowData?.pageViews || 0} / ${+rowData?.allPageViews || 0}`
-            :
-            +rowData?.pageViews || 0
+    bodyRenderer: (isDataCollapsed, rowData) => isDataCollapsed ?
+        `${+rowData?.pageViews || 0} / ${+rowData?.allPageViews || 0}`
+        :
+        +rowData?.pageViews || 0
 }, {
     name: 'uniquePageViews',
     mappingIndex: 2,
@@ -67,7 +67,7 @@ export default [{
             + (sum(node.children.map(item => +item?.allUniquePageViews || 0)) || 0);
 
     },
-    bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
+    bodyRenderer: (isDataCollapsed, rowData) =>
         isDataCollapsed ?
             `${+rowData?.uniquePageViews || 0} / ${+rowData?.allUniquePageViews || 0}`
             :
@@ -86,7 +86,7 @@ export default [{
         node.averageTimeOnPage = mean(node.children.map(child => child?.averageTimeOnPage)) || 0;
 
     },
-    bodyRenderer: rowData => formatTime(rowData.averageTimeOnPage)
+    bodyRenderer: (isDataCollapsed, rowData) => formatTime(rowData.averageTimeOnPage)
 }, {
     name: 'numberOfEntries',
     mappingIndex: 4,
@@ -106,11 +106,10 @@ export default [{
             + (sum(node.children.map(item => +item?.allNumberOfEntries || 0)) || 0);
 
     },
-    bodyRenderer: (rowData, rowIndex, colIndex, parentData, data, collapsed, depth, path, isDataCollapsed) =>
-        isDataCollapsed ?
-            `${+rowData?.numberOfEntries || 0} / ${+rowData?.allNumberOfEntries || 0}`
-            :
-            +rowData?.numberOfEntries || 0
+    bodyRenderer: (isDataCollapsed, rowData) => isDataCollapsed ?
+        `${+rowData?.numberOfEntries || 0} / ${+rowData?.allNumberOfEntries || 0}`
+        :
+        +rowData?.numberOfEntries || 0
 }, {
     name: 'bounceRate',
     mappingIndex: 5,
@@ -125,7 +124,7 @@ export default [{
         node.bounceRate = mean(node.children.map(child => child?.bounceRate)) || 0;
 
     },
-    bodyRenderer: rowData => formatPercent(rowData.bounceRate)
+    bodyRenderer: (isDataCollapsed, rowData) => formatPercent(rowData.bounceRate)
 }, {
     name: 'exitPercentage',
     mappingIndex: 6,
@@ -140,5 +139,5 @@ export default [{
         node.exitPercentage = mean(node.children.map(child => child?.exitPercentage)) || 0;
 
     },
-    bodyRenderer: rowData => formatPercent(rowData.exitPercentage)
+    bodyRenderer: (isDataCollapsed, rowData) => formatPercent(rowData.exitPercentage)
 }];

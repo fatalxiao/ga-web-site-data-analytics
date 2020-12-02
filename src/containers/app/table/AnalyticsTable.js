@@ -128,7 +128,7 @@ const AnalyticsTable = ({
                 sortable: true,
                 sortingProp: name,
                 headRenderer: dataColumns[mappingIndex],
-                bodyRenderer: (...args) => bodyRenderer?.(...args, isDataCollapsed),
+                bodyRenderer: (...args) => bodyRenderer?.(isDataCollapsed, ...args),
                 footRenderer: (rowData, colIndex) => colIndex === 0 ?
                     'Total'
                     :
