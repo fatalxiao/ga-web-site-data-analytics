@@ -1,5 +1,5 @@
 /**
- * @file TimeUtil.js
+ * @file TimeColumnUtil.js
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
