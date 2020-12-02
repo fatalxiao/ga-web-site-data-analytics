@@ -23,12 +23,20 @@ const SelectFile = ({onDataChange}) => {
          */
         [errMsg, setErrMsg] = useState(''),
 
+        /**
+         * 成功解析文件后上报
+         * @type {function(*): *}
+         */
         handleSuccess = useCallback(data => onDataChange?.({
             title: data[0].split('\n'),
             tableData: data[1].split('\n'),
             browseData: data[2].split('\n')
         }), [onDataChange]),
 
+        /**
+         * 获取或解析文件失败后报错
+         * @type {function(): void}
+         */
         handleFailure = useCallback(() => setErrMsg('Read file failure, please retry.'), [setErrMsg]);
 
     return (
