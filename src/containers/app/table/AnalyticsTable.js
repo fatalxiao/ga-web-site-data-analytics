@@ -3,7 +3,7 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useMemo, useState, useCallback} from 'react';
+import React, {useMemo, useState, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -15,7 +15,7 @@ import ColumnsFields from 'src/config.ColumnsFields';
 // Vendors
 import {
     splitCSVRow, collapseData,
-    getSortingCollapsedData, getPageViewsSortingCollapsedData, getSortingData
+    getSortingCollapsedData, getSortingData
 } from 'vendors/TableDataUtil';
 
 // Styles
@@ -28,13 +28,19 @@ const AnalyticsTable = ({
     const
 
         /**
+         * 默认排序配置
+         * @type {{prop: string, type: number}}
+         */
+        DEFAULT_SORTING = useMemo(() => ({
+            prop: ColumnsFields[0].sortingProp,
+            type: 1
+        }), []),
+
+        /**
          * 表格的排序
          * @type {string[]}
          */
-        [sorting, setSorting] = useState({
-            prop: ColumnsFields[0].name,
-            type: 1
-        }),
+        [sorting, setSorting] = useState(DEFAULT_SORTING),
 
         /**
          * 原始的表格数据
@@ -88,11 +94,10 @@ const AnalyticsTable = ({
                     return collapsedData;
                 }
 
-                // 对第二列的排序做特殊处理
-                return sorting?.prop === ColumnsFields[1].name ?
-                    [getPageViewsSortingCollapsedData(collapsedData?.[0], sorting)]
-                    :
-                    [getSortingCollapsedData(collapsedData?.[0], sorting)];
+                return [getSortingCollapsedData(collapsedData?.[0], {
+                    ...sorting,
+                    prop: sorting.prop[isDataCollapsed ? 'collapsed' : 'default']
+                })];
 
             }
 
@@ -101,7 +106,10 @@ const AnalyticsTable = ({
                 return filteredData;
             }
 
-            return getSortingData(filteredData, sorting);
+            return getSortingData(filteredData, {
+                ...sorting,
+                prop: sorting.prop[isDataCollapsed ? 'collapsed' : 'default']
+            });
 
         }, [isDataCollapsed, filteredData, sorting]),
 
@@ -112,14 +120,14 @@ const AnalyticsTable = ({
 
             const dataColumns = data?.[0]?.split(',');
 
-            return ColumnsFields.map(({name, mappingIndex, bodyRenderer}, index) => ({
+            return ColumnsFields.map(({name, mappingIndex, sortingProp, bodyRenderer}, index) => ({
                 key: name,
                 noWrap: true,
                 width: index === 0 ? '40%' : null,
                 align: index === 0 ? Table.Align.LEFT : Table.Align.RIGHT,
                 resizable: true,
                 sortable: true,
-                sortingProp: name,
+                sortingProp: sortingProp,
                 headRenderer: dataColumns[mappingIndex],
                 bodyRenderer: (...args) => bodyRenderer?.(...args, isDataCollapsed),
                 footRenderer: (rowData, colIndex) => colIndex === 0 ?
