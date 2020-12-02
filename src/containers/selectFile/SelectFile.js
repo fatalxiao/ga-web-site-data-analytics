@@ -3,10 +3,11 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useRef, useState, useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
+import DropFile from './DropFile';
 import BrowseFile from './BrowseFile';
 
 // Styles
@@ -32,6 +33,9 @@ const SelectFile = ({onDataChange}) => {
 
     return (
         <div className="select-file">
+
+            <DropFile onSuccess={handleSuccess}
+                      onFailure={handleFailure}/>
 
             <BrowseFile onSuccess={handleSuccess}
                         onFailure={handleFailure}/>
