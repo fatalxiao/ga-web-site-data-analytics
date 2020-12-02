@@ -3,16 +3,18 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useRef, useState, useCallback} from 'react';
+import React, {useRef, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import RaisedButton from 'alcedo-ui/RaisedButton';
 
 // Styles
-import 'scss/containers/browseFile/BrowseFile.scss';
+import 'scss/containers/selectFile/BrowseFile.scss';
 
-const BrowseFile = ({onDataChange}) => {
+const BrowseFile = ({
+    onSuccess, onFailure
+}) => {
 
     const
 
@@ -21,12 +23,6 @@ const BrowseFile = ({onDataChange}) => {
          * @type {React.MutableRefObject<undefined>}
          */
         fileInput = useRef(),
-
-        /**
-         * 错误消息 state
-         * @type {React.MutableRefObject<undefined>}
-         */
-        [errMsg, setErrMsg] = useState(''),
 
         /**
          * 选择文件
@@ -48,20 +44,16 @@ const BrowseFile = ({onDataChange}) => {
 
                 // 处理解析失败
                 if (!data || data.length < 1) {
-                    return setErrMsg('Read file failure, please retry.');
+                    return onFailure();
                 }
 
                 // 回调数据
-                onDataChange?.({
-                    title: data[0].split('\n'),
-                    tableData: data[1].split('\n'),
-                    browseData: data[2].split('\n')
-                });
+                onSuccess?.(data);
 
             };
             reader.readAsText(file);
 
-        }, [onDataChange]);
+        }, [onSuccess, onFailure]);
 
     return (
         <div className="browse-file">
@@ -77,15 +69,14 @@ const BrowseFile = ({onDataChange}) => {
                           value="Browse File"
                           onClick={chooseFile}/>
 
-            <div className="err-msg">{errMsg}</div>
-
         </div>
     );
 
 };
 
 BrowseFile.propTypes = {
-    onDataChange: PropTypes.func
+    onSuccess: PropTypes.func,
+    onFailure: PropTypes.func
 };
 
 export default BrowseFile;
