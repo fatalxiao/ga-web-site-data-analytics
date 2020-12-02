@@ -11,7 +11,6 @@ import URI from 'urijs';
 import Util from 'alcedo-ui/_vendors/Util';
 
 function digitLength(num) {
-    // Get digit length of e
     const eSplit = num.toString().split(/[eE]/);
     const len = (eSplit[0].split('.')[1] || '').length - +(eSplit[1] || 0);
     return len > 0 ? len : 0;
@@ -34,14 +33,9 @@ export function splitCSVRow(rowString) {
             return null;
         }
 
-        const data = matched?.[1] || matched?.[2] || matched?.[3];
+        const value = matched?.[1] || matched?.[2] || matched?.[3];
 
-        // 第一列
-        if (index === 0) {
-            return result[field.name] = data || null;
-        }
-
-        result[field.name] = data?.replace(',', '') || null;
+        result[field.name] = field?.parse?.(value) || value;
 
     });
 
@@ -266,6 +260,8 @@ export function getSortingData(data, sorting) {
 }
 
 export default {
+    digitLength,
+    splitCSVRow,
     getMatchedChildNode,
     addPath,
     summaryCollapsedData,
