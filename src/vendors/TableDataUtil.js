@@ -10,6 +10,11 @@ import ColumnsFields from 'src/config.ColumnsFields';
 import URI from 'urijs';
 import Util from 'alcedo-ui/_vendors/Util';
 
+/**
+ * 计算数字有多少位小数
+ * @param num
+ * @returns {number}
+ */
 function digitLength(num) {
     const eSplit = num.toString().split(/[eE]/);
     const len = (eSplit[0].split('.')[1] || '').length - +(eSplit[1] || 0);
