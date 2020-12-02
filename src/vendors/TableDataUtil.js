@@ -13,13 +13,14 @@ import Util from 'alcedo-ui/_vendors/Util';
 /**
  * 根据逗号，split 行
  * @param rowString
+ * @param parseValue
  */
-export function splitCSVRow(rowString) {
+export function splitCSVRow(rowString, parseValue = false) {
 
     const reg = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g,
         result = {};
 
-    ColumnsFields.forEach((field, index) => {
+    ColumnsFields.forEach(field => {
 
         const matched = reg.exec(rowString);
 
@@ -29,7 +30,10 @@ export function splitCSVRow(rowString) {
 
         const value = matched?.[1] || matched?.[2] || matched?.[3];
 
-        result[field.name] = field?.parse?.(value) || value;
+        result[field.name] = parseValue ?
+            field?.parse?.(value)
+            :
+            value;
 
     });
 
