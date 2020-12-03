@@ -37,17 +37,41 @@ const SelectFile = ({onDataChange}) => {
          * 获取或解析文件失败后报错
          * @type {function(): void}
          */
-        handleFailure = useCallback(() => setErrMsg('Read file failure, please retry.'), [setErrMsg]);
+        handleFailure = useCallback(() => setErrMsg('Read file failure, please retry.'), [setErrMsg]),
+
+        /**
+         * 解析文件
+         * @type {Function}
+         */
+        parseFile = useCallback(file => {
+
+            const reader = new FileReader();
+
+            reader.onloadend = e => {
+
+                // 解析文件，分段
+                const data = e?.target?.result?.split?.('\n\n');
+
+                // 处理解析失败
+                if (!data || data.length < 1) {
+                    return handleFailure();
+                }
+
+                // 回调数据
+                handleSuccess?.(data);
+
+            };
+            reader.readAsText(file);
+
+        }, [handleSuccess, handleFailure]);
 
     return (
         <DropFile className="select-file"
-                  onSuccess={handleSuccess}
-                  onFailure={handleFailure}>
+                  onGetFile={parseFile}>
 
             <div className="select-file-desc">Drag and drop your file here or</div>
 
-            <BrowseFile onSuccess={handleSuccess}
-                        onFailure={handleFailure}/>
+            <BrowseFile onGetFile={parseFile}/>
 
             <div className="err-msg">{errMsg}</div>
 

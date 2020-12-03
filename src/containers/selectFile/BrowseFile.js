@@ -13,7 +13,7 @@ import RaisedButton from 'alcedo-ui/RaisedButton';
 import 'scss/containers/selectFile/BrowseFile.scss';
 
 const BrowseFile = ({
-    onSuccess, onFailure
+    onGetFile
 }) => {
 
     const
@@ -32,28 +32,7 @@ const BrowseFile = ({
         /**
          * 处理文件变更
          */
-        handleFileChange = useCallback(e => {
-
-            const file = e?.target?.files?.[0],
-                reader = new FileReader();
-
-            reader.onloadend = e => {
-
-                // 解析文件，分段
-                const data = e?.target?.result?.split?.('\n\n');
-
-                // 处理解析失败
-                if (!data || data.length < 1) {
-                    return onFailure();
-                }
-
-                // 回调数据
-                onSuccess?.(data);
-
-            };
-            reader.readAsText(file);
-
-        }, [onSuccess, onFailure]);
+        handleFileChange = useCallback(e => onGetFile?.(e?.target?.files?.[0]), [onGetFile]);
 
     return (
         <div className="browse-file">
@@ -74,8 +53,7 @@ const BrowseFile = ({
 };
 
 BrowseFile.propTypes = {
-    onSuccess: PropTypes.func,
-    onFailure: PropTypes.func
+    onGetFile: PropTypes.func
 };
 
 export default BrowseFile;
