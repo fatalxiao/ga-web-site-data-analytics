@@ -10,7 +10,7 @@
     .base-button.raised-button.browse-file-button {
         width: auto;
         height: auto;
-        background: #e9f5fb;
+        background: hsl(hue($theme-highlight), 48%, 94%);
         padding: 16px 24px;
         border: none;
         border-radius: 16px;
