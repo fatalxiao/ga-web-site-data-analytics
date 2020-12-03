@@ -47,6 +47,7 @@ module.exports = {
             'components': resolve('src/components'),
             'containers': resolve('src/containers'),
             'statics': resolve('src/statics'),
+            'hooks': resolve('src/hooks'),
             'vendors': resolve('src/vendors'),
 
             'test': resolve('test')

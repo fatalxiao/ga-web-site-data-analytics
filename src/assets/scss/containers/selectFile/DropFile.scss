@@ -28,4 +28,8 @@
     &.dragging {
         border: 2px dashed #ccc;
     }
+
+    &.dragging-over {
+        background: lighten($theme-highlight, 40%);
+    }
 }
