@@ -5,6 +5,10 @@
 
 import React, {useRef, useCallback} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import * as actions from 'reduxes/actions';
 
 // Icons
 import UploadIcon from 'components/UploadIcon';
@@ -20,7 +24,7 @@ import 'scss/containers/selectFile/DropZone.scss';
 
 const DropZone = ({
     children, className,
-    onDragEnter, onDragLeave, onGetFile
+    onDragEnter, onDragLeave, updateFile
 }) => {
 
     const
@@ -43,7 +47,7 @@ const DropZone = ({
          * 处理拖入文件 drop
          * @type {function(*): *}
          */
-        handleDrop = useCallback(e => onGetFile?.(e?.dataTransfer?.files[0]), [onGetFile]),
+        handleDrop = useCallback(e => updateFile?.(e?.dataTransfer?.files[0]), [updateFile]),
 
         /**
          * 是否在当前组件上 dragging over
@@ -85,8 +89,10 @@ DropZone.propTypes = {
     onDragEnter: PropTypes.func,
     onDragLeave: PropTypes.func,
 
-    onGetFile: PropTypes.func
+    updateFile: PropTypes.func
 
 };
 
-export default DropZone;
+export default connect(null, dispatch => bindActionCreators({
+    updateFile: actions.updateFile
+}, dispatch))(DropZone);

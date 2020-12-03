@@ -5,6 +5,10 @@
 
 import React, {useRef, useCallback} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import * as actions from 'reduxes/actions';
 
 // Components
 import RaisedButton from 'alcedo-ui/RaisedButton';
@@ -13,7 +17,7 @@ import RaisedButton from 'alcedo-ui/RaisedButton';
 import 'scss/containers/selectFile/BrowseFile.scss';
 
 const BrowseFile = ({
-    onGetFile
+    updateFile
 }) => {
 
     const
@@ -32,7 +36,7 @@ const BrowseFile = ({
         /**
          * 处理文件变更
          */
-        handleFileChange = useCallback(e => onGetFile?.(e?.target?.files?.[0]), [onGetFile]);
+        handleFileChange = useCallback(e => updateFile?.(e?.target?.files?.[0]), [updateFile]);
 
     return (
         <div className="browse-file">
@@ -53,7 +57,9 @@ const BrowseFile = ({
 };
 
 BrowseFile.propTypes = {
-    onGetFile: PropTypes.func
+    updateFile: PropTypes.func
 };
 
-export default BrowseFile;
+export default connect(null, dispatch => bindActionCreators({
+    updateFile: actions.updateFile
+}, dispatch))(BrowseFile);

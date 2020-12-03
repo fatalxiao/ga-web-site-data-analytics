@@ -3,7 +3,9 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useState, useCallback} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 // Components
 import SelectFile from 'containers/selectFile/SelectFile';
@@ -12,36 +14,25 @@ import App from 'containers/app/App';
 // Styles
 import 'scss/containers/Root.scss';
 
-const Root = () => {
+const Root = ({data}) => (
+    <div className="root">
+        {
+            data ?
+                <App data={data}/>
+                :
+                <SelectFile/>
+        }
+    </div>
+);
 
-    const
-
-        /**
-         * GA 数据
-         *  {
-         *      title: {Array},
-         *      tableData: {Array},
-         *      browseData: {Array}
-         *  }
-         */
-        [data, setData] = useState(null),
-
-        /**
-         * 处理数据变更
-         */
-        handleDataChange = useCallback(data => setData(data), [setData]);
-
-    return (
-        <div className="root">
-            {
-                data ?
-                    <App data={data}/>
-                    :
-                    <SelectFile onDataChange={handleDataChange}/>
-            }
-        </div>
-    );
-
+Root.propTypes = {
+    data: PropTypes.shape({
+        title: PropTypes.array,
+        tableData: PropTypes.array,
+        browseData: PropTypes.array
+    })
 };
 
-export default Root;
+export default connect(state => ({
+    data: state.file.data
+}))(Root);
