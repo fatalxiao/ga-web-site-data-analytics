@@ -5,6 +5,7 @@
 
 import React, {useRef, useMemo, useState, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 // Components
 import Paper from 'alcedo-ui/Paper';
@@ -148,4 +149,6 @@ AnalyticsTableLayout.propTypes = {
     })
 };
 
-export default AnalyticsTableLayout;
+export default connect(state => ({
+    data: state.file.data
+}))(AnalyticsTableLayout);

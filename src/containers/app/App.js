@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 // Components
 import TableLayout from './table/AnalyticsTableLayout';
@@ -12,18 +11,10 @@ import TableLayout from './table/AnalyticsTableLayout';
 // Styles
 import 'scss/containers/app/App.scss';
 
-const App = ({data}) => (
+const App = () => (
     <div className="app">
-        <TableLayout data={data}/>
+        <TableLayout/>
     </div>
 );
-
-App.propTypes = {
-    data: PropTypes.shape({
-        title: PropTypes.array,
-        tableData: PropTypes.array,
-        browseData: PropTypes.array
-    })
-};
 
 export default App;

@@ -18,7 +18,7 @@ const Root = ({data}) => (
     <div className="root">
         {
             data ?
-                <App data={data}/>
+                <App/>
                 :
                 <SelectFile/>
         }
