@@ -21,8 +21,8 @@ import 'scss/containers/app/table/AnalyticsTableLayout.scss';
 let observer = null;
 
 const AnalyticsTableLayout = ({
-                                  data, ...restProps
-                              }) => {
+    data, ...restProps
+}) => {
 
     const
 
