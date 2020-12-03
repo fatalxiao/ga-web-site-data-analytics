@@ -1,5 +1,5 @@
 /**
- * @file AnalyticsTableFilters.js
+ * @file AnalyticsTableActions.js
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
@@ -11,13 +11,13 @@ import ToggleCollapseData from './toggleCollapseData/AnalyticsTableToggleCollaps
 import TableSearch from './search/AnalyticsTableSearch';
 
 // Styles
-import 'scss/containers/app/table/header/filter/AnalyticsTableFilters.scss';
+import 'scss/containers/app/table/header/action/AnalyticsTableActions.scss';
 
-const AnalyticsTableFilters = ({
+const AnalyticsTableActions = ({
     searchText, isDataCollapsed,
     onSearchChang, onDataCollapsedChange
 }) => (
-    <div className="analytics-table-filters">
+    <div className="analytics-table-actions">
 
         <ToggleCollapseData isDataCollapsed={isDataCollapsed}
                             onDataCollapsedChange={onDataCollapsedChange}/>
@@ -28,7 +28,7 @@ const AnalyticsTableFilters = ({
     </div>
 );
 
-AnalyticsTableFilters.propTypes = {
+AnalyticsTableActions.propTypes = {
 
     searchText: PropTypes.string,
     isDataCollapsed: PropTypes.bool,
@@ -38,4 +38,4 @@ AnalyticsTableFilters.propTypes = {
 
 };
 
-export default AnalyticsTableFilters;
+export default AnalyticsTableActions;

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import AnalyticsTableTitle from './title/AnalyticsTableTitle';
-import AnalyticsTableFilters from './filter/AnalyticsTableFilters';
+import AnalyticsTableActions from './action/AnalyticsTableActions';
 
 // Styles
 import 'scss/containers/app/table/header/AnalyticsTableHeader.scss';
@@ -22,7 +22,7 @@ const AnalyticsTableHeader = forwardRef(({
 
         <AnalyticsTableTitle data={title}/>
 
-        <AnalyticsTableFilters searchText={searchText}
+        <AnalyticsTableActions searchText={searchText}
                                isDataCollapsed={isDataCollapsed}
                                onSearchChang={onSearchChang}
                                onDataCollapsedChange={onDataCollapsedChange}/>

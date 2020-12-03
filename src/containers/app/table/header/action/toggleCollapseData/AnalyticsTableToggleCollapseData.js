@@ -11,7 +11,7 @@ import TipProvider from 'alcedo-ui/TipProvider';
 import IconButton from 'alcedo-ui/IconButton';
 
 // Styles
-import 'scss/containers/app/table/header/filter/toggleCollapseData/AnalyticsTableToggleCollapseData.scss';
+import 'scss/containers/app/table/header/action/toggleCollapseData/AnalyticsTableToggleCollapseData.scss';
 
 const AnalyticsTableToggleCollapseData = ({
     isDataCollapsed,
