@@ -1,5 +1,5 @@
 /**
- * @file DropFile.js
+ * @file DropZone.js
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
@@ -16,17 +16,24 @@ import useDraggingOver from 'hooks/useDraggingOver';
 import classNames from 'classnames';
 
 // Styles
-import 'scss/containers/selectFile/DropFile.scss';
+import 'scss/containers/selectFile/DropZone.scss';
 
-const DropFile = ({
+const DropZone = ({
     children, className,
     onDragEnter, onDragLeave, onGetFile
 }) => {
 
     const
 
+        /**
+         *
+         * @type {React.MutableRefObject<undefined>}
+         */
         dropZone = useRef(),
 
+        /**
+         * 是否在 document 上 dragging over
+         */
         documentDraggingOver = useDraggingOver({
             onDragEnter,
             onDragLeave
@@ -38,6 +45,9 @@ const DropFile = ({
          */
         handleDrop = useCallback(e => onGetFile?.(e?.dataTransfer?.files[0]), [onGetFile]),
 
+        /**
+         * 是否在当前组件上 dragging over
+         */
         draggingOver = useDraggingOver({
             el: dropZone?.current,
             onDrop: handleDrop
@@ -45,17 +55,17 @@ const DropFile = ({
 
     return (
         <div ref={dropZone}
-             className={classNames('drop-file', {
+             className={classNames('drop-zone', {
                  dragging: documentDraggingOver,
                  'dragging-over': draggingOver,
                  [className]: className
              })}
              onDrop={handleDrop}>
 
-            <div className="drop-file-content">
+            <div className="drop-zone-content">
 
                 <UploadIcon/>
-                <div className="drop-file-desc">Google Analytics CSV file</div>
+                <div className="drop-zone-desc">Google Analytics CSV file</div>
 
                 {children}
 
@@ -66,7 +76,7 @@ const DropFile = ({
 
 };
 
-DropFile.propTypes = {
+DropZone.propTypes = {
 
     children: PropTypes.any,
 
@@ -79,4 +89,4 @@ DropFile.propTypes = {
 
 };
 
-export default DropFile;
+export default DropZone;

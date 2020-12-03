@@ -1,10 +1,10 @@
 /**
- * @file DropFile.scss
+ * @file DropZone.scss
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 @import "../../common.scss";
 
-.drop-file {
+.drop-zone {
     position: relative;
     box-sizing: border-box;
     display: flex;
@@ -19,7 +19,7 @@
         margin: 0 auto;
     }
 
-    .drop-file-desc {
+    .drop-zone-desc {
         text-align: center;
         color: #ccc;
         font-size: 24px;
@@ -31,5 +31,9 @@
 
     &.dragging-over {
         background: lighten($theme-highlight, 40%);
+
+        .arrow-up-icon {
+            background: lighten($theme-highlight, 40%);
+        }
     }
 }

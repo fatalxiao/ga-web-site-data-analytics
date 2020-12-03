@@ -7,7 +7,7 @@ import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import DropFile from './DropFile';
+import DropZone from './DropZone';
 import BrowseFile from './BrowseFile';
 
 // Styles
@@ -66,7 +66,7 @@ const SelectFile = ({onDataChange}) => {
         }, [handleSuccess, handleFailure]);
 
     return (
-        <DropFile className="select-file"
+        <DropZone className="select-file"
                   onGetFile={parseFile}>
 
             <div className="select-file-desc">Drag and drop your file here or</div>
@@ -75,7 +75,7 @@ const SelectFile = ({onDataChange}) => {
 
             <div className="err-msg">{errMsg}</div>
 
-        </DropFile>
+        </DropZone>
     );
 
 };
