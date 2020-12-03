@@ -40,10 +40,9 @@ const SelectFile = ({onDataChange}) => {
         handleFailure = useCallback(() => setErrMsg('Read file failure, please retry.'), [setErrMsg]);
 
     return (
-        <div className="select-file">
-
-            <DropFile onSuccess={handleSuccess}
-                      onFailure={handleFailure}/>
+        <DropFile className="select-file"
+                  onSuccess={handleSuccess}
+                  onFailure={handleFailure}>
 
             <div className="select-file-desc">Drag and drop your file here or</div>
 
@@ -52,7 +51,7 @@ const SelectFile = ({onDataChange}) => {
 
             <div className="err-msg">{errMsg}</div>
 
-        </div>
+        </DropFile>
     );
 
 };
