@@ -2,7 +2,27 @@
  * @file UploadIcon.scss
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
+@import "../common.scss";
 
 .upload-icon {
+    position: relative;
+    width: 320px;
+    height: 224px;
+    text-align: center;
 
+    .cloud-icon {
+        width: 240px;
+        fill: #eaeaea;
+    }
+
+    .arrow-up-icon {
+        position: absolute;
+        top: 88px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 120px;
+        padding: 8px 16px;
+        fill: $theme-highlight;
+        background: $theme-background;
+    }
 }

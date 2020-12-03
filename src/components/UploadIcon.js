@@ -6,20 +6,16 @@
 import React from 'react';
 
 // Icons
-import CloudIcon from 'assets/icon/cloud.svg';
-import ArrowUpIcon from 'assets/icon/arrow-up.svg';
+import CloudIcon from './CloudIcon';
+import ArrowUpIcon from './ArrowUpIcon';
 
 // Styles
 import 'scss/components/UploadIcon.scss';
 
 const UploadIcon = () => (
     <div className="upload-icon">
-
-        <img className="cloud"
-             src={CloudIcon}/>
-
-        <img src={ArrowUpIcon}/>
-
+        <CloudIcon/>
+        <ArrowUpIcon/>
     </div>
 );
 
