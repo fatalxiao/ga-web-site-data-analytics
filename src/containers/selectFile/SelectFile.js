@@ -45,6 +45,8 @@ const SelectFile = ({onDataChange}) => {
             <DropFile onSuccess={handleSuccess}
                       onFailure={handleFailure}/>
 
+            <div className="select-file-desc">Drag and drop your file here or</div>
+
             <BrowseFile onSuccess={handleSuccess}
                         onFailure={handleFailure}/>
 

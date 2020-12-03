@@ -64,9 +64,8 @@ const BrowseFile = ({
                    accept="text/csv"
                    onChange={handleFileChange}/>
 
-            <RaisedButton theme={RaisedButton.Theme.HIGHLIGHT}
-                          className="browse-file-button"
-                          value="Browse File"
+            <RaisedButton className="browse-file-button"
+                          value="browse file"
                           onClick={chooseFile}/>
 
         </div>

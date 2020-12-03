@@ -5,10 +5,23 @@
 @import "../../common.scss";
 
 .browse-file {
+    text-align: center;
 
-    .browse-file-button {
-        width: 320px;
-        height: 80px;
-        font-size: 32px;
+    .base-button.raised-button.browse-file-button {
+        width: auto;
+        height: auto;
+        background: #e9f5fb;
+        padding: 16px 24px;
+        border: none;
+        border-radius: 16px;
+        color: $theme-highlight;
+        font-size: 24px;
+        font-weight: 600;
+        box-shadow: none;
+        transition: box-shadow $theme-transition-duration ease-in-out;
+
+        &:hover {
+            box-shadow: transparentize(#000, .88) 1px 1px 8px;
+        }
     }
 }

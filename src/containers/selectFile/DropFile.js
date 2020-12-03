@@ -14,7 +14,7 @@ import 'scss/containers/selectFile/DropFile.scss';
 const DropFile = () => (
     <div className="drop-file">
         <UploadIcon/>
-        <div>Drag and Drop file</div>
+        <div className="drop-file-desc">GA CSV file</div>
     </div>
 );
 
