@@ -6,6 +6,7 @@
 
 .drop-file {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,5 +23,9 @@
         text-align: center;
         color: #ccc;
         font-size: 24px;
+    }
+
+    &.dragging {
+        border: 2px dashed #ccc;
     }
 }
