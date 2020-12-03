@@ -49,6 +49,7 @@ module.exports = {
             'statics': resolve('src/statics'),
             'hooks': resolve('src/hooks'),
             'vendors': resolve('src/vendors'),
+            'reduxes': resolve('src/reduxes'),
 
             'test': resolve('test')
 
