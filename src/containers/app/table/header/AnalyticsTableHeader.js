@@ -7,8 +7,8 @@ import React, {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import AnalyticsTableTitle from './title/AnalyticsTableTitle';
-import AnalyticsTableActions from './action/AnalyticsTableActions';
+import Title from './title/AnalyticsTableTitle';
+import Actions from './action/AnalyticsTableActions';
 
 // Styles
 import 'scss/containers/app/table/header/AnalyticsTableHeader.scss';
@@ -20,12 +20,12 @@ const AnalyticsTableHeader = forwardRef(({
     <div ref={ref}
          className="analytics-table-header">
 
-        <AnalyticsTableTitle data={title}/>
+        <Title data={title}/>
 
-        <AnalyticsTableActions searchText={searchText}
-                               isDataCollapsed={isDataCollapsed}
-                               onSearchChang={onSearchChang}
-                               onDataCollapsedChange={onDataCollapsedChange}/>
+        <Actions searchText={searchText}
+                 isDataCollapsed={isDataCollapsed}
+                 onSearchChang={onSearchChang}
+                 onDataCollapsedChange={onDataCollapsedChange}/>
 
     </div>
 ));
