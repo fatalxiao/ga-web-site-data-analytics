@@ -4,6 +4,15 @@
  */
 @import "../../common.scss";
 
+@keyframes blink {
+    0% {
+        transform: translate(-50%, 0);
+    }
+    50% {
+        transform: translate(-50%, 16px);
+    }
+}
+
 .drop-zone {
     position: relative;
     box-sizing: border-box;
@@ -16,7 +25,7 @@
     margin: 0 auto;
 
     .upload-icon {
-        margin: 0 auto;
+        margin: 0 auto 16px;
     }
 
     .drop-zone-desc {
@@ -34,6 +43,8 @@
 
         .arrow-up-icon {
             background: lighten($theme-highlight, 40%);
+            animation: blink 1s infinite ease-in-out;
         }
     }
 }
+
