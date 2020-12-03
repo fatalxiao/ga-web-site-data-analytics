@@ -2,8 +2,9 @@
  * @file common.scss
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
-
 @import '~alcedo-ui/Theme/default.scss';
+
+$theme-background: #fafafa;
 
 @mixin invisible {
     position: absolute;
