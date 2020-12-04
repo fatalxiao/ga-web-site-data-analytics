@@ -3,12 +3,11 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useRef, useCallback} from 'react';
+import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import TipProvider from 'alcedo-ui/TipProvider';
-import IconButton from 'alcedo-ui/IconButton';
+import ActionButton from '../AnalyticsTableActionButton';
 
 // Styles
 import 'scss/containers/app/table/header/action/toggleCollapseData/AnalyticsTableToggleCollapseData.scss';
@@ -21,27 +20,17 @@ const AnalyticsTableToggleCollapseData = ({
     const
 
         /**
-         * tip ref
-         * @type {React.MutableRefObject<undefined>}
-         */
-        tipRef = useRef(),
-
-        /**
          * 处理 button 点击事件
          * @type {Function}
          */
-        handleDataCollapsedClick = useCallback(() => {
-            setTimeout(() => tipRef?.current?.resetPosition?.(), 0);
-            onDataCollapsedChange?.(!isDataCollapsed);
-        }, [tipRef, isDataCollapsed, onDataCollapsedChange]);
+        handleDataCollapsedClick = useCallback(() => onDataCollapsedChange?.(!isDataCollapsed),
+            [isDataCollapsed, onDataCollapsedChange]);
 
     return (
-        <TipProvider ref={tipRef}
-                     tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}>
-            <IconButton className="analytics-table-toggle-collapse-data"
-                        iconCls={`fas fa-align-${isDataCollapsed ? 'justify' : 'right'}`}
-                        onClick={handleDataCollapsedClick}/>
-        </TipProvider>
+        <ActionButton className="analytics-table-toggle-collapse-data"
+                      tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}
+                      iconCls={`fas fa-align-${isDataCollapsed ? 'justify' : 'right'}`}
+                      onClick={handleDataCollapsedClick}/>
     );
 
 };

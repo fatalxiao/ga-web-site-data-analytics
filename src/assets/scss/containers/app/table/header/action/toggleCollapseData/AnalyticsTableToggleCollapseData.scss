@@ -4,13 +4,6 @@
  */
 @import '../../../../../../common.scss';
 
-.base-button.icon-button.analytics-table-toggle-collapse-data {
-    border-radius: 8px;
-    margin-right: 8px;
-    font-size: 16px;
+.analytics-table-toggle-collapse-data {
     transform: rotate(180deg);
-
-    &:hover {
-        background: $theme-secondary;
-    }
 }

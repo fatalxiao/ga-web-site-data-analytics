@@ -4,6 +4,12 @@
  */
 @import '../../../../../common.scss';
 
-.analytics-table-action-button {
+.base-button.icon-button.analytics-table-action-button {
+    border-radius: 8px;
+    margin-right: 8px;
+    font-size: 16px;
 
+    &:hover {
+        background: $theme-secondary;
+    }
 }
