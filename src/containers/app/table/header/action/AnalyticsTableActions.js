@@ -12,7 +12,7 @@ import ToggleCollapseData from './toggleCollapseData/AnalyticsTableToggleCollaps
 import TableSearch from './search/AnalyticsTableSearch';
 
 // Styles
-import 'scss/containers/app/table/header/action/AnalyticsTableActions.scss';
+import './AnalyticsTableActions.scss';
 
 const AnalyticsTableActions = ({
     searchText, isDataCollapsed,

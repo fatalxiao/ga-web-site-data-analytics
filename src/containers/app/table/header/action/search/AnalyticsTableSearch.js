@@ -13,7 +13,7 @@ import TextField from 'alcedo-ui/TextField';
 import classNames from 'classnames';
 
 // Styles
-import 'scss/containers/app/table/header/action/search/AnalyticsTableSearch.scss';
+import './AnalyticsTableSearch.scss';
 
 const AnalyticsTableSearch = ({
     searchText,

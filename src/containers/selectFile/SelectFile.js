@@ -10,7 +10,7 @@ import DropZone from './DropZone';
 import BrowseFileButton from './BrowseFileButton';
 
 // Styles
-import 'scss/containers/selectFile/SelectFile.scss';
+import './SelectFile.scss';
 
 const SelectFile = () => (
     <DropZone className="select-file">

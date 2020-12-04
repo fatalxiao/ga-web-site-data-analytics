@@ -9,7 +9,7 @@ import React from 'react';
 import TableLayout from './table/AnalyticsTableLayout';
 
 // Styles
-import 'scss/containers/app/App.scss';
+import './App.scss';
 
 const App = () => (
     <div className="app">

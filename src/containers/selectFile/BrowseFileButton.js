@@ -17,7 +17,7 @@ import RaisedButton from 'alcedo-ui/RaisedButton';
 import classNames from 'classnames';
 
 // Styles
-import 'scss/containers/selectFile/BrowseFileButton.scss';
+import './BrowseFileButton.scss';
 
 const BrowseFileButton = ({
     className,

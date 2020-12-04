@@ -12,7 +12,7 @@ import SelectFile from 'containers/selectFile/SelectFile';
 import App from 'containers/app/App';
 
 // Styles
-import 'scss/containers/Root.scss';
+import './Root.scss';
 
 const Root = ({data}) => (
     <div className="root">

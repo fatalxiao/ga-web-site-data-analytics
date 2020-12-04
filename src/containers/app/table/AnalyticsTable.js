@@ -19,7 +19,7 @@ import {
 } from 'vendors/TableDataUtil';
 
 // Styles
-import 'scss/containers/app/table/AnalyticsTable.scss';
+import './AnalyticsTable.scss';
 
 const AnalyticsTable = ({
     data, scrollHeight, searchText, isDataCollapsed

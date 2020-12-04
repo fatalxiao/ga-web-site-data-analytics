@@ -38,7 +38,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.js'],
+        extensions: ['.js', '.scss'],
         alias: {
 
             'src': resolve('src'),
@@ -77,7 +77,12 @@ module.exports = {
             }
         }, {
             test: /\.scss$/,
-            use: [...cssLoaderConfig, 'fast-sass-loader']
+            use: [...cssLoaderConfig, {
+                loader: 'fast-sass-loader',
+                options: {
+                    includePaths: ['./src/assets']
+                }
+            }]
         }, {
             test: /\.css$/,
             use: cssLoaderConfig

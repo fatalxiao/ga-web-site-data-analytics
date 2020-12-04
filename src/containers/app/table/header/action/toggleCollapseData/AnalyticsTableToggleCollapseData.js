@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import ActionButton from '../AnalyticsTableActionButton';
 
 // Styles
-import 'scss/containers/app/table/header/action/toggleCollapseData/AnalyticsTableToggleCollapseData.scss';
+import './AnalyticsTableToggleCollapseData.scss';
 
 const AnalyticsTableToggleCollapseData = ({
     isDataCollapsed,

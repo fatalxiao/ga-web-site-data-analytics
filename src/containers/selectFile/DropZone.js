@@ -11,7 +11,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from 'reduxes/actions';
 
 // Icons
-import UploadIcon from 'components/UploadIcon';
+import UploadIcon from 'components/icons/UploadIcon';
 
 // Hooks
 import useDraggingOver from 'hooks/useDraggingOver';
@@ -20,7 +20,7 @@ import useDraggingOver from 'hooks/useDraggingOver';
 import classNames from 'classnames';
 
 // Styles
-import 'scss/containers/selectFile/DropZone.scss';
+import './DropZone.scss';
 
 const DropZone = ({
     children, className,

@@ -11,7 +11,7 @@ import Title from './title/AnalyticsTableTitle';
 import Actions from './action/AnalyticsTableActions';
 
 // Styles
-import 'scss/containers/app/table/header/AnalyticsTableHeader.scss';
+import './AnalyticsTableHeader.scss';
 
 const AnalyticsTableHeader = forwardRef(({
     title, searchText, isDataCollapsed,

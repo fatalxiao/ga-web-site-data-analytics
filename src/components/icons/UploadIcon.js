@@ -14,7 +14,7 @@ import ArrowUpIcon from './ArrowUpIcon';
 import classNames from 'classnames';
 
 // Styles
-import 'scss/components/UploadIcon.scss';
+import './UploadIcon.scss';
 
 const UploadIcon = ({className, ...restProps}) => (
     <div {...restProps}

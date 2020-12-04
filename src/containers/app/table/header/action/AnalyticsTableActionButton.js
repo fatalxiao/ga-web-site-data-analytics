@@ -14,7 +14,7 @@ import IconButton from 'alcedo-ui/IconButton';
 import classNames from 'classnames';
 
 // Styles
-import 'scss/containers/app/table/header/action/AnalyticsTableActionButton.scss';
+import './AnalyticsTableActionButton.scss';
 
 const AnalyticsTableActionButton = ({
     className, tipContent,

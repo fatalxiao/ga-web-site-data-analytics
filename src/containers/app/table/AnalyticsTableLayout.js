@@ -17,7 +17,7 @@ import {findDOMNode} from 'react-dom';
 import ResizeObserver from 'resize-observer-polyfill';
 
 // Styles
-import 'scss/containers/app/table/AnalyticsTableLayout.scss';
+import './AnalyticsTableLayout.scss';
 
 let observer = null;
 

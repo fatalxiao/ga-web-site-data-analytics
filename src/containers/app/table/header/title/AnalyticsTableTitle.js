@@ -7,7 +7,7 @@ import React, {useMemo} from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
-import 'scss/containers/app/table/header/title/AnalyticsTableTitle.scss';
+import './AnalyticsTableTitle.scss';
 
 const AnalyticsTableTitle = ({data}) => {
 
