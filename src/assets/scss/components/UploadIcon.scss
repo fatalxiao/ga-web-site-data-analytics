@@ -15,14 +15,30 @@
         fill: #eaeaea;
     }
 
-    .arrow-up-icon {
+    .arrow-up-icon-wrapper {
         position: absolute;
-        top: 88px;
+        top: 64px;
         left: 50%;
         transform: translateX(-50%);
-        height: 120px;
-        padding: 8px 16px;
-        fill: $theme-highlight;
-        background: $theme-background;
+        z-index: 1;
+
+        .arrow-up-icon {
+            display: block;
+            height: 160px;
+            fill: $theme-highlight;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            display: block;
+            width: 32px;
+            height: 120px;
+            background: $theme-background;
+            z-index: -1;
+        }
     }
 }

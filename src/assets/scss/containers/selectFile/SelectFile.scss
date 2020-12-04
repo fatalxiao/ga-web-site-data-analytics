@@ -10,6 +10,10 @@
     top: 50%;
     transform: translate(-50%, -50%);
 
+    .drop-zone-content {
+        text-align: center;
+    }
+
     .select-file-desc {
         margin: 64px 0 24px;
         text-align: center;
@@ -18,12 +22,18 @@
         color: #777;
     }
 
-    .err-msg {
-        @include text-nowrap;
-        line-height: 24px;
-        text-align: center;
-        margin-top: 24px;
-        color: #f55;
+    .base-button.raised-button.browse-file-button {
+        padding: 16px 24px;
+        background: hsl(hue($theme-highlight), 48%, 94%);
+        border-radius: 16px;
+        color: $theme-highlight;
         font-size: 24px;
+        font-weight: 600;
+        box-shadow: none;
+        transition: box-shadow $theme-transition-duration ease-in-out;
+
+        &:hover {
+            box-shadow: transparentize(#000, .88) 1px 1px 8px;
+        }
     }
 }

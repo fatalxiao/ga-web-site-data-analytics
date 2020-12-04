@@ -1,9 +1,9 @@
 /**
- * @file BrowseFile.js
+ * @file BrowseFileButton.js
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useRef, useCallback} from 'react';
+import React, {Fragment, useRef, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -13,11 +13,16 @@ import * as actions from 'reduxes/actions';
 // Components
 import RaisedButton from 'alcedo-ui/RaisedButton';
 
-// Styles
-import 'scss/containers/selectFile/BrowseFile.scss';
+// Vendors
+import classNames from 'classnames';
 
-const BrowseFile = ({
-    updateFile
+// Styles
+import 'scss/containers/selectFile/BrowseFileButton.scss';
+
+const BrowseFileButton = ({
+    className,
+    updateFile,
+    ...restProps
 }) => {
 
     const
@@ -39,7 +44,7 @@ const BrowseFile = ({
         handleFileChange = useCallback(e => updateFile?.(e?.target?.files?.[0]), [updateFile]);
 
     return (
-        <div className="browse-file">
+        <Fragment>
 
             <input ref={fileInput}
                    className="hidden-input"
@@ -47,19 +52,25 @@ const BrowseFile = ({
                    accept="text/csv"
                    onChange={handleFileChange}/>
 
-            <RaisedButton className="browse-file-button"
-                          value="browse file"
+            <RaisedButton {...restProps}
+                          className={classNames('browse-file-button', {
+                              [className]: className
+                          })}
                           onClick={chooseFile}/>
 
-        </div>
+        </Fragment>
     );
 
 };
 
-BrowseFile.propTypes = {
+BrowseFileButton.propTypes = {
+
+    className: PropTypes.string,
+
     updateFile: PropTypes.func
+
 };
 
 export default connect(null, dispatch => bindActionCreators({
     updateFile: actions.updateFile
-}, dispatch))(BrowseFile);
+}, dispatch))(BrowseFileButton);

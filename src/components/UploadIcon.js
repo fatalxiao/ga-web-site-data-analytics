@@ -15,7 +15,9 @@ import 'scss/components/UploadIcon.scss';
 const UploadIcon = () => (
     <div className="upload-icon">
         <CloudIcon/>
-        <ArrowUpIcon/>
+        <div className="arrow-up-icon-wrapper">
+            <ArrowUpIcon/>
+        </div>
     </div>
 );
 
