@@ -6,18 +6,16 @@
 import React from 'react';
 
 // Components
-import TipProvider from 'alcedo-ui/TipProvider';
+import ActionButton from '../AnalyticsTableActionButton';
 import BrowseFileButton from 'containers/selectFile/BrowseFileButton';
+import UploadIcon from 'components/UploadIcon';
 
 // Styles
 import 'scss/containers/app/table/header/action/rebrowse/AnalyticsTableRebrowseFile.scss';
 
 const AnalyticsTableRebrowseFile = () => {
     return (
-        <TipProvider tipContent="Rebrowse File">
-            <BrowseFileButton className="analytics-table-rebrowse-file"
-                              iconCls=""/>
-        </TipProvider>
+        <ActionButton tipContent="Rebrowse File"/>
     );
 };
 
