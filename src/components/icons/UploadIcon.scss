@@ -9,21 +9,19 @@
     text-align: center;
 
     .cloud-icon {
-        width: 24px;
-        fill: #eaeaea;
+        font-size: 20px;
+        color: #eaeaea;
     }
 
-    .arrow-up-icon-wrapper {
+    .arrow-up-icon {
         position: absolute;
         top: 8px;
         left: 50%;
         transform: translateX(-50%);
+        display: block;
+        font-size: 16px;
+        color: $theme-highlight;
         z-index: 1;
-
-        .arrow-up-icon {
-            height: 16px;
-            fill: $theme-highlight;
-        }
 
         &::after {
             content: "";
@@ -32,8 +30,8 @@
             bottom: 0;
             transform: translateX(-50%);
             display: block;
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 100%;
             background: $theme-background;
             z-index: -1;
         }

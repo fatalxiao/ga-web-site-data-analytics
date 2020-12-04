@@ -21,19 +21,15 @@
         height: 224px;
 
         .cloud-icon {
-            width: 240px;
+            font-size: 200px;
         }
 
-        .arrow-up-icon-wrapper {
+        .arrow-up-icon {
+            font-size: 160px;
             top: 64px;
-
-            .arrow-up-icon {
-                height: 160px;
-            }
 
             &::after {
                 width: 32px;
-                height: 120px;
             }
         }
     }
@@ -51,7 +47,7 @@
     &.dragging-over {
         background: lighten($theme-highlight, 40%);
 
-        .arrow-up-icon-wrapper::after {
+        .arrow-up-icon::after {
             background: lighten($theme-highlight, 40%);
         }
     }

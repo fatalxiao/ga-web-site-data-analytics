@@ -17,7 +17,7 @@ import {Provider} from 'react-redux';
 import configureStore from 'reduxes/store';
 
 // Styles
-import 'assets/font-awesome/css/fontawesome-all.min.css';
+import 'assets/font-awesome/css/all.min.css';
 import 'scss/index.scss';
 import 'scss/global.scss';
 

@@ -6,10 +6,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Icons
-import CloudIcon from './CloudIcon';
-import ArrowUpIcon from './ArrowUpIcon';
-
 // Vendors
 import classNames from 'classnames';
 
@@ -21,10 +17,8 @@ const UploadIcon = ({className, ...restProps}) => (
          className={classNames('upload-icon', {
              [className]: className
          })}>
-        <CloudIcon/>
-        <div className="arrow-up-icon-wrapper">
-            <ArrowUpIcon/>
-        </div>
+        <i className="fal fa-cloud cloud-icon"></i>
+        <i class="fal fa-long-arrow-up arrow-up-icon"></i>
     </div>
 );
 
