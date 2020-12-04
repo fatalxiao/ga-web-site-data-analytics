@@ -43,6 +43,12 @@ const AnalyticsTable = ({
         [sorting, setSorting] = useState(DEFAULT_SORTING),
 
         /**
+         * 表格折叠的行
+         * @type {string[]}
+         */
+        [expandRows, setExpandRows] = useState([]),
+
+        /**
          * 原始的表格数据
          */
         rawData = useMemo(() => data?.slice(1, data.length - 1)?.map(item => {
@@ -141,7 +147,19 @@ const AnalyticsTable = ({
          * 处理排序变更
          * @type {function(*=): void}
          */
-        handleSortChange = useCallback(sorting => setSorting(sorting), [setSorting]);
+        handleSortChange = useCallback(sorting => setSorting(sorting), []),
+
+        /**
+         * 处理折叠变更
+         * @type {function(*=): void}
+         */
+        handleExpandChange = useCallback(rows => setExpandRows(rows), []);
+
+    useEffect(() => {
+        if (isDataCollapsed) {
+            setExpandRows([collapsedData?.[0]]);
+        }
+    }, [isDataCollapsed, collapsedData]);
 
     return (
         <Table className="analytics-table"
@@ -157,7 +175,9 @@ const AnalyticsTable = ({
                autoSorting={false}
                sorting={sorting}
                defaultSortingType={Table.SortingType.DESC}
-               onSortChange={handleSortChange}/>
+               expandRows={expandRows}
+               onSortChange={handleSortChange}
+               onExpandChange={handleExpandChange}/>
     );
 
 };
