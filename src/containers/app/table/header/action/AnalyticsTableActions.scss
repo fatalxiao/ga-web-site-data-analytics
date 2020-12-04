@@ -6,7 +6,12 @@
 .analytics-table-actions {
     box-sizing: border-box;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     height: 56px;
+
+    & > * {
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-left: 16px;
+    }
 }

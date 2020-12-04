@@ -3,11 +3,11 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useCallback} from 'react';
+import React, {useMemo, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import ActionButton from '../AnalyticsTableActionButton';
+import ActionButtonRadioGroup from '../AnalyticsTableActionButtonRadioGroup';
 
 // Styles
 import './AnalyticsTableToggleCollapseData.scss';
@@ -20,27 +20,42 @@ const AnalyticsTableToggleCollapseData = ({
     const
 
         /**
+         * ButtonRadioGroup 的数据
+         * @type {*[]}
+         */
+        data = useMemo(() => [{
+            className: 'rotate-180',
+            value: true,
+            iconCls: 'far fa-align-right'
+        }, {
+            value: false,
+            iconCls: 'far fa-align-justify'
+        }], []),
+
+        /**
+         * ButtonRadioGroup 选中的值
+         */
+        value = useMemo(() => data.find(item => item?.value === isDataCollapsed), [isDataCollapsed]),
+
+        /**
          * 处理 button 点击事件
          * @type {Function}
          */
-        handleDataCollapsedClick = useCallback(() => onDataCollapsedChange?.(!isDataCollapsed),
-            [isDataCollapsed, onDataCollapsedChange]);
+        handleChange = useCallback(v => onDataCollapsedChange?.(v?.value), [onDataCollapsedChange]);
 
     return (
-        <ActionButton className="analytics-table-toggle-collapse-data"
-                      tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}
-                      iconCls={`far fa-align-${isDataCollapsed ? 'justify' : 'right'}`}
-                      onClick={handleDataCollapsedClick}/>
+        <ActionButtonRadioGroup className="analytics-table-toggle-collapse-data"
+                                tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}
+                                data={data}
+                                value={value}
+                                onChange={handleChange}/>
     );
 
 };
 
 AnalyticsTableToggleCollapseData.propTypes = {
-
     isDataCollapsed: PropTypes.bool,
-
     onDataCollapsedChange: PropTypes.func
-
 };
 
 export default AnalyticsTableToggleCollapseData;

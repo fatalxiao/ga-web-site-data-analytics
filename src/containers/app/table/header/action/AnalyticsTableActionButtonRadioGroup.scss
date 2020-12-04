@@ -1,0 +1,45 @@
+/**
+ * @file AnalyticsTableActionButtonRadioGroup.scss
+ * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ */
+@import 'scss/common.scss';
+
+.list.button-radio-group.analytics-table-action-button-radio-group {
+    width: auto;
+    border-radius: 8px;
+    transition: background $theme-transition-duration ease-in-out;
+
+    .list-item {
+        width: 40px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        margin: 0;
+        border-radius: 8px;
+        text-align: center;
+        transition: background $theme-transition-duration ease-in-out;
+
+        .button-icon-left {
+            float: none;
+            margin: 0;
+            color: $theme-primary;
+            font-size: 16px;
+        }
+
+        &:hover {
+            background: transparent;
+        }
+
+        &.activated {
+            background: $theme-secondary;
+        }
+    }
+
+    &:hover {
+        background: $theme-secondary;
+
+        .list-item.activated {
+            background: darken($theme-secondary, 8%);
+        }
+    }
+}

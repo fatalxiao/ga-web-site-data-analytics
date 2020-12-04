@@ -6,8 +6,8 @@
 
 .base-button.icon-button.analytics-table-action-button {
     border-radius: 8px;
-    margin-right: 8px;
     font-size: 16px;
+    transition: background $theme-transition-duration ease-in-out;
 
     &:hover {
         background: $theme-secondary;

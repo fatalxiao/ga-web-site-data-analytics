@@ -63,7 +63,8 @@ const AnalyticsTableActionButton = ({
 
     return (
         <TipProvider ref={tipRef}
-                     tipContent={tipContent}>
+                     tipContent={tipContent}
+                     position={TipProvider.Position.BOTTOM}>
             <IconButton {...restProps}
                         className={classNames('analytics-table-action-button', {
                             [className]: className
