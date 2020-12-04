@@ -17,6 +17,25 @@
 
     .upload-icon {
         margin: 0 auto;
+        width: 320px;
+        height: 224px;
+
+        .cloud-icon {
+            width: 240px;
+        }
+
+        .arrow-up-icon-wrapper {
+            top: 64px;
+
+            .arrow-up-icon {
+                height: 160px;
+            }
+
+            &::after {
+                width: 32px;
+                height: 120px;
+            }
+        }
     }
 
     .drop-zone-desc {
