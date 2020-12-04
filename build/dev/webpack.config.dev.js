@@ -15,7 +15,7 @@ module.exports = merge(baseWebpackConfig, {
 
     mode: 'development',
 
-    devtool: '#cheap-module-eval-source-map',
+    devtool: 'eval-cheap-source-map',
 
     optimization: {
         noEmitOnErrors: true
