@@ -24,30 +24,30 @@ const AnalyticsTableToggleCollapseData = ({
          * @type {*[]}
          */
         data = useMemo(() => [{
-            className: 'rotate-180',
-            value: true,
-            iconCls: 'far fa-align-right'
+            value: 1,
+            iconCls: 'far fa-align-right rotate-180'
         }, {
-            value: false,
+            value: 0,
             iconCls: 'far fa-align-justify'
         }], []),
 
         /**
          * ButtonRadioGroup 选中的值
          */
-        value = useMemo(() => data.find(item => item?.value === isDataCollapsed), [isDataCollapsed]),
+        value = useMemo(() => data.find(item => !!item?.value === isDataCollapsed), [isDataCollapsed]),
 
         /**
          * 处理 button 点击事件
          * @type {Function}
          */
-        handleChange = useCallback(v => onDataCollapsedChange?.(v?.value), [onDataCollapsedChange]);
+        handleChange = useCallback(v => onDataCollapsedChange?.(!!v?.value), [onDataCollapsedChange]);
 
     return (
         <ActionButtonRadioGroup className="analytics-table-toggle-collapse-data"
                                 tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}
                                 data={data}
                                 value={value}
+                                renderer={() => null}
                                 onChange={handleChange}/>
     );
 

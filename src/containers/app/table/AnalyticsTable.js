@@ -155,6 +155,9 @@ const AnalyticsTable = ({
          */
         handleExpandChange = useCallback(rows => setExpandRows(rows), []);
 
+    /**
+     * 当切换为折叠数据时，默认展开第一层
+     */
     useEffect(() => {
         if (isDataCollapsed) {
             setExpandRows([collapsedData?.[0]]);
