@@ -5,4 +5,8 @@
 
 .analytics-table-rebrowse-file {
     overflow: hidden;
+
+    .analytics-table-action-button:hover .button-icon {
+        transform: translateX(1px);
+    }
 }

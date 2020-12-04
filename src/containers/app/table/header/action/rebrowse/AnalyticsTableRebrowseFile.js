@@ -8,7 +8,6 @@ import React, {useRef, useCallback} from 'react';
 // Components
 import ActionButton from '../AnalyticsTableActionButton';
 import BrowseFile from 'components/BrowseFile';
-import UploadIcon from 'components/icons/UploadIcon';
 
 // Styles
 import './AnalyticsTableRebrowseFile.scss';
@@ -35,7 +34,8 @@ const AnalyticsTableRebrowseFile = () => {
             <BrowseFile ref={browseFileRef}/>
 
             <ActionButton tipContent="Rebrowse File"
-                          renderer={() => <UploadIcon/>}
+                          iconCls="far fa-folder"
+                          hoveringIconCls="far fa-folder-open"
                           onClick={handleClick}/>
 
         </div>
