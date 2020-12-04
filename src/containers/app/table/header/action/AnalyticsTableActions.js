@@ -7,6 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
+import RebrowseFile from './rebrowse/AnalyticsTableRebrowseFile';
 import ToggleCollapseData from './toggleCollapseData/AnalyticsTableToggleCollapseData';
 import TableSearch from './search/AnalyticsTableSearch';
 
@@ -18,6 +19,8 @@ const AnalyticsTableActions = ({
     onSearchChang, onDataCollapsedChange
 }) => (
     <div className="analytics-table-actions">
+
+        <RebrowseFile/>
 
         <ToggleCollapseData isDataCollapsed={isDataCollapsed}
                             onDataCollapsedChange={onDataCollapsedChange}/>
