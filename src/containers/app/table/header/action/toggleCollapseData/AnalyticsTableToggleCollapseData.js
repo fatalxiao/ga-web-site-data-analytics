@@ -29,7 +29,7 @@ const AnalyticsTableToggleCollapseData = ({
     return (
         <ActionButton className="analytics-table-toggle-collapse-data"
                       tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}
-                      iconCls={`fas fa-align-${isDataCollapsed ? 'justify' : 'right'}`}
+                      iconCls={`far fa-align-${isDataCollapsed ? 'justify' : 'right'}`}
                       onClick={handleDataCollapsedClick}/>
     );
 

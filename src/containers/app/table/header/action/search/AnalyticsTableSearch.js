@@ -72,7 +72,7 @@ const AnalyticsTableSearch = ({
                    className={classNames('analytics-table-search', {
                        collapsed
                    })}
-                   iconCls="fas fa-search"
+                   iconCls="far fa-search"
                    placeholder="Search routes..."
                    value={searchText}
                    onIconClick={handleIconClick}

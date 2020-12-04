@@ -18,7 +18,7 @@ const UploadIcon = ({className, ...restProps}) => (
              [className]: className
          })}>
         <i className="fal fa-cloud cloud-icon"></i>
-        <i class="fal fa-long-arrow-up arrow-up-icon"></i>
+        <i className="fal fa-long-arrow-up arrow-up-icon"></i>
     </div>
 );
 
