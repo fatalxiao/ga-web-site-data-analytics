@@ -44,7 +44,7 @@ const AnalyticsTableToggleCollapseData = ({
 
     return (
         <ActionButtonRadioGroup className="analytics-table-toggle-collapse-data"
-                                tipContent={isDataCollapsed ? 'Flatten Data' : 'Fold Data'}
+                                tipContent="Flatten Data or Collapse Data"
                                 data={data}
                                 value={value}
                                 renderer={() => null}

@@ -8,20 +8,27 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 // Components
+import RootToaster from './RootToaster';
 import SelectFile from 'containers/selectFile/SelectFile';
 import App from 'containers/app/App';
 
 // Styles
 import './Root.scss';
 
-const Root = ({data}) => (
+const Root = ({
+    data
+}) => (
     <div className="root">
+
+        <RootToaster/>
+
         {
             data ?
                 <App/>
                 :
                 <SelectFile/>
         }
+
     </div>
 );
 

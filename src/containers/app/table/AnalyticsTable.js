@@ -3,7 +3,7 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {useMemo, useState, useCallback, useEffect} from 'react';
+import React, {useMemo, useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -41,12 +41,6 @@ const AnalyticsTable = ({
          * @type {string[]}
          */
         [sorting, setSorting] = useState(DEFAULT_SORTING),
-
-        /**
-         * 表格折叠的行
-         * @type {string[]}
-         */
-        [expandRows, setExpandRows] = useState([]),
 
         /**
          * 原始的表格数据
@@ -147,22 +141,7 @@ const AnalyticsTable = ({
          * 处理排序变更
          * @type {function(*=): void}
          */
-        handleSortChange = useCallback(sorting => setSorting(sorting), []),
-
-        /**
-         * 处理折叠变更
-         * @type {function(*=): void}
-         */
-        handleExpandChange = useCallback(rows => setExpandRows(rows), []);
-
-    /**
-     * 当切换为折叠数据时，默认展开第一层
-     */
-    useEffect(() => {
-        if (isDataCollapsed) {
-            setExpandRows([collapsedData?.[0]]);
-        }
-    }, [isDataCollapsed, collapsedData]);
+        handleSortChange = useCallback(sorting => setSorting(sorting), []);
 
     return (
         <Table className="analytics-table"
@@ -178,9 +157,8 @@ const AnalyticsTable = ({
                autoSorting={false}
                sorting={sorting}
                defaultSortingType={Table.SortingType.DESC}
-               expandRows={expandRows}
-               onSortChange={handleSortChange}
-               onExpandChange={handleExpandChange}/>
+               disableScrollingRender={false}
+               onSortChange={handleSortChange}/>
     );
 
 };

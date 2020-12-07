@@ -83,11 +83,8 @@ const AnalyticsTableSearch = ({
 };
 
 AnalyticsTableSearch.propTypes = {
-
     searchText: PropTypes.string,
-
     onSearchChang: PropTypes.func
-
 };
 
 export default AnalyticsTableSearch;

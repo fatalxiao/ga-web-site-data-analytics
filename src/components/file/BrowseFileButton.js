@@ -7,7 +7,7 @@ import React, {Fragment, useRef, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import BrowseFile from 'components/BrowseFile';
+import BrowseFile from 'components/file/BrowseFile';
 import RaisedButton from 'alcedo-ui/RaisedButton';
 
 // Vendors
