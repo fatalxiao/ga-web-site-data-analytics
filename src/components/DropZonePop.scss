@@ -1,0 +1,47 @@
+/**
+ * @file DropZonePop.scss
+ * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ */
+@import 'scss/common.scss';
+
+.drop-zone-pop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .drop-zone-pop-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        width: 80%;
+        height: 80%;
+        padding: 8%;
+        background: $theme-background;
+        box-shadow: 0 0 40px 40px $theme-background;
+        border-radius: 32px;
+
+        .drop-zone {
+            width: 100%;
+            height: 100%;
+
+            .drop-zone-pop-desc {
+                margin: 64px 0 24px;
+                text-align: center;
+                white-space: nowrap;
+                font-size: 32px;
+                color: #777;
+            }
+        }
+    }
+}
+
+.portal-parent .app {
+    filter: blur(2px);
+}
+
+.pop-modal.drop-zone-pop-modal {
+    background: transparentize($theme-background, .5);
+}
