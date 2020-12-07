@@ -27,7 +27,7 @@
         "start": "npm run build && npm run run"
     },
     "dependencies": {
-        "alcedo-ui": "2.54.12",
+        "alcedo-ui": "2.54.14",
         "classnames": "2.2.6",
         "lodash": "4.17.20",
         "moment": "2.29.1",
