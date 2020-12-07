@@ -4,3 +4,4 @@
  */
 
 export * from './FileActionType';
+export * from './ToasterActionType';

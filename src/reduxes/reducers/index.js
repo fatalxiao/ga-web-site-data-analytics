@@ -1,15 +1,15 @@
 /**
  * @file index.js
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
- *
- * redux reducers index 文件
  */
 
 import {combineReducers} from 'redux';
 
 // Reducers
 import file from './FileReducer';
+import toaster from './ToasterReducer';
 
 export default () => combineReducers({
-    file
+    file,
+    toaster
 });
