@@ -17,8 +17,9 @@
         align-items: center;
         box-sizing: border-box;
         width: 80%;
+        min-width: 480px;
         height: 80%;
-        padding: 8%;
+        min-height: 560px;
         background: $theme-background;
         box-shadow: 0 0 40px 40px $theme-background;
         border-radius: 32px;
