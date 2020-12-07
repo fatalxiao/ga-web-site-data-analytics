@@ -5,6 +5,9 @@
 
 import * as actionTypes from 'reduxes/actionTypes';
 
+// Actions
+import {addErrorToaste} from './ToasterAction';
+
 /**
  * 解析文件
  * @param file
@@ -72,6 +75,6 @@ export const updateFile = file => async dispatch => {
         }
 
     } catch (errMsg) {
-        console.log('errMsg::', errMsg);
+        addErrorToaste(errMsg)(dispatch);
     }
 };
