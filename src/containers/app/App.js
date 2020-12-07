@@ -7,7 +7,7 @@ import React from 'react';
 
 // Components
 import TableLayout from './table/AnalyticsTableLayout';
-import DropZonePop from 'components/DropZonePop';
+import DropZonePop from 'components/file/DropZonePop';
 
 // Styles
 import './App.scss';

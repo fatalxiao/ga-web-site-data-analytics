@@ -7,7 +7,7 @@ import React, {useRef, useCallback} from 'react';
 
 // Components
 import ActionButton from '../AnalyticsTableActionButton';
-import BrowseFile from 'components/BrowseFile';
+import BrowseFile from 'components/file/BrowseFile';
 
 // Styles
 import './AnalyticsTableRebrowseFile.scss';
