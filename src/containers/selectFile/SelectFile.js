@@ -6,7 +6,7 @@
 import React from 'react';
 
 // Components
-import DropZone from './DropZone';
+import DropZone from 'components/DropZone';
 import BrowseFileButton from './BrowseFileButton';
 
 // Styles
