@@ -75,6 +75,7 @@ const AnalyticsTableSearch = ({
                    iconCls="far fa-search"
                    placeholder="Search routes..."
                    value={searchText}
+                   tip={collapsed ? 'Search path' : null}
                    onIconClick={handleIconClick}
                    onBlur={handleBlur}
                    onChange={onSearchChang}/>
@@ -83,11 +84,8 @@ const AnalyticsTableSearch = ({
 };
 
 AnalyticsTableSearch.propTypes = {
-
     searchText: PropTypes.string,
-
     onSearchChang: PropTypes.func
-
 };
 
 export default AnalyticsTableSearch;
