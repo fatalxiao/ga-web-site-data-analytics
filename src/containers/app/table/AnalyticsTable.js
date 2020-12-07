@@ -179,6 +179,7 @@ const AnalyticsTable = ({
                sorting={sorting}
                defaultSortingType={Table.SortingType.DESC}
                expandRows={expandRows}
+               disableScrollingRender={false}
                onSortChange={handleSortChange}
                onExpandChange={handleExpandChange}/>
     );
