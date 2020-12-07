@@ -29,6 +29,7 @@
     "dependencies": {
         "alcedo-ui": "2.54.14",
         "classnames": "2.2.6",
+        "dom-helpers": "^5.2.0",
         "lodash": "4.17.20",
         "moment": "2.29.1",
         "prop-types": "15.7.2",
