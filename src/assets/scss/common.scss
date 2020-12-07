@@ -4,7 +4,30 @@
  */
 @import '~alcedo-ui/Theme/default.scss';
 
+// Colors
 $theme-background: #fafafa;
+
+$theme-info: #2db7f5;
+$theme-success: #87d068;
+$theme-warning: #fa0;
+$theme-error: #ff5959;
+$theme-success-bg: #f5fbf2;
+$theme-success-border: #e3f6db;
+$theme-error-bg: #fff0e9;
+$theme-error-border: #fcd9c7;
+$theme-info-bg: #edf9ff;
+$theme-info-border: #cdedfc;
+$theme-warning-bg: #fff8e9;
+$theme-warning-border: #f9e3b6;
+$theme-forbidden-bg: #761616;
+$theme-forbidden-border: #601616;
+
+// Z Index
+$tip-z-index: 99;
+$toast-z-index: 98;
+$dialog-z-index: 95;
+$pop-z-index: 92;
+$full-screen-z-index: 91;
 
 @mixin invisible {
     position: absolute;

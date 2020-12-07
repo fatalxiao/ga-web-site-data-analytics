@@ -31,7 +31,6 @@ export const addSuccessToaste = message => dispatch => {
         toaste: {
             title: '',
             message,
-            iconCls: 'icon icon-ico-alert-success',
             type: MsgType.SUCCESS
         }
     });
@@ -48,7 +47,6 @@ export const addErrorToaste = message => dispatch => {
         toaste: {
             title: '',
             message,
-            iconCls: 'icon icon-ico-alert-error',
             type: MsgType.ERROR
         }
     });
