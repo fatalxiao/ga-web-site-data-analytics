@@ -37,7 +37,7 @@ const AnalyticsTableActionButtonRadioGroup = ({
         handleChange = useCallback((...args) => {
 
             // tip content 可能改变，在点击后重新计算位置
-            setTimeout(() => tipRef?.current?.resetPosition?.(), 0);
+            // setTimeout(() => tipRef?.current?.resetPosition?.(), 0);
 
             onChange?.(...args);
 
