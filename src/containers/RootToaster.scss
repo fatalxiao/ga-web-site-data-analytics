@@ -7,23 +7,24 @@
 .portal {
 
     .toaster.position-pop-top.root-toaster {
-        top: 0;
         z-index: $toast-z-index;
 
         .toast {
             position: fixed !important;
             top: 8px !important;
+            left: 50% !important;
             box-sizing: border-box;
             width: 160px !important;
             height: 50px !important;
             color: #333 !important;
-            box-shadow: transparentize(#000, .94) 1px 1px 8px;
+            box-shadow: transparentize(#000, .9) 0 0 8px;
             padding: 16px 16px 16px 56px !important;
             margin: 0 !important;
             background: #fff !important;
             border: none;
             border-radius: 8px;
             opacity: 1 !important;
+            transform: translateX(-50%);
             transition: top $theme-transition-duration ease-in-out !important;
 
             .toast-icon {
@@ -36,35 +37,16 @@
                 color: $theme-label;
             }
 
-            //&::before {
-            //    content: "";
-            //    position: absolute;
-            //    left: 6px;
-            //    top: 4px;
-            //    display: block;
-            //    width: 4px;
-            //    height: calc(100% - 8px);
-            //    border-radius: 2px;
-            //}
-
             &.theme-success {
                 .toast-icon {
                     color: $theme-success;
                 }
-
-                //&::before {
-                //    background: $theme-success;
-                //}
             }
 
             &.theme-error {
                 .toast-icon {
                     color: $theme-error;
                 }
-
-                //&::before {
-                //    background: $theme-error;
-                //}
             }
 
             &.hidden {
