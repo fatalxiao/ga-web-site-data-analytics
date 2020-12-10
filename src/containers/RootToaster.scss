@@ -11,16 +11,15 @@
 
         .toast {
             position: fixed !important;
-            top: 8px !important;
+            top: 32px !important;
             left: 50% !important;
             box-sizing: border-box;
             width: 160px !important;
             height: 50px !important;
             color: #333 !important;
-            box-shadow: transparentize(#000, .9) 0 0 8px;
+            box-shadow: transparentize(#000, .88) 0 0 8px;
             padding: 16px 16px 16px 56px !important;
             margin: 0 !important;
-            background: #fff !important;
             border: none;
             border-radius: 8px;
             opacity: 1 !important;
@@ -38,12 +37,16 @@
             }
 
             &.theme-success {
+                background: $theme-success-bg;
+
                 .toast-icon {
                     color: $theme-success;
                 }
             }
 
             &.theme-error {
+                background: $theme-error-bg;
+
                 .toast-icon {
                     color: $theme-error;
                 }
