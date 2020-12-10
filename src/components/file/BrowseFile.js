@@ -29,7 +29,7 @@ const BrowseFile = forwardRef(({
         handleFileChange = useCallback(e => {
             updateFile?.(e?.target?.files?.[0]);
             setInputKey(inputKey + 1);
-        }, [updateFile]);
+        }, [inputKey, updateFile]);
 
     return (
         <input key={inputKey}
