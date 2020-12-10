@@ -18,6 +18,9 @@ const BrowseFile = forwardRef(({
 
     const
 
+        /**
+         * input 的 key，每次 onChange 时更新 key，使得 file input 重绘
+         */
         [inputKey, setInputKey] = useState(1),
 
         /**
