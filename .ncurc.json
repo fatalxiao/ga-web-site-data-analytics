@@ -2,6 +2,8 @@
     "upgrade": true,
     "reject": [
         "history",
-        "webpack"
+        "webpack",
+        "copy-webpack-plugin",
+        "compression-webpack-plugin"
     ]
 }
