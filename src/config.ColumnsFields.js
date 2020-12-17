@@ -6,6 +6,7 @@
 // Vendors
 import sum from 'lodash/sum';
 import mean from 'lodash/mean';
+import {parseNumber, formatNumber} from 'vendors/NumberColumnUtil';
 import {parseTime, formatTime} from 'vendors/TimeColumnUtil';
 import {parsePercent, formatPercent} from 'vendors/PercentColumnUtil';
 
@@ -30,7 +31,7 @@ export default [{
     name: 'pageViews',
     mappingIndex: 1,
     sortingProp: isDataCollapsed => isDataCollapsed ? 'allPageViews' : 'pageViews',
-    parse: value => +value || 0,
+    parse: value => parseNumber(value) || 0,
     summary: node => {
 
         if (!node) {
@@ -45,14 +46,14 @@ export default [{
 
     },
     bodyRenderer: (isDataCollapsed, rowData) => isDataCollapsed ?
-        `${+rowData?.pageViews || 0} / ${+rowData?.allPageViews || 0}`
+        `${formatNumber(rowData?.pageViews) || 0} / ${formatNumber(rowData?.allPageViews) || 0}`
         :
-        +rowData?.pageViews || 0
+        formatNumber(rowData?.pageViews) || 0
 }, {
     name: 'uniquePageViews',
     mappingIndex: 2,
     sortingProp: isDataCollapsed => isDataCollapsed ? 'allUniquePageViews' : 'uniquePageViews',
-    parse: value => +value || 0,
+    parse: value => parseNumber(value) || 0,
     summary: node => {
 
         if (!node) {
@@ -69,9 +70,9 @@ export default [{
     },
     bodyRenderer: (isDataCollapsed, rowData) =>
         isDataCollapsed ?
-            `${+rowData?.uniquePageViews || 0} / ${+rowData?.allUniquePageViews || 0}`
+            `${formatNumber(rowData?.uniquePageViews) || 0} / ${formatNumber(rowData?.allUniquePageViews) || 0}`
             :
-            +rowData?.uniquePageViews || 0
+            formatNumber(rowData?.uniquePageViews) || 0
 }, {
     name: 'averageTimeOnPage',
     mappingIndex: 3,
@@ -91,7 +92,7 @@ export default [{
     name: 'numberOfEntries',
     mappingIndex: 4,
     sortingProp: isDataCollapsed => isDataCollapsed ? 'allNumberOfEntries' : 'numberOfEntries',
-    parse: value => +value || 0,
+    parse: value => parseNumber(value) || 0,
     summary: node => {
 
         if (!node) {
@@ -107,9 +108,9 @@ export default [{
 
     },
     bodyRenderer: (isDataCollapsed, rowData) => isDataCollapsed ?
-        `${+rowData?.numberOfEntries || 0} / ${+rowData?.allNumberOfEntries || 0}`
+        `${formatNumber(rowData?.numberOfEntries) || 0} / ${formatNumber(rowData?.allNumberOfEntries) || 0}`
         :
-        +rowData?.numberOfEntries || 0
+        formatNumber(rowData?.numberOfEntries) || 0
 }, {
     name: 'bounceRate',
     mappingIndex: 5,
