@@ -129,10 +129,10 @@ const AnalyticsTable = ({
                 sortingProp: name,
                 headRenderer: dataColumns[mappingIndex],
                 bodyRenderer: (...args) => bodyRenderer?.(isDataCollapsed, ...args),
-                footRenderer: (rowData, colIndex) => colIndex === 0 ?
+                footRenderer: (rowData, rowIndex, colIndex) => colIndex === 0 ?
                     'Total'
                     :
-                    footData[ColumnsFields[colIndex].name]
+                    rowData[ColumnsFields[colIndex].name]
             }));
 
         }, [data, footData, isDataCollapsed]),
@@ -147,6 +147,7 @@ const AnalyticsTable = ({
         <Table className="analytics-table"
                columns={columns}
                data={sortingData}
+               footData={[footData]}
                isHeadFixed={true}
                isFootFixed={true}
                isPaginated={false}
