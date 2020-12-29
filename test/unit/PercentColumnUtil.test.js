@@ -1,6 +1,6 @@
 /**
  * @file PercentColumnUtil.test.js
- * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ * @author liangxiaojun(fatalxiao@163.com)
  */
 
 'use strict';

@@ -1,6 +1,6 @@
 /**
  * @file AnalyticsTable.js
- * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React, {useMemo, useState, useCallback} from 'react';

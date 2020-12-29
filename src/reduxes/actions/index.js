@@ -1,6 +1,6 @@
 /**
  * @file index.js
- * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ * @author liangxiaojun(fatalxiao@163.com)
  */
 
 export * from './FileAction';

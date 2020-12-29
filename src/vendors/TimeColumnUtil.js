@@ -1,6 +1,6 @@
 /**
  * @file TimeColumnUtil.js
- * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ * @author liangxiaojun(fatalxiao@163.com)
  */
 
 /**

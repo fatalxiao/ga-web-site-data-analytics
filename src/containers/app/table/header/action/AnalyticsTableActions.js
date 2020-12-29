@@ -1,6 +1,6 @@
 /**
  * @file AnalyticsTableActions.js
- * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React from 'react';

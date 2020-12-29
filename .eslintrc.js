@@ -1,6 +1,6 @@
 /**
  * @file .eslintrc.js
- * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ * @author liangxiaojun(fatalxiao@163.com)
  */
 
 /* eslint-disable no-magic-numbers */

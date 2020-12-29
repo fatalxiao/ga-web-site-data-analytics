@@ -1,6 +1,6 @@
 /**
  * @file ToasterAction.js
- * @author liangxiaojun(liangxiaojun@derbysoft.com)
+ * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import * as actionTypes from 'reduxes/actionTypes';
