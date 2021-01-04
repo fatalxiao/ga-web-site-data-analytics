@@ -1,6 +1,5 @@
 /**
  * @file AnalyticsTableRebrowseFile.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React, {useRef, useCallback} from 'react';

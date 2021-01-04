@@ -1,6 +1,5 @@
 /**
  * @file config.ColumnsFields.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 // Vendors

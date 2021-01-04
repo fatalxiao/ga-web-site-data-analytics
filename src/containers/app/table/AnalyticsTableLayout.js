@@ -1,6 +1,5 @@
 /**
  * @file AnalyticsTableLayout.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React, {useRef, useMemo, useState, useCallback, useEffect} from 'react';

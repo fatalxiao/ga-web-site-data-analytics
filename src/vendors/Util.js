@@ -1,6 +1,5 @@
 /**
  * @file Util.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 /**

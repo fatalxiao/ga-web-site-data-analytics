@@ -1,6 +1,5 @@
 /**
  * @file useDraggingOver.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import {useState, useMemo, useEffect, useCallback} from 'react';

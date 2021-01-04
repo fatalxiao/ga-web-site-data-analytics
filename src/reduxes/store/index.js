@@ -1,6 +1,5 @@
 /**
  * @file index.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import {createStore, applyMiddleware} from 'redux';

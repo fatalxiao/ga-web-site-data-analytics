@@ -1,6 +1,5 @@
 /**
  * @file index.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import {combineReducers} from 'redux';

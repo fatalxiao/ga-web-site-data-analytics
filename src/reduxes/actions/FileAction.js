@@ -1,6 +1,5 @@
 /**
  * @file FileAction.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import * as actionTypes from 'reduxes/actionTypes';

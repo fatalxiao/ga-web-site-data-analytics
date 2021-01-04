@@ -1,6 +1,5 @@
 /**
  * @file DropZonePop.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React, {useMemo, useCallback} from 'react';

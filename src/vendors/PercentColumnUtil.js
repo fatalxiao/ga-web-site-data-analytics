@@ -1,6 +1,5 @@
 /**
  * @file PercentColumnUtil.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 // Vendors

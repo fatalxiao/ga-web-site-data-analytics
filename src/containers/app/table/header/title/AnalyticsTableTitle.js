@@ -1,6 +1,5 @@
 /**
  * @file AnalyticsTableTitle.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React, {useMemo} from 'react';

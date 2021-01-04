@@ -1,6 +1,5 @@
 /**
  * @file TableDataUtil.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 // Statics

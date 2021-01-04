@@ -1,6 +1,5 @@
 /**
  * @file BrowseFileButton.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React, {Fragment, useRef, useCallback} from 'react';

@@ -1,6 +1,5 @@
 /**
  * @file TimeColumnUtil.test.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 'use strict';

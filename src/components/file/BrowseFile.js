@@ -1,6 +1,5 @@
 /**
  * @file BrowseFile.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React, {useState, useCallback, forwardRef} from 'react';

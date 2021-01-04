@@ -1,6 +1,5 @@
 /**
  * @file AnalyticsTableHeader.js
- * @author liangxiaojun(fatalxiao@163.com)
  */
 
 import React, {forwardRef} from 'react';
