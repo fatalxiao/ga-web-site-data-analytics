@@ -7,11 +7,7 @@
 .upload-icon {
     position: relative;
     text-align: center;
-
-    .cloud-icon {
-        font-size: 20px;
-        color: #eaeaea;
-    }
+    overflow: hidden;
 
     .arrow-up-icon {
         position: absolute;
@@ -22,18 +18,13 @@
         font-size: 16px;
         color: $theme-highlight;
         z-index: 1;
+    }
 
-        &::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            display: block;
-            width: 6px;
-            height: 100%;
-            background: $theme-background;
-            z-index: -1;
-        }
+    .cloud-svg {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        z-index: 2;
     }
 }
