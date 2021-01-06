@@ -60,7 +60,7 @@ export const parseFile = file => new Promise((resolve, reject) => {
  * @param file
  * @returns {function(*): *}
  */
-export const updateFile = file => async dispatch => {
+export const updateFile = (file, callback) => async dispatch => {
     try {
 
         const data = await parseFile(file);
@@ -75,5 +75,7 @@ export const updateFile = file => async dispatch => {
 
     } catch (errMsg) {
         addErrorToaste(errMsg)(dispatch);
+    } finally {
+        callback?.();
     }
 };
