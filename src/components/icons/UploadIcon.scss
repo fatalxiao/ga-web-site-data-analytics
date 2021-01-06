@@ -27,4 +27,21 @@
         transform: translateX(-50%);
         z-index: 2;
     }
+
+    &.activated {
+        .arrow-up-icon {
+            animation: upload 1s infinite;
+        }
+    }
+}
+
+@keyframes upload {
+    0% {
+        top: 128px;
+        opacity: 0;
+    }
+    100% {
+        top: -128px;
+        opacity: 1;
+    }
 }

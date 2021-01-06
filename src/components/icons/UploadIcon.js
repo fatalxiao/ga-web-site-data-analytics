@@ -11,9 +11,13 @@ import classNames from 'classnames';
 // Styles
 import './UploadIcon.scss';
 
-const UploadIcon = ({className, ...restProps}) => (
+const UploadIcon = ({
+    className, maskBackground, activated,
+    ...restProps
+}) => (
     <div {...restProps}
          className={classNames('upload-icon', {
+             activated,
              [className]: className
          })}>
 
@@ -39,7 +43,7 @@ const UploadIcon = ({className, ...restProps}) => (
 
             <rect width="100%"
                   height="100%"
-                  fill="#fafafa"
+                  fill={maskBackground}
                   mask="url(#background-mask)"/>
 
             <mask id="cloud-mask">
@@ -67,9 +71,15 @@ const UploadIcon = ({className, ...restProps}) => (
 UploadIcon.propTypes = {
 
     className: PropTypes.string,
+    maskBackground: PropTypes.string,
 
     activated: PropTypes.bool
 
+};
+
+UploadIcon.defaultProps = {
+    maskBackground: '#fff',
+    activated: false
 };
 
 export default UploadIcon;
