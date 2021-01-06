@@ -2,7 +2,7 @@
  * @file DropZone.js
  */
 
-import React, {useRef, useCallback} from 'react';
+import React, {useRef, useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -42,11 +42,19 @@ const DropZone = ({
             onDragLeave
         }),
 
+        [droping, setDroping] = useState(false),
+
         /**
          * 处理拖入文件 drop
          * @type {function(*): *}
          */
-        handleDrop = useCallback(e => updateFile?.(e?.dataTransfer?.files[0]), [updateFile]),
+        handleDrop = useCallback(e => {
+            setDroping(true);
+            updateFile?.(
+                e?.dataTransfer?.files[0],
+                () => setTimeout(() => setDroping(false), 0)
+            );
+        }, [updateFile]),
 
         /**
          * 是否在当前组件上 dragging over
@@ -67,7 +75,8 @@ const DropZone = ({
 
             <div className="drop-zone-content">
 
-                <UploadIcon/>
+                <UploadIcon maskBackground={draggingOver ? '#f1fafe' : '#fafafa'}
+                            activated={draggingOver || droping}/>
                 <div className="drop-zone-desc">Google Analytics CSV file</div>
 
                 {children}
