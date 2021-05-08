@@ -1,6 +1,6 @@
-require('eventsource-polyfill');
+/**
+ * @file client.js
+ */
 
-const config = require('../config.js');
-if (config.development.isHotReload) {
-    require('webpack-hot-middleware/client?noInfo=true');
-}
+require('eventsource-polyfill');
+require('webpack-hot-middleware/client?noInfo=true');

@@ -1,3 +1,7 @@
+/**
+ * @file .babelrc.js
+ */
+
 const presets = [
         [
             '@babel/preset-env',

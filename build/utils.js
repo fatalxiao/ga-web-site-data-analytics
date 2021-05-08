@@ -1,22 +1,55 @@
+/**
+ * @file utils.js
+ */
+
 const fs = require('fs'),
     path = require('path'),
-    crypto = require('crypto'),
-    ChildProcess = require('child_process'),
 
     config = require('./config.js');
 
-function assetsPath(p, env = 'production') {
+/**
+ * 处理配置中的相对路径
+ * @param p
+ * @returns {string}
+ */
+function resolveRootPath(p) {
+    return path.join(__dirname, '..', p);
+}
+
+/**
+ * 处理 assets ( 默认 "dist" 目录 ) 下的路径
+ * @param p
+ * @param env
+ * @returns {string}
+ */
+function getAssetsPath(p, env = 'production') {
     return path.posix.join(config[env].assetsDirectory, p);
 }
 
-function assetsSubPath(p) {
+/**
+ * 处理 sub assets ( 默认 "dist/static" 目录 ) 下的路径
+ * @param p
+ * @returns {string}
+ */
+function getAssetsSubPath(p) {
     return path.posix.join(config.assetsSubDirectory, p);
 }
 
-function assetsVendorsAbsolutePath(p, env = 'production') {
-    return path.posix.join(config[env].assetsRoot, assetsSubPath(`vendors/${p}`));
+/**
+ * 处理存放 DllPlugin manifest.json 的据对路径
+ * @param p
+ * @param env
+ * @returns {string}
+ */
+function getAssetsVendorsAbsolutePath(p, env = 'production') {
+    return path.posix.join(config[env].assetsRoot, getAssetsSubPath(`vendors/${p}`));
 }
 
+/**
+ * 同步检查文件是否存在
+ * @param path
+ * @returns {boolean}
+ */
 function fsExistsSync(path) {
     try {
         fs.accessSync(path, (fs.constants && fs.constants.F_OK) || fs.F_OK);
@@ -26,6 +59,12 @@ function fsExistsSync(path) {
     return true;
 }
 
+/**
+ * 递归拷贝文件
+ * @param src
+ * @param dist
+ * @param excludes
+ */
 function copyRecursionSync(src, dist, excludes) {
 
     const paths = fs.readdirSync(src);
@@ -57,6 +96,10 @@ function copyRecursionSync(src, dist, excludes) {
 
 }
 
+/**
+ * 同步递归移除文件
+ * @param p
+ */
 function rmRecursionSync(p) {
 
     const paths = fs.readdirSync(p);
@@ -85,73 +128,10 @@ function rmRecursionSync(p) {
 
 }
 
-function getClientIp(req) {
-    return req && ((req.headers && (req.headers['x-real-ip'] || req.headers['x-forwarded-for']))
-        || (req.connection && req.connection.remoteAddress)
-        || (req.socket && req.socket.remoteAddress)
-        || (req.connection && req.connection.socket && req.connection.socket.remoteAddress));
-}
-
-function ipParse(ip) {
-
-    if (!ip || !ip.includes(':')) {
-        return ip;
-    }
-
-    const ipArray = ip.split(':');
-
-    if (!ipArray[3]) {
-        return ip;
-    }
-
-    return ipArray[3];
-
-}
-
-function calculateSHA256(filePath, callback) {
-    const rs = fs.createReadStream(filePath),
-        hash = crypto.createHash('sha256');
-    rs.on('data', hash.update.bind(hash));
-    rs.on('end', function () {
-        console.log('SHA-256 Hash: ', hash.digest('hex'), '\n');
-        callback && callback();
-    });
-}
-
-function installDependencies(path) {
-    return new Promise((resolve, reject) => {
-        const childProcess = ChildProcess.exec('npm i', {
-            cwd: path
-        }, error => {
-            error && reject(error);
-        }).on('close', () => {
-            resolve();
-        });
-        childProcess.stdout.pipe(process.stdout);
-        childProcess.stderr.pipe(process.stderr);
-    });
-}
-
-function makeTapeAchive(path, name) {
-    return new Promise((resolve, reject) => {
-        ChildProcess.exec(`tar -czf ${name}.tar.gz ${path}`, {
-            cwd: path
-        }, error => {
-            error && reject(error);
-        }).on('close', () => {
-            resolve();
-        });
-    });
-}
-
-exports.assetsPath = assetsPath;
-exports.assetsSubPath = assetsSubPath;
-exports.assetsVendorsAbsolutePath = assetsVendorsAbsolutePath;
+exports.resolveRootPath = resolveRootPath;
+exports.getAssetsPath = getAssetsPath;
+exports.getAssetsSubPath = getAssetsSubPath;
+exports.getAssetsVendorsAbsolutePath = getAssetsVendorsAbsolutePath;
 exports.fsExistsSync = fsExistsSync;
 exports.copyRecursionSync = copyRecursionSync;
 exports.rmRecursionSync = rmRecursionSync;
-exports.getClientIp = getClientIp;
-exports.ipParse = ipParse;
-exports.calculateSHA256 = calculateSHA256;
-exports.installDependencies = installDependencies;
-exports.makeTapeAchive = makeTapeAchive;

@@ -1,9 +1,13 @@
-const path = require('path'),
+/**
+ * @file webpack.config.base.js
+ */
+
+const os = require('os'),
 
     HappyPack = require('happypack'),
 
     config = require('./config.js'),
-    utils = require('./utils.js'),
+    {resolveRootPath, getAssetsSubPath} = require('./utils.js'),
 
     cssLoaderConfig = ['style-loader', {
         loader: 'css-loader',
@@ -21,10 +25,6 @@ const path = require('path'),
         }
     }];
 
-function resolve(dir) {
-    return path.join(__dirname, '..', dir);
-}
-
 module.exports = {
 
     entry: {
@@ -41,17 +41,17 @@ module.exports = {
         extensions: ['.js', '.scss'],
         alias: {
 
-            'src': resolve('src'),
-            'assets': resolve('src/assets'),
-            'scss': resolve('src/assets/scss'),
-            'components': resolve('src/components'),
-            'containers': resolve('src/containers'),
-            'statics': resolve('src/statics'),
-            'hooks': resolve('src/hooks'),
-            'vendors': resolve('src/vendors'),
-            'reduxes': resolve('src/reduxes'),
+            'src': resolveRootPath('src'),
+            'assets': resolveRootPath('src/assets'),
+            'scss': resolveRootPath('src/assets/scss'),
+            'components': resolveRootPath('src/components'),
+            'containers': resolveRootPath('src/containers'),
+            'statics': resolveRootPath('src/statics'),
+            'hooks': resolveRootPath('src/hooks'),
+            'vendors': resolveRootPath('src/vendors'),
+            'reduxes': resolveRootPath('src/reduxes'),
 
-            'test': resolve('test')
+            'test': resolveRootPath('test')
 
         }
     },
@@ -60,27 +60,29 @@ module.exports = {
         rules: [{
             test: /\.js$/,
             use: 'happypack/loader?id=js',
-            include: [resolve('src')]
+            include: [resolveRootPath('src')]
         }, {
             test: /\.(png|jpe?g|gif|svg|cur|ico)(\?.*)?$/,
             loader: 'url-loader',
-            query: {
+            options: {
                 limit: 1000,
-                name: utils.assetsSubPath('img/[name].[hash:7].[ext]')
+                name: getAssetsSubPath('img/[name].[hash:7].[ext]')
             }
         }, {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
             loader: 'url-loader',
-            query: {
+            options: {
                 limit: 1000,
-                name: utils.assetsSubPath('fonts/[name].[hash:7].[ext]')
+                name: getAssetsSubPath('fonts/[name].[hash:7].[ext]')
             }
         }, {
             test: /\.scss$/,
             use: [...cssLoaderConfig, {
-                loader: 'fast-sass-loader',
+                loader: 'sass-loader',
                 options: {
-                    includePaths: ['./src/assets']
+                    sassOptions: {
+                        includePaths: [resolveRootPath('src/assets')]
+                    }
                 }
             }]
         }, {
@@ -89,7 +91,7 @@ module.exports = {
         }, {
             test: /\.md/,
             loader: 'js-markdown-loader',
-            query: {
+            options: {
                 fullInfo: true,
                 dialect: 'DERBY'
             }
@@ -99,10 +101,8 @@ module.exports = {
     plugins: [
         new HappyPack({
             id: 'js',
-            loaders: [{
-                loader: 'babel-loader?cacheDirectory=true'
-            }],
-            threads: 4,
+            threadPool: HappyPack.ThreadPool({size: os.cpus().length}),
+            loaders: ['babel-loader?cacheDirectory=true'],
             verbose: false
         })
     ]
