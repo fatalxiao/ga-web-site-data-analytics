@@ -31,7 +31,7 @@ export const parseFile = file => new Promise((resolve, reject) => {
             }
 
             // 解析文件，分段
-            const data = raw.split?.('\n\n');
+            const data = raw.split?.(/\r?\n\r?\n/);
 
             // 处理解析失败
             if (!data || data.length < 3) {
