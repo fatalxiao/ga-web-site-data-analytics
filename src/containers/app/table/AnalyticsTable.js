@@ -52,13 +52,18 @@ const AnalyticsTable = ({
 
             return splitCSVRow(item, true);
 
-        }), [data]),
+        }), [
+            data
+        ]),
 
         /**
          * 表尾 Total 数据
          * @type {{}}
          */
-        footData = useMemo(() => splitCSVRow(data?.[data.length - 1]), [data]),
+        footData = useMemo(() =>
+            splitCSVRow(data?.[data.length - 1]), [
+            data
+        ]),
 
         /**
          * 获取过滤后的数据
@@ -72,13 +77,18 @@ const AnalyticsTable = ({
 
             return rawData.filter(row => row?.[ColumnsFields[0].name].includes(searchText));
 
-        }, [rawData, searchText]),
+        }, [
+            rawData, searchText
+        ]),
 
         /**
          * 折叠的数据
          * @type {Array|*[]}
          */
-        collapsedData = useMemo(() => collapseData(filteredData), [filteredData]),
+        collapsedData = useMemo(() =>
+            collapseData(filteredData), [
+            filteredData
+        ]),
 
         /**
          * 排序后的数据
@@ -109,7 +119,9 @@ const AnalyticsTable = ({
 
             return getSortingData(filteredData, sortingConfig);
 
-        }, [isDataCollapsed, filteredData, sorting]),
+        }, [
+            sorting, isDataCollapsed, filteredData, collapsedData
+        ]),
 
         /**
          * columns 配置
@@ -134,13 +146,16 @@ const AnalyticsTable = ({
                     rowData[ColumnsFields[colIndex].name]
             }));
 
-        }, [data, footData, isDataCollapsed]),
+        }, [
+            data, isDataCollapsed
+        ]),
 
         /**
          * 处理排序变更
          * @type {function(*=): void}
          */
-        handleSortChange = useCallback(sorting => setSorting(sorting), []);
+        handleSortChange = useCallback(sorting =>
+            setSorting(sorting), []);
 
     return (
         <Table className="analytics-table"
