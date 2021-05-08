@@ -99,11 +99,21 @@ export function addPath(node, pathArray, rowData, collapsedField) {
 
     // 还要继续往下走
     if (pathArray.length > 1) {
-        addPath(getMatchedChildNode(node, pathArray?.[1], collapsedField), pathArray.slice(1), rowData, collapsedField);
+        addPath(
+            getMatchedChildNode(node, pathArray?.[1], collapsedField),
+            pathArray.slice(1),
+            rowData,
+            collapsedField
+        );
     }
 
 }
 
+/**
+ * 对数据做汇总
+ * @param root
+ * @returns {*}
+ */
 export function summaryCollapsedData(root) {
 
     Util.postOrderTraverse(root, node =>
@@ -115,7 +125,7 @@ export function summaryCollapsedData(root) {
 }
 
 /**
- *
+ * 把数据折叠成树状
  * @param data
  * @returns {Array|*[]}
  */
@@ -149,7 +159,10 @@ export function collapseData(data) {
 
         // 添加子节点
         addPath(
-            root, pathArray[1] === '' ? pathArray.slice(1) : pathArray, row, ColumnsFields[0].name
+            root,
+            pathArray[1] === '' ? pathArray.slice(1) : pathArray,
+            row,
+            ColumnsFields[0].name
         );
 
     });
