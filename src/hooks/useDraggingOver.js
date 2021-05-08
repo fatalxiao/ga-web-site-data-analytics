@@ -7,6 +7,11 @@ import {useState, useMemo, useEffect, useCallback} from 'react';
 // Vendors
 import Event from 'alcedo-ui/_vendors/Event';
 
+/**
+ * 判断是否正 dragging over document
+ * @param params
+ * @returns {boolean}
+ */
 export default function useDraggingOver(params) {
 
     const
@@ -26,7 +31,9 @@ export default function useDraggingOver(params) {
         mergedParams = useMemo(() => ({
             ...DEFAULT_PARAMS,
             ...params
-        }), [params]),
+        }), [
+            DEFAULT_PARAMS, params
+        ]),
 
         /**
          * 解构 params
@@ -52,7 +59,9 @@ export default function useDraggingOver(params) {
             setLastEnterEl(e?.target);
             setDraggingover(true);
             onDragEnter?.(e);
-        }, [onDragEnter]),
+        }, [
+            onDragEnter
+        ]),
 
         /**
          * 处理拖拽离开 document 区域
@@ -63,7 +72,10 @@ export default function useDraggingOver(params) {
                 setDraggingover(false);
                 onDragLeave?.(e);
             }
-        }, [lastEnterEl, onDragLeave]),
+        }, [
+            lastEnterEl,
+            onDragLeave
+        ]),
 
         /**
          * 处理拖拽离开 document 区域
@@ -72,7 +84,9 @@ export default function useDraggingOver(params) {
         handleDocumentDragOver = useCallback(e => {
             e?.preventDefault();
             onDragOver?.(e);
-        }, [onDragOver]),
+        }, [
+            onDragOver
+        ]),
 
         /**
          * 处理拖拽离开 document 区域
@@ -82,7 +96,9 @@ export default function useDraggingOver(params) {
             e?.preventDefault();
             setDraggingover(false);
             onDrop?.(e);
-        }, [onDrop]);
+        }, [
+            onDrop
+        ]);
 
     /**
      * 初始化时绑定拖拽进出 document 区域的事件
@@ -101,7 +117,10 @@ export default function useDraggingOver(params) {
             Event.removeEvent(el, 'drop', handleDocumentDrop);
         };
 
-    }, [el, handleDocumentDragEnter, handleDocumentDragLeave, handleDocumentDragOver, handleDocumentDrop]);
+    }, [
+        el,
+        handleDocumentDragEnter, handleDocumentDragLeave, handleDocumentDragOver, handleDocumentDrop
+    ]);
 
     return draggingOver;
 
