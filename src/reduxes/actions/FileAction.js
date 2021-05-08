@@ -58,6 +58,7 @@ export const parseFile = file => new Promise((resolve, reject) => {
 /**
  * 更新文件
  * @param file
+ * @param callback
  * @returns {function(*): *}
  */
 export const updateFile = (file, callback) => async dispatch => {
