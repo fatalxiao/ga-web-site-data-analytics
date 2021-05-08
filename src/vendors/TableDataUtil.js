@@ -146,7 +146,8 @@ export function collapseData(data) {
         const url = URI(row[ColumnsFields[0].name]),
             path = url.path(),
             query = url.query(),
-            pathArray = path?.split('/');
+            hash = url.hash(),
+            pathArray = (path + hash)?.split('/');
 
         if (!path || !pathArray || pathArray.length < 1) {
             return;
