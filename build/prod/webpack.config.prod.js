@@ -8,10 +8,10 @@ const path = require('path'),
 
     config = require('../config.js'),
     baseWebpackConfig = require('../webpack.config.base.js'),
-    utils = require('../utils.js'),
+    {getAssetsSubPath, getAssetsVendorsAbsolutePath} = require('../utils.js'),
 
     env = process.env.NODE_ENV,
-    vendorsAssets = require(utils.assetsVendorsAbsolutePath('vendors-assets.json', env));
+    vendorsAssets = require(getAssetsVendorsAbsolutePath('vendors-assets.json', env));
 
 const prodConfig = {
 
@@ -22,8 +22,8 @@ const prodConfig = {
     output: {
         publicPath: './',
         path: config[env].assetsRoot,
-        filename: utils.assetsSubPath('js/[name].[chunkhash].js', env),
-        chunkFilename: utils.assetsSubPath('js/[id].[chunkhash].js', env)
+        filename: getAssetsSubPath('js/[name].[chunkhash].js', env),
+        chunkFilename: getAssetsSubPath('js/[id].[chunkhash].js', env)
     },
 
     optimization: {
@@ -56,7 +56,7 @@ const prodConfig = {
 
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require(utils.assetsVendorsAbsolutePath('polyfill-manifest.json', env))
+            manifest: require(getAssetsVendorsAbsolutePath('polyfill-manifest.json', env))
         }),
 
         new HtmlPlugin({

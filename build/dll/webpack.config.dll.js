@@ -2,7 +2,7 @@ const webpack = require('webpack'),
     AssetsPlugin = require('assets-webpack-plugin'),
 
     config = require('../config.js'),
-    utils = require('../utils.js'),
+    {getAssetsSubPath, getAssetsVendorsAbsolutePath} = require('../utils.js'),
 
     env = process.env.NODE_ENV,
     library = '[name]_lib';
@@ -18,7 +18,7 @@ module.exports = {
     output: {
         publicPath: './',
         path: config[env].assetsRoot,
-        filename: utils.assetsSubPath('vendors/[name].[chunkhash].js', env),
+        filename: getAssetsSubPath('vendors/[name].[chunkhash].js', env),
         library
     },
 
@@ -29,13 +29,13 @@ module.exports = {
 
         new webpack.DllPlugin({
             context: __dirname,
-            path: utils.assetsVendorsAbsolutePath('[name]-manifest.json', env),
+            path: getAssetsVendorsAbsolutePath('[name]-manifest.json', env),
             name: library
         }),
 
         new AssetsPlugin({
             path: config[env].assetsRoot,
-            filename: utils.assetsSubPath('vendors/vendors-assets.json', env)
+            filename: getAssetsSubPath('vendors/vendors-assets.json', env)
         })
 
     ]
