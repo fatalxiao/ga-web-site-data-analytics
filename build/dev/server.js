@@ -4,7 +4,6 @@ const os = require('os'),
     webpack = require('webpack'),
     express = require('express'),
     history = require('connect-history-api-fallback'),
-    log = require('friendly-errors-webpack-plugin/src/output'),
     webpackConfig = require('./webpack.config.dev.js'),
 
     config = require('../config.js'),
@@ -39,7 +38,7 @@ if (config.development.isHotReload) {
 }
 
 devMiddleware.waitUntilValid(() => {
-    log.title('success', 'DONE', `Listening At ${uri} `);
+    console.log('DONE', `Listening At ${uri} `);
 });
 
 module.exports = app.listen(port, err => {

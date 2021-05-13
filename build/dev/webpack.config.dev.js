@@ -1,7 +1,6 @@
 const webpack = require('webpack'),
     {merge} = require('webpack-merge'),
     HtmlPlugin = require('html-webpack-plugin'),
-    FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'),
 
     baseWebpackConfig = require('../webpack.config.base.js'),
 
@@ -40,9 +39,7 @@ module.exports = merge(baseWebpackConfig, {
             template: './src/index.html',
             inject: true,
             NODE_ENV: env
-        }),
-
-        new FriendlyErrorsPlugin()
+        })
 
     ]
 

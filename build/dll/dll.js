@@ -1,9 +1,8 @@
 const webpack = require('webpack'),
-    log = require('friendly-errors-webpack-plugin/src/output'),
 
     webpackConfig = require('./webpack.config.dll.js');
 
-log.title('info', 'WAIT', 'Building DLL...');
+console.log('WAIT', 'Building DLL...');
 
 webpack(webpackConfig, (err, stats) => {
 
@@ -19,6 +18,6 @@ webpack(webpackConfig, (err, stats) => {
         chunkModules: false
     }) + '\n\n');
 
-    log.title('success', 'DONE', 'Build DLL Complete');
+    console.log('DONE', 'Build DLL Complete');
 
 });
